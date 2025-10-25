@@ -65,6 +65,13 @@ function loadVoices() {
     voices = speechSynthesis.getVoices();
     // Try to find a Hebrew voice
     hebrewVoice = voices.find(voice => voice.lang.startsWith('he')) || null;
+
+    // Log available voices for debugging on mobile
+    if (voices.length > 0) {
+        console.log('Available voices:', voices.length);
+        const hebrewVoices = voices.filter(v => v.lang.startsWith('he'));
+        console.log('Hebrew voices:', hebrewVoices.length);
+    }
 }
 
 // Load voices immediately and also on voiceschanged event (for mobile)
@@ -73,14 +80,31 @@ if (speechSynthesis.onvoiceschanged !== undefined) {
     speechSynthesis.onvoiceschanged = loadVoices;
 }
 
+// Android specific: Try loading voices again after a short delay
+setTimeout(loadVoices, 100);
+
 // Initialize speech synthesis on first user interaction (required for mobile)
 function initializeSpeech() {
     if (!speechInitialized) {
+        // Android fix: Reload voices to ensure they're available
+        if (voices.length === 0) {
+            voices = speechSynthesis.getVoices();
+            hebrewVoice = voices.find(voice => voice.lang.startsWith('he')) || null;
+        }
+
         // Create a silent utterance to initialize speech synthesis
         const utterance = new SpeechSynthesisUtterance('');
         utterance.volume = 0;
-        speechSynthesis.speak(utterance);
+        utterance.rate = 1;
+
+        try {
+            speechSynthesis.speak(utterance);
+        } catch (error) {
+            console.error('Speech initialization error:', error);
+        }
+
         speechInitialized = true;
+        console.log('Speech synthesis initialized');
     }
 }
 
@@ -222,20 +246,17 @@ function speak(text) {
     // Initialize speech on first call (important for mobile)
     initializeSpeech();
 
-    // Stop any ongoing speech
-    if (speechSynthesis.speaking) {
-        speechSynthesis.cancel();
-        // Small delay to ensure cancel completes on mobile
-        setTimeout(() => speakNow(text), 100);
-    } else {
-        speakNow(text);
-    }
-}
-
-function speakNow(text) {
+    // Android Chrome fix: Don't use cancel() as it causes issues
+    // Instead, just speak immediately - the new utterance will interrupt the old one
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'he-IL';
     utterance.rate = 0.8;
+
+    // Reload voices if empty (Android sometimes clears them)
+    if (voices.length === 0) {
+        voices = speechSynthesis.getVoices();
+        hebrewVoice = voices.find(voice => voice.lang.startsWith('he')) || null;
+    }
 
     // Use Hebrew voice if available
     if (hebrewVoice) {
@@ -244,10 +265,19 @@ function speakNow(text) {
 
     // Error handling for mobile
     utterance.onerror = function(event) {
-        console.error('Speech synthesis error:', event);
+        console.error('Speech synthesis error:', event.error);
+        // If error is 'not-allowed', it means user gesture was lost
+        if (event.error === 'not-allowed') {
+            console.warn('Speech not allowed - user gesture may be required');
+        }
     };
 
-    speechSynthesis.speak(utterance);
+    // Android fix: Ensure we're in a user gesture context
+    try {
+        speechSynthesis.speak(utterance);
+    } catch (error) {
+        console.error('Speech synthesis exception:', error);
+    }
 }
 
 function setMode(mode, e) {
