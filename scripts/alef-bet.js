@@ -55,48 +55,6 @@ const scoreBox = document.getElementById('scoreBox');
 const celebration = document.getElementById('celebration');
 const shuffleBtn = document.getElementById('shuffleBtn');
 
-// Debug logging for mobile
-const originalConsoleLog = console.log;
-const originalConsoleError = console.error;
-const originalConsoleWarn = console.warn;
-
-function debugLog(message, isError = false) {
-    // Log to console
-    if (isError) {
-        originalConsoleError(message);
-    } else {
-        originalConsoleLog(message);
-    }
-
-    // Show debug panel on mobile
-    const debugPanel = document.getElementById('debugPanel');
-    const debugLogDiv = document.getElementById('debugLog');
-
-    if (debugPanel && debugLogDiv) {
-        debugPanel.style.display = 'block';
-        const entry = document.createElement('div');
-        entry.style.marginBottom = '3px';
-        entry.style.color = isError ? '#f00' : '#0f0';
-        entry.textContent = message;
-        debugLogDiv.appendChild(entry);
-        // Auto-scroll to bottom
-        debugLogDiv.scrollTop = debugLogDiv.scrollHeight;
-    }
-}
-
-// Override console functions
-console.log = function(...args) {
-    debugLog(args.join(' '), false);
-};
-
-console.error = function(...args) {
-    debugLog(args.join(' '), true);
-};
-
-console.warn = function(...args) {
-    debugLog('⚠ ' + args.join(' '), false);
-};
-
 // Speech synthesis variables for mobile compatibility
 let voices = [];
 let hebrewVoice = null;
@@ -131,19 +89,6 @@ function loadVoices() {
         if (!hebrewVoice) {
             hebrewVoice = voices.find(voice => voice.default) || voices[0];
         }
-
-        // Log available voices for debugging on mobile
-        console.log('✓ Voices loaded:', voices.length);
-        const hebrewVoices = voices.filter(v => v.lang.startsWith('he') || v.lang.startsWith('iw'));
-        console.log('Hebrew voices found:', hebrewVoices.length);
-
-        if (hebrewVoice) {
-            console.log('✓ Selected voice:', hebrewVoice.name, '(' + hebrewVoice.lang + ')');
-        } else {
-            console.log('⚠ No voice found, will use system default');
-        }
-    } else {
-        console.log('⚠ No voices available yet');
     }
 
     return voicesLoaded;
@@ -163,13 +108,9 @@ setTimeout(loadVoices, 1000);
 // Initialize speech synthesis on first user interaction (required for mobile)
 function initializeSpeech() {
     if (!speechInitialized) {
-        console.log('→ Initializing speech synthesis...');
-
         // Android fix: Force reload voices
         loadVoices();
-
         speechInitialized = true;
-        console.log('✓ Speech synthesis initialized');
     }
 }
 
@@ -308,28 +249,21 @@ function createGrid() {
 }
 
 function speak(text) {
-    console.log('→ speak() called with text:', text);
-
     // Initialize speech on first call (important for mobile)
     initializeSpeech();
 
     // Check if speech synthesis is available
     if (!window.speechSynthesis) {
-        console.error('✗ Speech synthesis not supported in this browser');
         return;
     }
 
     // Reload voices if empty (Android sometimes clears them)
     if (voices.length === 0) {
-        console.log('→ Reloading voices...');
         loadVoices();
     }
 
     // Create utterance
     const utterance = new SpeechSynthesisUtterance(text);
-
-    // Try different language codes that Android might support
-    // he-IL = Hebrew (Israel), iw-IL = old Hebrew code
     utterance.lang = 'he-IL';
     utterance.rate = 0.8;
     utterance.pitch = 1;
@@ -338,41 +272,13 @@ function speak(text) {
     // Use selected voice if available
     if (hebrewVoice) {
         utterance.voice = hebrewVoice;
-        console.log('→ Using voice:', hebrewVoice.name);
-    } else {
-        console.log('→ Using system default voice with lang=he-IL');
     }
 
-    // Event handlers for debugging
-    utterance.onstart = function() {
-        console.log('✓ Speech started');
-    };
-
-    utterance.onend = function() {
-        console.log('✓ Speech ended');
-    };
-
-    utterance.onerror = function(event) {
-        console.error('✗ Speech error:', event.error);
-        if (event.error === 'not-allowed') {
-            console.error('✗ Speech not allowed - user gesture required or autoplay blocked');
-        } else if (event.error === 'network') {
-            console.error('✗ Network error - check internet connection');
-        } else if (event.error === 'synthesis-failed') {
-            console.error('✗ Synthesis failed - voice may not be available');
-        }
-    };
-
-    // Check current state
-    console.log('→ speechSynthesis.speaking:', speechSynthesis.speaking);
-    console.log('→ speechSynthesis.pending:', speechSynthesis.pending);
-
-    // Try to speak
+    // Speak
     try {
         speechSynthesis.speak(utterance);
-        console.log('✓ speechSynthesis.speak() called successfully');
     } catch (error) {
-        console.error('✗ Exception calling speak():', error);
+        // Silently fail
     }
 }
 
@@ -463,20 +369,3 @@ function updateScore() {
 }
 
 createGrid();
-
-// Log startup information
-console.log('=== Alef-Bet Game Started ===');
-console.log('User Agent: ' + navigator.userAgent);
-console.log('Speech Synthesis Available: ' + ('speechSynthesis' in window));
-
-// Check after voices have had time to load
-setTimeout(() => {
-    if (voices.length === 0) {
-        console.warn('⚠ No voices loaded. TTS may not work.');
-    } else if (!voices.some(v => v.lang.startsWith('he') || v.lang.startsWith('iw'))) {
-        console.warn('⚠ No Hebrew voices found. Will use default voice - pronunciation may not be perfect.');
-        console.log('💡 To get Hebrew voices on Android: Settings > Language & Input > Text-to-speech > Install voice data');
-    }
-}, 1500);
-
-console.log('==============================');
