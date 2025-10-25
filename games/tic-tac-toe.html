@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>איקס עיגול - ילד נגד מחשב</title>
+    <link rel="stylesheet" href="../styles/common.css">
+    <link rel="stylesheet" href="../styles/tic-tac-toe.css">
+</head>
+<body>
+    <a href="../index.html" class="back-button">← חזרה</a>
+
+    <div class="container">
+        <div class="header">
+            <h1>⭕ איקס עיגול ❌</h1>
+            <p class="subtitle">שחק נגד המחשב!</p>
+        </div>
+
+        <div class="game-info">
+            <div class="score-board">
+                <div class="score-item player">
+                    <div class="score-label">אתה (❌)</div>
+                    <div class="score-value" id="playerScore">0</div>
+                </div>
+                <div class="score-item tie">
+                    <div class="score-label">תיקו</div>
+                    <div class="score-value" id="tieScore">0</div>
+                </div>
+                <div class="score-item computer">
+                    <div class="score-label">מחשב (⭕)</div>
+                    <div class="score-value" id="computerScore">0</div>
+                </div>
+            </div>
+            <div class="status-message" id="statusMessage">התור שלך! בחר משבצת</div>
+        </div>
+
+        <div class="game-board" id="gameBoard">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-primary" id="resetBtn">משחק חדש</button>
+            <button class="btn btn-secondary" id="resetScoreBtn">אפס ניקוד</button>
+        </div>
+
+        <div class="difficulty-selector">
+            <label>רמת קושי:</label>
+            <div class="difficulty-buttons">
+                <button class="difficulty-btn" data-level="easy">קל</button>
+                <button class="difficulty-btn active" data-level="medium">בינוני</button>
+                <button class="difficulty-btn" data-level="hard">קשה</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/tic-tac-toe.js"></script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-top: 80px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.subtitle {
+    font-size: 18px;
+    color: #666;
+    margin-top: 10px;
+}
+
+.game-info {
+    margin-bottom: 30px;
+}
+
+.score-board {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.score-item {
+    background: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    border: 2px solid #e0e0e0;
+    text-align: center;
+    min-width: 120px;
+}
+
+.score-item.player {
+    border-top: 4px solid #e53935;
+}
+
+.score-item.tie {
+    border-top: 4px solid #FFC107;
+}
+
+.score-item.computer {
+    border-top: 4px solid #1976D2;
+}
+
+.score-label {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.score-value {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+}
+
+.status-message {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 15px;
+    background: #667eea;
+    color: white;
+    border-radius: 10px;
+}
+
+.status-message.win {
+    background: #e53935;
+}
+
+.status-message.lose {
+    background: #1976D2;
+}
+
+.status-message.tie {
+    background: #FFC107;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    grid-template-rows: repeat(3, 120px);
+    gap: 10px;
+    margin: 0 auto 30px;
+    width: fit-content;
+}
+
+.cell {
+    background: white;
+    border: 3px solid #e0e0e0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 70px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 120px;
+    height: 120px;
+    font-family: Arial, sans-serif;
+}
+
+.cell:hover:not(.taken) {
+    background: #f5f5f5;
+    border-color: #667eea;
+}
+
+.cell.taken {
+    cursor: not-allowed;
+}
+
+.cell.player {
+    color: #e53935;
+}
+
+.cell.computer {
+    color: #1976D2;
+}
+
+.cell.winner {
+    background: #FFE082;
+}
+
+
+.controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 15px 35px;
+    font-size: 18px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn-primary {
+    background: #667eea;
+    color: white;
+}
+
+.btn-secondary {
+    background: #f5576c;
+    color: white;
+}
+
+.difficulty-selector {
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #e0e0e0;
+}
+
+.difficulty-selector label {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.difficulty-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.difficulty-btn {
+    padding: 10px 25px;
+    font-size: 16px;
+    border: 2px solid #e0e0e0;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #666;
+}
+
+.difficulty-btn:hover {
+    border-color: #667eea;
+    color: #667eea;
+}
+
+.difficulty-btn.active {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+}
+
+@media (max-width: 500px) {
+    .game-board {
+        grid-template-columns: repeat(3, 90px);
+        grid-template-rows: repeat(3, 90px);
+        gap: 8px;
+    }
+
+    .cell {
+        width: 90px;
+        height: 90px;
+        font-size: 40px;
+    }
+
+    .score-board {
+        gap: 10px;
+    }
+
+    .score-item {
+        padding: 10px 15px;
+        min-width: 90px;
+    }
+
+    .score-value {
+        font-size: 24px;
+    }
+
+    .status-message {
+        font-size: 18px;
+    }
+}
