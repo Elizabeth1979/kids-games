@@ -1,0 +1,66 @@
+/* Common styles for all games */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Back button styles */
+.back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: all 0.3s;
+    z-index: 1000;
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    background: #f0f0f0;
+}
+
+.back-button:active {
+    transform: translateY(0);
+}
+
+/* For RTL layout */
+[dir="rtl"] .back-button {
+    left: auto;
+    right: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .back-button {
+        padding: 10px 20px;
+        font-size: 1em;
+        top: 10px;
+        left: 10px;
+    }
+
+    [dir="rtl"] .back-button {
+        left: auto;
+        right: 10px;
+    }
+}

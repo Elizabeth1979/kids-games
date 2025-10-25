@@ -1,0 +1,107 @@
+/* Styles for main landing page */
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    font-size: 3.5em;
+    margin-bottom: 10px;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+}
+
+.header p {
+    font-size: 1.5em;
+    opacity: 0.9;
+}
+
+.games-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px;
+}
+
+.game-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.game-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+
+.game-icon {
+    font-size: 5em;
+    margin-bottom: 20px;
+}
+
+.game-title {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.game-description {
+    font-size: 1.2em;
+    color: #666;
+    line-height: 1.6;
+}
+
+.game-card.alef-bet {
+    background: linear-gradient(135deg, #FFE5E5 0%, #FFD1DC 100%);
+}
+
+.game-card.coming-soon {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: linear-gradient(135deg, #E0E0E0 0%, #F5F5F5 100%);
+}
+
+.game-card.coming-soon:hover {
+    transform: none;
+}
+
+.coming-soon-badge {
+    background: #FF9800;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2.5em;
+    }
+    .header p {
+        font-size: 1.2em;
+    }
+    .games-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
