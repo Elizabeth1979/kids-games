@@ -19,8 +19,11 @@
             <button class="mode-btn" id="shuffleBtn" onclick="toggleShuffle()">🔀 ערבב אותיות</button>
         </div>
 
-        <div class="instruction-box" id="instruction">
-            לחץ על אות כדי לשמוע את השם שלה
+        <div class="permanent-instruction">
+            💡 לחץ על אות כדי לשמוע את השם שלה
+        </div>
+
+        <div class="instruction-box" id="instruction" style="display: none;">
         </div>
 
         <div class="score-box" id="scoreBox">
@@ -266,9 +269,10 @@
             });
 
             if (mode === 'learn') {
-                instruction.textContent = 'לחץ על אות כדי לשמוע את השם שלה';
+                instruction.style.display = 'none';
                 scoreBox.classList.remove('show');
             } else if (mode === 'find') {
+                instruction.style.display = 'flex';
                 scoreBox.classList.add('show');
                 nextFindChallenge();
             }
@@ -276,7 +280,7 @@
 
         function nextFindChallenge() {
             currentTarget = letters[Math.floor(Math.random() * letters.length)];
-            instruction.innerHTML = `מצא את האות <span style="color: #FFD93D; font-size: 1.3em;">${currentTarget.letter}</span>`;
+            instruction.innerHTML = `מצא את האות <span style="color: #FFD93D; font-size: 1.3em; margin-right: 10px;">${currentTarget.letter}</span>`;
             speak('מצא את האות ' + currentTarget.name);
         }
 
