@@ -109,17 +109,38 @@ function loadVoices() {
 
     if (voices.length > 0) {
         voicesLoaded = true;
-        // Try to find a Hebrew voice
-        hebrewVoice = voices.find(voice => voice.lang.startsWith('he')) || null;
+
+        // Try multiple strategies to find a suitable voice
+        // 1. Try to find a Hebrew voice (he, he-IL, iw, iw-IL)
+        hebrewVoice = voices.find(voice =>
+            voice.lang.startsWith('he') ||
+            voice.lang.startsWith('iw') ||
+            voice.name.toLowerCase().includes('hebrew')
+        );
+
+        // 2. If no Hebrew voice, try to find any voice that works with Hebrew text
+        // Google voices and default voices usually support multiple languages
+        if (!hebrewVoice) {
+            // Look for Google voices (they support many languages)
+            hebrewVoice = voices.find(voice =>
+                voice.name.toLowerCase().includes('google')
+            );
+        }
+
+        // 3. If still nothing, use the default voice (first in the list or marked as default)
+        if (!hebrewVoice) {
+            hebrewVoice = voices.find(voice => voice.default) || voices[0];
+        }
 
         // Log available voices for debugging on mobile
         console.log('✓ Voices loaded:', voices.length);
-        const hebrewVoices = voices.filter(v => v.lang.startsWith('he'));
-        console.log('✓ Hebrew voices:', hebrewVoices.length);
+        const hebrewVoices = voices.filter(v => v.lang.startsWith('he') || v.lang.startsWith('iw'));
+        console.log('Hebrew voices found:', hebrewVoices.length);
+
         if (hebrewVoice) {
-            console.log('✓ Using Hebrew voice:', hebrewVoice.name);
+            console.log('✓ Selected voice:', hebrewVoice.name, '(' + hebrewVoice.lang + ')');
         } else {
-            console.log('⚠ No Hebrew voice found, using default');
+            console.log('⚠ No voice found, will use system default');
         }
     } else {
         console.log('⚠ No voices available yet');
@@ -306,17 +327,20 @@ function speak(text) {
 
     // Create utterance
     const utterance = new SpeechSynthesisUtterance(text);
+
+    // Try different language codes that Android might support
+    // he-IL = Hebrew (Israel), iw-IL = old Hebrew code
     utterance.lang = 'he-IL';
     utterance.rate = 0.8;
     utterance.pitch = 1;
     utterance.volume = 1;
 
-    // Use Hebrew voice if available
+    // Use selected voice if available
     if (hebrewVoice) {
         utterance.voice = hebrewVoice;
-        console.log('→ Using Hebrew voice');
+        console.log('→ Using voice:', hebrewVoice.name);
     } else {
-        console.log('→ Using default voice (no Hebrew voice available)');
+        console.log('→ Using system default voice with lang=he-IL');
     }
 
     // Event handlers for debugging
@@ -444,4 +468,15 @@ createGrid();
 console.log('=== Alef-Bet Game Started ===');
 console.log('User Agent: ' + navigator.userAgent);
 console.log('Speech Synthesis Available: ' + ('speechSynthesis' in window));
+
+// Check after voices have had time to load
+setTimeout(() => {
+    if (voices.length === 0) {
+        console.warn('⚠ No voices loaded. TTS may not work.');
+    } else if (!voices.some(v => v.lang.startsWith('he') || v.lang.startsWith('iw'))) {
+        console.warn('⚠ No Hebrew voices found. Will use default voice - pronunciation may not be perfect.');
+        console.log('💡 To get Hebrew voices on Android: Settings > Language & Input > Text-to-speech > Install voice data');
+    }
+}, 1500);
+
 console.log('==============================');
