@@ -42,7 +42,11 @@ const colors = [
 const game = new LanguageGame({
     letters: letters,
     colors: colors,
-    language: 'ar-SA',
+    language: 'ar-SA', // Arabic - Saudi Arabia (most widely supported)
+    fallbackLanguage: 'en-US', // Fallback to English if Arabic not available
+    usePhoneticForSpeech: false, // Use Arabic names (with English phonetic fallback)
+    voicePreferences: ['ar-SA', 'ar-001', 'ar-EG', 'ar'], // Priority order for voice selection
+    speechRate: 0.7, // Slower rate for children's comprehension
     uiTexts: {
         shuffled: 'האותיות מעורבבות',
         unshuffled: 'חזרה לסדר רגיל',

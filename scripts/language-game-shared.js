@@ -72,11 +72,40 @@ class LanguageGame {
             // Extract base language code (e.g., 'ar' from 'ar-SA')
             const baseLang = this.language.split('-')[0];
 
-            // Try to find a voice for this language
-            this.selectedVoice = this.voices.find(voice =>
-                voice.lang.startsWith(baseLang) ||
-                voice.name.toLowerCase().includes(baseLang)
-            );
+            // Try voice preferences first if provided
+            if (this.voicePreferences && this.voicePreferences.length > 0) {
+                for (const langPref of this.voicePreferences) {
+                    this.selectedVoice = this.voices.find(voice =>
+                        voice.lang === langPref || voice.lang.startsWith(langPref)
+                    );
+                    if (this.selectedVoice) break;
+                }
+            }
+
+            // If no voice found via preferences, try base language matching
+            if (!this.selectedVoice) {
+                this.selectedVoice = this.voices.find(voice =>
+                    voice.lang.startsWith(baseLang)
+                );
+            }
+
+            // Try matching by voice name (for Arabic: Majed, Hoda, etc.)
+            if (!this.selectedVoice && baseLang === 'ar') {
+                this.selectedVoice = this.voices.find(voice =>
+                    voice.name.toLowerCase().includes('arabic') ||
+                    voice.name.includes('Majed') ||
+                    voice.name.includes('Hoda') ||
+                    voice.name.includes('Tarik') ||
+                    voice.name.includes('Laila')
+                );
+            }
+
+            // Try matching by language name in voice name
+            if (!this.selectedVoice) {
+                this.selectedVoice = this.voices.find(voice =>
+                    voice.name.toLowerCase().includes(baseLang)
+                );
+            }
 
             // Fallback to Google voices
             if (!this.selectedVoice) {
@@ -88,6 +117,11 @@ class LanguageGame {
             // Final fallback to default voice
             if (!this.selectedVoice) {
                 this.selectedVoice = this.voices.find(voice => voice.default) || this.voices[0];
+            }
+
+            // Log selected voice for debugging
+            if (this.selectedVoice) {
+                console.log(`Selected voice: ${this.selectedVoice.name} (${this.selectedVoice.lang})`);
             }
         }
 
@@ -111,19 +145,47 @@ class LanguageGame {
         }
 
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = this.language;
-        utterance.rate = 0.8;
+
+        // Use custom speech rate if provided, otherwise default
+        utterance.rate = this.speechRate || 0.8;
         utterance.pitch = 1;
         utterance.volume = 1;
 
-        if (this.selectedVoice) {
+        // Check if we have a voice for the target language
+        const baseLang = this.language.split('-')[0];
+        const hasLanguageVoice = this.selectedVoice &&
+            (this.selectedVoice.lang.startsWith(baseLang) ||
+             this.selectedVoice.name.toLowerCase().includes(baseLang));
+
+        if (hasLanguageVoice) {
+            // Use the target language voice
+            utterance.lang = this.language;
             utterance.voice = this.selectedVoice;
+        } else if (this.fallbackLanguage) {
+            // No appropriate voice found, use fallback language if available
+            console.log(`No ${baseLang} voice found, falling back to ${this.fallbackLanguage}`);
+            utterance.lang = this.fallbackLanguage;
+
+            // Find a voice for fallback language
+            const fallbackBaseLang = this.fallbackLanguage.split('-')[0];
+            const fallbackVoice = this.voices.find(voice =>
+                voice.lang.startsWith(fallbackBaseLang)
+            );
+            if (fallbackVoice) {
+                utterance.voice = fallbackVoice;
+            }
+        } else {
+            // No fallback, use selected voice anyway
+            utterance.lang = this.language;
+            if (this.selectedVoice) {
+                utterance.voice = this.selectedVoice;
+            }
         }
 
         try {
             speechSynthesis.speak(utterance);
         } catch (error) {
-            // Silently fail
+            console.error('Speech synthesis error:', error);
         }
     }
 
@@ -295,7 +357,24 @@ class LanguageGame {
 
     handleLetterClick(item, e) {
         if (this.currentMode === 'learn') {
-            const textToSpeak = this.usePhoneticForSpeech ? item.phonetic : item.name;
+            // Determine what to speak based on voice availability
+            let textToSpeak;
+            const baseLang = this.language.split('-')[0];
+            const hasLanguageVoice = this.selectedVoice &&
+                (this.selectedVoice.lang.startsWith(baseLang) ||
+                 this.selectedVoice.name.toLowerCase().includes(baseLang));
+
+            if (this.usePhoneticForSpeech) {
+                // Always use phonetic if explicitly configured
+                textToSpeak = item.phonetic;
+            } else if (!hasLanguageVoice && this.fallbackLanguage && item.phonetic) {
+                // No native voice available, use phonetic as fallback
+                textToSpeak = item.phonetic;
+            } else {
+                // Use native name
+                textToSpeak = item.name;
+            }
+
             this.speak(textToSpeak);
             const box = e.currentTarget;
             box.style.transform = 'scale(1.2)';
