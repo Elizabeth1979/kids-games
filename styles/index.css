@@ -96,10 +96,10 @@ body {
 
 .game-card {
     background: white;
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
+    border-radius: 25px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
     text-decoration: none;
     color: inherit;
@@ -107,23 +107,87 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+    border: 4px solid transparent;
+}
+
+.game-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
 }
 
 .game-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.game-card:active {
+    transform: translateY(-10px) scale(1.02);
+}
+
+/* Colorful gradients for each language game */
+.game-card.alef-bet {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+}
+
+.game-card.abc {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    border-color: #f093fb;
+}
+
+.game-card.arabic {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    border-color: #4facfe;
+}
+
+.game-card.russian {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    border-color: #43e97b;
+}
+
+.game-card.tic-tac-toe {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    border-color: #fa709a;
+}
+
+.game-card.alef-bet:hover,
+.game-card.abc:hover,
+.game-card.arabic:hover,
+.game-card.russian:hover,
+.game-card.tic-tac-toe:hover {
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(255,255,255,0.3);
+    border-color: white;
 }
 
 .game-icon {
-    font-size: 5em;
+    font-size: 8em;
     margin-bottom: 20px;
+    font-weight: bold;
+    text-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+    color: white;
+    transition: all 0.3s ease;
+    line-height: 1;
+}
+
+.game-card:hover .game-icon {
+    transform: scale(1.2) rotate(5deg);
+    text-shadow: 5px 5px 20px rgba(0,0,0,0.3);
 }
 
 .game-title {
-    font-size: 2em;
+    font-size: 2.2em;
     font-weight: bold;
     margin-bottom: 15px;
-    color: #333;
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
 }
 
 .game-description {

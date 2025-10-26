@@ -26,8 +26,8 @@ const categoriesConfig = [
 const gamesConfig = [
     {
         id: 'alef-bet',
-        title: 'משחק אלף-בית',
-        icon: '🎨',
+        title: 'משחק עברית',
+        icon: 'א-ת',
         description: 'למדו את האותיות העבריות בצורה מהנה!',
         subtitle: 'שלושה מצבי משחק שונים',
         url: 'games/alef-bet.html',
@@ -36,8 +36,8 @@ const gamesConfig = [
     },
     {
         id: 'abc',
-        title: 'משחק ABC',
-        icon: '🎨',
+        title: 'משחק אנגלית',
+        icon: 'ABC',
         description: 'למדו את האותיות האנגליות בצורה מהנה!',
         subtitle: 'שלושה מצבי משחק שונים',
         url: 'games/abc.html',
@@ -47,7 +47,7 @@ const gamesConfig = [
     {
         id: 'arabic',
         title: 'משחק ערבית',
-        icon: '📖',
+        icon: 'أ-ي',
         description: 'למדו את האותיות הערביות בצורה מהנה!',
         subtitle: 'שלושה מצבי משחק שונים',
         url: 'games/arabic.html',
@@ -57,7 +57,7 @@ const gamesConfig = [
     {
         id: 'russian',
         title: 'משחק רוסית',
-        icon: '🇷🇺',
+        icon: 'АБВ',
         description: 'למדו את האותיות הרוסיות בצורה מהנה!',
         subtitle: 'שלושה מצבי משחק שונים',
         url: 'games/russian.html',
