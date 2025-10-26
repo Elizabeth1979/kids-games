@@ -1,52 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABC Learning Game</title>
+    <title>משחק ABC</title>
     <link rel="stylesheet" href="../styles/common.css">
     <link rel="stylesheet" href="../styles/abc.css">
 </head>
 <body>
-    <a href="../index.html" class="back-button">← Back</a>
+    <a href="../index.html" class="back-button">← חזרה</a>
 
     <div class="container">
-        <h1>🎨 ABC Learning Game 🎨</h1>
+        <h1>🎨 משחק ABC 🎨</h1>
 
         <div class="mode-selector">
-            <button class="mode-btn active" onclick="setMode('learn', event)">📚 Learn</button>
-            <button class="mode-btn" onclick="setMode('find', event)">🔍 Find the Letter</button>
-            <button class="mode-btn" id="shuffleBtn" onclick="toggleShuffle()">🔀 Shuffle Letters</button>
+            <button class="mode-btn active" onclick="setMode('learn', event)">📚 למידה</button>
+            <button class="mode-btn" onclick="setMode('find', event)">🔍 מצא את האות</button>
+            <button class="mode-btn" id="shuffleBtn" onclick="toggleShuffle()">🔀 ערבב אותיות</button>
         </div>
 
         <div class="permanent-instruction">
-            💡 Click on a letter to hear its name
+            💡 לחצו על אות כדי לשמוע את שמה
         </div>
 
         <div class="instruction-box" id="instruction" style="display: none;">
         </div>
 
         <div class="score-box" id="scoreBox">
-            Correct: <span id="correct">0</span> | Wrong: <span id="wrong">0</span>
+            נכון: <span id="correct">0</span> | לא נכון: <span id="wrong">0</span>
         </div>
 
         <div class="abc-grid" id="grid"></div>
 
         <div class="drawing-section">
-            <h2 style="color: #667eea; text-align: center; margin-bottom: 15px;">✏️ Drawing Board ✏️</h2>
+            <h2 style="color: #667eea; text-align: center; margin-bottom: 15px;">✏️ לוח ציור ✏️</h2>
             <canvas id="drawingCanvas"></canvas>
             <div class="drawing-controls">
                 <div class="control-group">
-                    <label>Color:</label>
+                    <label>צבע:</label>
                     <input type="color" id="colorPicker" value="#000000">
                 </div>
                 <div class="control-group">
-                    <label>Size:</label>
+                    <label>גודל:</label>
                     <input type="range" id="brushSize" min="2" max="20" value="5">
                     <span id="sizeDisplay">5</span>
                 </div>
-                <button class="control-btn" onclick="clearCanvas()">🗑️ Clear</button>
-                <button class="control-btn" onclick="downloadDrawing()">💾 Save</button>
+                <button class="control-btn" onclick="clearCanvas()">🗑️ נקה</button>
+                <button class="control-btn" onclick="downloadDrawing()">💾 שמור</button>
             </div>
         </div>
 

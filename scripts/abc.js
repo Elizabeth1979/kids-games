@@ -207,12 +207,12 @@ function toggleShuffle() {
         currentLetters = shuffleArray(letters);
         shuffleBtn.style.background = '#FF9800';
         shuffleBtn.style.color = 'white';
-        speak('Letters are shuffled');
+        speak('האותיות מעורבבות');
     } else {
         currentLetters = [...letters];
         shuffleBtn.style.background = '';
         shuffleBtn.style.color = '';
-        speak('Back to normal order');
+        speak('חזרה לסדר רגיל');
     }
 
     createGrid();
@@ -304,8 +304,8 @@ function setMode(mode, e) {
 
 function nextFindChallenge() {
     currentTarget = letters[Math.floor(Math.random() * letters.length)];
-    instruction.innerHTML = `Find the letter <span style="color: #FFD93D; font-size: 1.3em; margin-left: 10px;">${currentTarget.letter}</span>`;
-    speak('Find the letter ' + currentTarget.phonetic);
+    instruction.innerHTML = `מצא את האות <span style="color: #FFD93D; font-size: 1.3em; margin-right: 10px;">${currentTarget.letter}</span>`;
+    speak('מצא את האות ' + currentTarget.phonetic);
 }
 
 function handleLetterClick(item, e) {
@@ -328,7 +328,7 @@ function handleLetterClick(item, e) {
 function handleCorrect(e) {
     correctCount++;
     updateScore();
-    speak('Great job! Correct!');
+    speak('כל הכבוד! נכון!');
 
     const box = e.currentTarget;
     box.classList.add('correct');
@@ -346,7 +346,7 @@ function handleCorrect(e) {
 function handleWrong(e) {
     wrongCount++;
     updateScore();
-    speak('Try again');
+    speak('נסה שוב');
 
     const box = e.currentTarget;
     box.classList.add('wrong');

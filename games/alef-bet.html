@@ -14,20 +14,20 @@
         <h1>🎨 משחק אלף-בית 🎨</h1>
 
         <div class="mode-selector">
-            <button class="mode-btn active" onclick="setMode('learn', event)">📚 לומדים</button>
+            <button class="mode-btn active" onclick="setMode('learn', event)">📚 למידה</button>
             <button class="mode-btn" onclick="setMode('find', event)">🔍 מצא את האות</button>
             <button class="mode-btn" id="shuffleBtn" onclick="toggleShuffle()">🔀 ערבב אותיות</button>
         </div>
 
         <div class="permanent-instruction">
-            💡 לחץ על אות כדי לשמוע את השם שלה
+            💡 לחצו על אות כדי לשמוע את שמה
         </div>
 
         <div class="instruction-box" id="instruction" style="display: none;">
         </div>
 
         <div class="score-box" id="scoreBox">
-            נכון: <span id="correct">0</span> | טעויות: <span id="wrong">0</span>
+            נכון: <span id="correct">0</span> | לא נכון: <span id="wrong">0</span>
         </div>
 
         <div class="alef-bet-grid" id="grid"></div>
