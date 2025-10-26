@@ -13,48 +13,101 @@
         <p>בחרו משחק ותתחילו ללמוד ולהנות!</p>
     </div>
 
-    <div class="games-container" id="gamesContainer">
-        <!-- Games will be dynamically loaded from games-config.js -->
+    <!-- Category Navigation -->
+    <nav class="category-nav" id="categoryNav">
+        <!-- Navigation will be dynamically loaded -->
+    </nav>
+
+    <!-- Games Container with Categories -->
+    <div class="games-wrapper" id="gamesWrapper">
+        <!-- Categories and games will be dynamically loaded from games-config.js -->
     </div>
 
     <script src="scripts/games-config.js"></script>
     <script>
-        // Dynamically generate game cards from configuration
-        const container = document.getElementById('gamesContainer');
+        // Dynamically generate category navigation
+        const nav = document.getElementById('categoryNav');
+        const wrapper = document.getElementById('gamesWrapper');
 
-        gamesConfig.forEach(game => {
-            if (game.active) {
-                // Create active game card (clickable link)
-                const card = document.createElement('a');
-                card.href = game.url;
-                card.className = `game-card ${game.id}`;
+        // Create navigation buttons
+        categoriesConfig.forEach(category => {
+            const navButton = document.createElement('a');
+            navButton.href = `#${category.id}`;
+            navButton.className = 'category-nav-button';
+            navButton.innerHTML = `${category.icon} ${category.title}`;
+            nav.appendChild(navButton);
+        });
 
-                card.innerHTML = `
-                    <div class="game-icon">${game.icon}</div>
-                    <div class="game-title">${game.title}</div>
-                    <div class="game-description">
-                        ${game.description}
-                        <br>${game.subtitle}
-                    </div>
-                `;
+        // Group games by category
+        categoriesConfig.forEach(category => {
+            // Create category section
+            const section = document.createElement('section');
+            section.id = category.id;
+            section.className = 'category-section';
 
-                container.appendChild(card);
-            } else {
-                // Create coming soon card (non-clickable)
-                const card = document.createElement('div');
-                card.className = 'game-card coming-soon';
+            // Create category header
+            const header = document.createElement('div');
+            header.className = 'category-header';
+            header.innerHTML = `
+                <h2>${category.icon} ${category.title}</h2>
+                <p>${category.description}</p>
+            `;
+            section.appendChild(header);
 
-                card.innerHTML = `
-                    <div class="game-icon">${game.icon}</div>
-                    <div class="game-title">${game.title}</div>
-                    <div class="game-description">
-                        ${game.description}
-                    </div>
-                    <div class="coming-soon-badge">${game.subtitle}</div>
-                `;
+            // Create games container for this category
+            const container = document.createElement('div');
+            container.className = 'games-container';
 
-                container.appendChild(card);
-            }
+            // Filter and add games for this category
+            const categoryGames = gamesConfig.filter(game => game.category === category.id);
+
+            categoryGames.forEach(game => {
+                if (game.active) {
+                    // Create active game card (clickable link)
+                    const card = document.createElement('a');
+                    card.href = game.url;
+                    card.className = `game-card ${game.id}`;
+
+                    card.innerHTML = `
+                        <div class="game-icon">${game.icon}</div>
+                        <div class="game-title">${game.title}</div>
+                        <div class="game-description">
+                            ${game.description}
+                            <br>${game.subtitle}
+                        </div>
+                    `;
+
+                    container.appendChild(card);
+                } else {
+                    // Create coming soon card (non-clickable)
+                    const card = document.createElement('div');
+                    card.className = 'game-card coming-soon';
+
+                    card.innerHTML = `
+                        <div class="game-icon">${game.icon}</div>
+                        <div class="game-title">${game.title}</div>
+                        <div class="game-description">
+                            ${game.description}
+                        </div>
+                        <div class="coming-soon-badge">${game.subtitle}</div>
+                    `;
+
+                    container.appendChild(card);
+                }
+            });
+
+            section.appendChild(container);
+            wrapper.appendChild(section);
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('.category-nav-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
         });
     </script>
 </body>
