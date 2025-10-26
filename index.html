@@ -13,42 +13,49 @@
         <p>בחרו משחק ותתחילו ללמוד ולהנות!</p>
     </div>
 
-    <div class="games-container">
-        <a href="games/alef-bet.html" class="game-card alef-bet">
-            <div class="game-icon">🎨</div>
-            <div class="game-title">משחק אלף-בית</div>
-            <div class="game-description">
-                למדו את האותיות העבריות בצורה מהנה!
-                <br>שלושה מצבי משחק שונים
-            </div>
-        </a>
-
-        <a href="games/tic-tac-toe.html" class="game-card tic-tac-toe">
-            <div class="game-icon">⭕❌</div>
-            <div class="game-title">איקס עיגול</div>
-            <div class="game-description">
-                שחק נגד המחשב במשחק הקלאסי!
-                <br>שלוש רמות קושי
-            </div>
-        </a>
-
-        <a href="games/abc.html" class="game-card abc">
-            <div class="game-icon">🎨</div>
-            <div class="game-title">ABC Learning Game</div>
-            <div class="game-description">
-                Learn the English alphabet in a fun way!
-                <br>Three different game modes
-            </div>
-        </a>
-
-        <div class="game-card coming-soon">
-            <div class="game-icon">🐶</div>
-            <div class="game-title">משחק חיות</div>
-            <div class="game-description">
-                הכירו חיות ואת הקולות שלהם
-            </div>
-            <div class="coming-soon-badge">בקרוב</div>
-        </div>
+    <div class="games-container" id="gamesContainer">
+        <!-- Games will be dynamically loaded from games-config.js -->
     </div>
+
+    <script src="scripts/games-config.js"></script>
+    <script>
+        // Dynamically generate game cards from configuration
+        const container = document.getElementById('gamesContainer');
+
+        gamesConfig.forEach(game => {
+            if (game.active) {
+                // Create active game card (clickable link)
+                const card = document.createElement('a');
+                card.href = game.url;
+                card.className = `game-card ${game.id}`;
+
+                card.innerHTML = `
+                    <div class="game-icon">${game.icon}</div>
+                    <div class="game-title">${game.title}</div>
+                    <div class="game-description">
+                        ${game.description}
+                        <br>${game.subtitle}
+                    </div>
+                `;
+
+                container.appendChild(card);
+            } else {
+                // Create coming soon card (non-clickable)
+                const card = document.createElement('div');
+                card.className = 'game-card coming-soon';
+
+                card.innerHTML = `
+                    <div class="game-icon">${game.icon}</div>
+                    <div class="game-title">${game.title}</div>
+                    <div class="game-description">
+                        ${game.description}
+                    </div>
+                    <div class="coming-soon-badge">${game.subtitle}</div>
+                `;
+
+                container.appendChild(card);
+            }
+        });
+    </script>
 </body>
 </html>
