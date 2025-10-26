@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABC Learning Game</title>
+    <link rel="stylesheet" href="../styles/common.css">
+    <link rel="stylesheet" href="../styles/abc.css">
+</head>
+<body>
+    <a href="../index.html" class="back-button">← Back</a>
+
+    <div class="container">
+        <h1>🎨 ABC Learning Game 🎨</h1>
+
+        <div class="mode-selector">
+            <button class="mode-btn active" onclick="setMode('learn', event)">📚 Learn</button>
+            <button class="mode-btn" onclick="setMode('find', event)">🔍 Find the Letter</button>
+            <button class="mode-btn" id="shuffleBtn" onclick="toggleShuffle()">🔀 Shuffle Letters</button>
+        </div>
+
+        <div class="permanent-instruction">
+            💡 Click on a letter to hear its name
+        </div>
+
+        <div class="instruction-box" id="instruction" style="display: none;">
+        </div>
+
+        <div class="score-box" id="scoreBox">
+            Correct: <span id="correct">0</span> | Wrong: <span id="wrong">0</span>
+        </div>
+
+        <div class="abc-grid" id="grid"></div>
+
+        <div class="drawing-section">
+            <h2 style="color: #667eea; text-align: center; margin-bottom: 15px;">✏️ Drawing Board ✏️</h2>
+            <canvas id="drawingCanvas"></canvas>
+            <div class="drawing-controls">
+                <div class="control-group">
+                    <label>Color:</label>
+                    <input type="color" id="colorPicker" value="#000000">
+                </div>
+                <div class="control-group">
+                    <label>Size:</label>
+                    <input type="range" id="brushSize" min="2" max="20" value="5">
+                    <span id="sizeDisplay">5</span>
+                </div>
+                <button class="control-btn" onclick="clearCanvas()">🗑️ Clear</button>
+                <button class="control-btn" onclick="downloadDrawing()">💾 Save</button>
+            </div>
+        </div>
+
+        <div class="celebration" id="celebration">🎉</div>
+    </div>
+
+    <script src="../scripts/abc.js"></script>
+</body>
+</html>
