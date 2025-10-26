@@ -132,10 +132,6 @@ body {
     line-height: 1.6;
 }
 
-.game-card.alef-bet {
-    background: linear-gradient(135deg, #FFE5E5 0%, #FFD1DC 100%);
-}
-
 .game-card.coming-soon {
     opacity: 0.6;
     cursor: not-allowed;
