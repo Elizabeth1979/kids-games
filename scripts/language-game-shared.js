@@ -11,6 +11,7 @@ class LanguageGame {
         this.uiTexts = config.uiTexts; // UI text translations
         this.gridClass = config.gridClass || 'letter-grid'; // CSS class for grid
         this.letterDisplayFn = config.letterDisplayFn || this.defaultLetterDisplay.bind(this);
+        this.usePhoneticForSpeech = config.usePhoneticForSpeech || false; // Use phonetic instead of name for speech
 
         this.currentMode = 'learn';
         this.currentTarget = null;
@@ -294,7 +295,8 @@ class LanguageGame {
 
     handleLetterClick(item, e) {
         if (this.currentMode === 'learn') {
-            this.speak(item.name);
+            const textToSpeak = this.usePhoneticForSpeech ? item.phonetic : item.name;
+            this.speak(textToSpeak);
             const box = e.currentTarget;
             box.style.transform = 'scale(1.2)';
             setTimeout(() => {
