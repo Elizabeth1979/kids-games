@@ -49,5 +49,5 @@ const game = new LanguageGame({
         wrong: 'נסה שוב'
     },
     gridClass: 'letter-grid',
-    letterDisplayFn: (item) => `${item.letter} ${item.lowercase}`
+    letterDisplayFn: (item) => `${item.letter}${item.lowercase}`
 });
