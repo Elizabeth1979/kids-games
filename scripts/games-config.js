@@ -30,6 +30,15 @@ const gamesConfig = [
         active: true
     },
     {
+        id: 'arabic',
+        title: 'משחק ערבית',
+        icon: '📖',
+        description: 'למדו את האותיות הערביות בצורה מהנה!',
+        subtitle: 'שלושה מצבי משחק שונים',
+        url: 'games/arabic.html',
+        active: true
+    },
+    {
         id: 'colors',
         title: 'משחק צבעים',
         icon: '🌈',
