@@ -35,13 +35,15 @@ export default function LanguageGame({ languageConfig }: LanguageGameProps) {
     }
 
     if (gameState.mode === 'find' && gameState.currentTarget) {
-      const letterName = languageConfig.usePhoneticForSpeech
+      // For the instruction, we only speak the letter name/phonetic
+      // The UI instruction text is visual only, since mixing UI language
+      // with game language in speech doesn't work well
+      const textToSpeak = languageConfig.usePhoneticForSpeech
         ? gameState.currentTarget.phonetic
         : gameState.currentTarget.name;
-      const fullInstruction = t('instructions.findLetter') + ' ' + letterName;
-      speak(fullInstruction);
+      speak(textToSpeak);
     }
-  }, [gameState.currentTarget, gameState.mode, languageConfig, t, speak]);
+  }, [gameState.currentTarget, gameState.mode, languageConfig, speak]);
 
   const handleLetterClick = (letter: Letter) => {
     if (gameState.mode === 'learn') {
