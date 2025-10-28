@@ -22,6 +22,11 @@ export interface LanguageConfig {
   usePhoneticForSpeech?: boolean; // Use phonetic instead of name for speech
   speechRate?: number;      // Speech speed (0.1-2.0, default 0.8)
   showBothCases?: boolean;  // Show both uppercase and lowercase (for English)
+  instructions?: {          // Game instructions in the game's language
+    findLetter: string;     // "Find the letter" / "מצא את האות"
+    shuffled: string;       // "Letters shuffled" / "האותיות מעורבבות"
+    unshuffled: string;     // "Back to normal order" / "חזרה לסדר רגיל"
+  };
 }
 
 export type GameMode = 'learn' | 'find';

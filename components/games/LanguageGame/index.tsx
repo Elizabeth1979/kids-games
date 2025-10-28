@@ -35,13 +35,13 @@ export default function LanguageGame({ languageConfig }: LanguageGameProps) {
     }
 
     if (gameState.mode === 'find' && gameState.currentTarget) {
-      // For the instruction, we only speak the letter name/phonetic
-      // The UI instruction text is visual only, since mixing UI language
-      // with game language in speech doesn't work well
-      const textToSpeak = languageConfig.usePhoneticForSpeech
+      // Speak the full instruction in the game's language
+      const letterName = languageConfig.usePhoneticForSpeech
         ? gameState.currentTarget.phonetic
         : gameState.currentTarget.name;
-      speak(textToSpeak);
+      const instruction = languageConfig.instructions?.findLetter || t('instructions.findLetter');
+      const fullText = `${instruction} ${letterName}`;
+      speak(fullText);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState.currentTarget, gameState.mode]);
@@ -89,7 +89,10 @@ export default function LanguageGame({ languageConfig }: LanguageGameProps) {
 
   const handleToggleShuffle = () => {
     gameState.toggleShuffle();
-    speak(gameState.isShuffled ? t('shuffle.unshuffled') : t('shuffle.shuffled'));
+    // Use game language instructions if available, fallback to UI language
+    const shuffledText = languageConfig.instructions?.shuffled || t('shuffle.shuffled');
+    const unshuffledText = languageConfig.instructions?.unshuffled || t('shuffle.unshuffled');
+    speak(gameState.isShuffled ? unshuffledText : shuffledText);
   };
 
   return (

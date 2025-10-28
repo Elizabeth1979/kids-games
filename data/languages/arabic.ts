@@ -6,6 +6,11 @@ export const arabicLanguage: LanguageConfig = {
   nativeName: 'العربية',
   lang: 'ar-SA',
   dir: 'rtl',
+  instructions: {
+    findLetter: 'ابحث عن الحرف',
+    shuffled: 'تم خلط الحروف',
+    unshuffled: 'العودة إلى الترتيب العادي'
+  },
   letters: [
     { letter: 'ا', name: 'ألف', phonetic: 'Alif' },
     { letter: 'ب', name: 'باء', phonetic: 'Ba' },

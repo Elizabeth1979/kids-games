@@ -6,6 +6,11 @@ export const russianLanguage: LanguageConfig = {
   nativeName: 'Русский',
   lang: 'ru-RU',
   dir: 'ltr',
+  instructions: {
+    findLetter: 'Найди букву',
+    shuffled: 'Буквы перемешаны',
+    unshuffled: 'Вернуться к обычному порядку'
+  },
   letters: [
     { letter: 'А', lowercase: 'а', name: 'А', phonetic: 'а' },
     { letter: 'Б', lowercase: 'б', name: 'Бэ', phonetic: 'бэ' },

@@ -8,6 +8,11 @@ export const hebrewLanguage: LanguageConfig = {
   dir: 'rtl',
   voicePreferences: ['he-IL', 'he'],
   speechRate: 0.9,
+  instructions: {
+    findLetter: 'מצא את האות',
+    shuffled: 'האותיות מעורבבות',
+    unshuffled: 'חזרה לסדר רגיל'
+  },
   letters: [
     { letter: 'א', name: 'אָלֶף', phonetic: 'Alef' },
     { letter: 'בּ', name: 'בֵּית', phonetic: 'Bet' },

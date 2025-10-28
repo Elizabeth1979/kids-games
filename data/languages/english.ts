@@ -6,6 +6,11 @@ export const englishLanguage: LanguageConfig = {
   nativeName: 'English',
   lang: 'en-US',
   dir: 'ltr',
+  instructions: {
+    findLetter: 'Find the letter',
+    shuffled: 'Letters shuffled',
+    unshuffled: 'Back to normal order'
+  },
   letters: [
     { letter: 'A', lowercase: 'a', name: 'a', phonetic: 'a' },
     { letter: 'B', lowercase: 'b', name: 'b', phonetic: 'b' },
