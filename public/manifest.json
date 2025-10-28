@@ -1,0 +1,50 @@
+{
+  "name": "Kids Educational Games",
+  "short_name": "Kids Games",
+  "description": "Educational games for children - learn languages, play board games, and more!",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#667eea",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "games", "kids"],
+  "lang": "he",
+  "dir": "rtl",
+  "shortcuts": [
+    {
+      "name": "Hebrew Game",
+      "short_name": "Hebrew",
+      "description": "Learn Hebrew letters",
+      "url": "/he/game/hebrew",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "English Game",
+      "short_name": "English",
+      "description": "Learn English letters",
+      "url": "/he/game/english",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Tic-Tac-Toe",
+      "short_name": "Tic-Tac-Toe",
+      "description": "Play Tic-Tac-Toe",
+      "url": "/he/game/tic-tac-toe",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
