@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { LanguageConfig, Letter } from '@/types';
 import { useSpeechSynthesis } from '@/hooks/useSpeechSynthesis';
@@ -24,6 +24,24 @@ export default function LanguageGame({ languageConfig }: LanguageGameProps) {
   const [showCelebration, setShowCelebration] = useState(false);
   const [correctLetter, setCorrectLetter] = useState<Letter | null>(null);
   const [wrongLetter, setWrongLetter] = useState<Letter | null>(null);
+  const isInitialMount = useRef(true);
+
+  // Speak the target letter whenever it changes in Find mode
+  useEffect(() => {
+    // Skip on initial mount
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+
+    if (gameState.mode === 'find' && gameState.currentTarget) {
+      const letterName = languageConfig.usePhoneticForSpeech
+        ? gameState.currentTarget.phonetic
+        : gameState.currentTarget.name;
+      const fullInstruction = t('instructions.findLetter') + ' ' + letterName;
+      speak(fullInstruction);
+    }
+  }, [gameState.currentTarget, gameState.mode, languageConfig, t, speak]);
 
   const handleLetterClick = (letter: Letter) => {
     if (gameState.mode === 'learn') {
@@ -63,14 +81,7 @@ export default function LanguageGame({ languageConfig }: LanguageGameProps) {
 
   const handleModeChange = (mode: 'learn' | 'find') => {
     gameState.changeMode(mode);
-    if (mode === 'find' && gameState.currentTarget) {
-      // Speak the full instruction with the letter name
-      const letterName = languageConfig.usePhoneticForSpeech
-        ? gameState.currentTarget.phonetic
-        : gameState.currentTarget.name;
-      const fullInstruction = t('instructions.findLetter') + ' ' + letterName;
-      speak(fullInstruction);
-    }
+    // Speech is now handled by useEffect that watches currentTarget
   };
 
   const handleToggleShuffle = () => {
