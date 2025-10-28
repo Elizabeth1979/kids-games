@@ -3,15 +3,19 @@ import { gamesConfig } from '@/data/games';
 import { categoriesConfig } from '@/data/categories';
 import GameCard from '@/components/shared/GameCard';
 import ComingSoonCard from '@/components/shared/ComingSoonCard';
+import Navigation from '@/components/shared/Navigation';
 
 export default function HomePage() {
   const t = useTranslations('home');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-500 to-pink-500 py-12 px-4">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <header className="text-center mb-12">
+    <div className="min-h-screen bg-gradient-to-br from-purple-500 to-pink-500">
+      <Navigation />
+
+      <div className="pt-24 pb-12 px-4">
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <header className="text-center mb-12">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 drop-shadow-lg">
             🎮 {t('title')} 🎮
           </h1>
@@ -52,10 +56,11 @@ export default function HomePage() {
           );
         })}
 
-        {/* Footer */}
-        <footer className="text-center mt-16 text-white/60">
-          <p>משחקים חינוכיים לילדים • Educational Games for Children</p>
-        </footer>
+          {/* Footer */}
+          <footer className="text-center mt-16 text-white/60">
+            <p>משחקים חינוכיים לילדים • Educational Games for Children</p>
+          </footer>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import LanguageGame from '@/components/games/LanguageGame';
+import Navigation from '@/components/shared/Navigation';
 import { getLanguageById } from '@/data/languages';
 
 interface GamePageProps {
@@ -19,7 +20,14 @@ export default async function GamePage({ params }: GamePageProps) {
     notFound();
   }
 
-  return <LanguageGame languageConfig={languageConfig} />;
+  return (
+    <>
+      <Navigation />
+      <div className="pt-20">
+        <LanguageGame languageConfig={languageConfig} />
+      </div>
+    </>
+  );
 }
 
 // Generate static params for all language games
