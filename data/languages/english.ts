@@ -4,7 +4,7 @@ export const englishLanguage: LanguageConfig = {
   id: 'english',
   name: 'English',
   nativeName: 'English',
-  lang: 'en-US',
+  lang: 'en',
   dir: 'ltr',
   instructions: {
     findLetter: 'Find the letter',

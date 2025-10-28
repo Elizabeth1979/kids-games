@@ -4,7 +4,7 @@ export const russianLanguage: LanguageConfig = {
   id: 'russian',
   name: 'Russian',
   nativeName: 'Русский',
-  lang: 'ru-RU',
+  lang: 'ru',
   dir: 'ltr',
   instructions: {
     findLetter: 'Найди букву',

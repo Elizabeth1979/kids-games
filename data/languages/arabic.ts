@@ -4,7 +4,7 @@ export const arabicLanguage: LanguageConfig = {
   id: 'arabic',
   name: 'Arabic',
   nativeName: 'العربية',
-  lang: 'ar-SA',
+  lang: 'ar',
   dir: 'rtl',
   instructions: {
     findLetter: 'ابحث عن الحرف',

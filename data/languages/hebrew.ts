@@ -4,7 +4,7 @@ export const hebrewLanguage: LanguageConfig = {
   id: 'hebrew',
   name: 'Hebrew',
   nativeName: 'עברית',
-  lang: 'he-IL',
+  lang: 'he',
   dir: 'rtl',
   voicePreferences: ['he-IL', 'he'],
   speechRate: 0.9,

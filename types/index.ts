@@ -15,7 +15,7 @@ export interface LanguageConfig {
   nativeName: string;       // 'עברית', 'English', 'Русский', 'العربية'
   letters: Letter[];        // All letters for this language
   colors: string[];         // Color for each letter
-  lang: string;             // BCP 47 code ('he-IL', 'en-US', 'ru-RU', 'ar-SA')
+  lang: string;             // ISO 639-1 two-letter code ('he', 'en', 'ru', 'ar')
   dir: 'rtl' | 'ltr';       // Text direction
   voicePreferences?: string[]; // Preferred voice languages for speech synthesis
   fallbackLanguage?: string;   // Fallback language if no voice available
