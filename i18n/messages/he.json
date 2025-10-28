@@ -23,7 +23,8 @@
     },
     "instructions": {
       "permanent": "💡 לחצו על אות כדי לשמוע את שמה",
-      "findLetter": "מצא את האות"
+      "findLetter": "מצא את האות",
+      "back": "חזרה"
     },
     "feedback": {
       "correct": "כל הכבוד! נכון!",

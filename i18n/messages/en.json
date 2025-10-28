@@ -23,7 +23,8 @@
     },
     "instructions": {
       "permanent": "💡 Click on a letter to hear its name",
-      "findLetter": "Find the letter"
+      "findLetter": "Find the letter",
+      "back": "Back"
     },
     "feedback": {
       "correct": "Great job! Correct!",
