@@ -1,9 +1,10 @@
 # Kids Games - React Migration Requirements
 
-**Document Version:** 1.0
+**Document Version:** 1.1
 **Date:** October 28, 2025
 **Author:** Elizabeth Patrick
 **Project:** Kids Educational Games Platform
+**Framework:** Next.js 15 (App Router)
 
 ---
 
@@ -24,32 +25,39 @@ This document outlines the complete requirements for migrating the Kids Games pr
 ## Tech Stack
 
 ### Core Technologies
-- **React 18** - UI framework
+- **Next.js 15** - React framework with App Router
+- **React 19** - UI framework (comes with Next.js 15)
 - **TypeScript** - Type safety and better developer experience
-- **Vite** - Build tool (fast, modern)
-- **React Router v6** - Client-side routing
 - **Tailwind CSS** - Utility-first styling
 - **shadcn/ui** - Component library (copies components, no dependency weight)
 
 ### Internationalization
-- **react-i18next** - i18n framework
-- **i18next** - Core i18n library
-- **i18next-browser-languagedetector** - Auto-detect user language
+- **next-intl** - i18n for Next.js (cleaner integration with App Router)
+- Built-in Next.js locale routing
 
 ### Testing
-- **Vitest** - Unit/component test runner (fast, Vite-native)
+- **Vitest** - Unit/component test runner (works great with Next.js)
 - **@testing-library/react** - Component testing utilities
 - **@testing-library/user-event** - User interaction simulation
 - **Playwright** - E2E browser testing
 - **@axe-core/playwright** - Accessibility testing
 
 ### PWA
-- **vite-plugin-pwa** - PWA configuration and service worker generation
-- **workbox** - Service worker runtime (via vite-plugin-pwa)
+- **next-pwa** - PWA configuration for Next.js
+- **workbox** - Service worker runtime (via next-pwa)
 
 ### Deployment
-- **Vercel** - Static hosting with automatic deployments
+- **Vercel** - Optimized hosting for Next.js (zero-config deployment)
 - **GitHub Actions** - CI/CD pipeline
+
+### Why Next.js over Vite?
+- **File-based routing** - No React Router configuration needed
+- **Better SEO** - Static Site Generation (SSG) for faster loads and search engine optimization
+- **Built-in i18n routing** - Cleaner `/[locale]/` structure
+- **Image optimization** - Built-in (helpful for future features)
+- **Future-proof** - Easy to add backend features (analytics, user data) if needed
+- **Industry standard** - Vercel's first-class framework, excellent documentation
+- **Static export** - Still generates pure HTML/JS/CSS files like current site
 
 ---
 
@@ -59,48 +67,65 @@ This document outlines the complete requirements for migrating the Kids Games pr
 kids-games/
 ├── public/
 │   ├── icons/                    # PWA icons (multiple sizes)
-│   ├── manifest.json             # PWA manifest
-│   └── robots.txt
-├── src/
-│   ├── components/
-│   │   ├── ui/                   # shadcn/ui components
-│   │   ├── layout/               # Header, Footer, Navigation
-│   │   ├── games/
-│   │   │   ├── LanguageGame/     # Main reusable language game
-│   │   │   └── TicTacToe/        # Board game
-│   │   └── shared/               # GameCard, ComingSoonCard
-│   ├── data/
-│   │   ├── languages/            # Letter data per language
-│   │   ├── games.ts              # Game configurations
-│   │   └── categories.ts         # Category definitions
-│   ├── hooks/
-│   │   ├── useSpeechSynthesis.ts # Speech API logic
-│   │   ├── useGameState.ts       # Game state management
-│   │   └── useDrawingCanvas.ts   # Canvas drawing logic
-│   ├── i18n/
-│   │   ├── config.ts             # i18n setup
-│   │   └── locales/              # Translation files (he, en, ru, ar)
-│   ├── pages/
-│   │   ├── Home.tsx              # Main menu
-│   │   ├── GamePage.tsx          # Dynamic game router
-│   │   └── Help.tsx              # FAQ/Guidelines
-│   ├── types/
-│   │   └── index.ts              # TypeScript interfaces
-│   └── lib/
-│       └── utils.ts              # Utility functions
+│   └── manifest.json             # PWA manifest
+├── app/
+│   ├── [locale]/                 # Next.js locale routing
+│   │   ├── page.tsx              # Home page (/he/, /en/, /ru/, /ar/)
+│   │   ├── game/
+│   │   │   └── [gameId]/
+│   │   │       └── page.tsx      # Game page (/he/game/hebrew, etc.)
+│   │   ├── help/
+│   │   │   └── page.tsx          # Help page (/he/help)
+│   │   └── layout.tsx            # Locale-specific layout
+│   ├── layout.tsx                # Root layout
+│   └── globals.css               # Global styles
+├── components/
+│   ├── ui/                       # shadcn/ui components
+│   ├── layout/                   # Header, Footer, CategoryNav
+│   ├── games/
+│   │   ├── LanguageGame/         # Main reusable language game
+│   │   └── TicTacToe/            # Board game
+│   └── shared/                   # GameCard, ComingSoonCard
+├── data/
+│   ├── languages/                # Letter data per language
+│   ├── games.ts                  # Game configurations
+│   └── categories.ts             # Category definitions
+├── hooks/
+│   ├── useSpeechSynthesis.ts     # Speech API logic
+│   ├── useGameState.ts           # Game state management
+│   └── useDrawingCanvas.ts       # Canvas drawing logic
+├── i18n/
+│   ├── request.ts                # next-intl configuration
+│   └── messages/                 # Translation files
+│       ├── he.json               # Hebrew translations
+│       ├── en.json               # English (Phase 2)
+│       ├── ru.json               # Russian (Phase 2)
+│       └── ar.json               # Arabic (Phase 2)
+├── types/
+│   └── index.ts                  # TypeScript interfaces
+├── lib/
+│   └── utils.ts                  # Utility functions
 ├── tests/
 │   ├── unit/                     # Vitest tests
 │   └── e2e/                      # Playwright tests
 ├── .github/
 │   └── workflows/
 │       └── ci.yml                # CI/CD pipeline
+├── middleware.ts                 # next-intl locale detection
+├── next.config.mjs               # Next.js configuration (+ PWA)
 ├── playwright.config.ts
 ├── vitest.config.ts
-├── vite.config.ts
-├── tailwind.config.js
+├── tailwind.config.ts
 ├── tsconfig.json
 └── package.json
 ```
+
+**Key Differences from Vite:**
+- `app/` directory instead of `src/pages/` (Next.js App Router)
+- File-based routing: `app/[locale]/game/[gameId]/page.tsx`
+- `middleware.ts` for automatic locale detection
+- `next.config.mjs` instead of `vite.config.ts`
+- No separate routing configuration needed
 
 ---
 
