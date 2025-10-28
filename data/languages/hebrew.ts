@@ -6,6 +6,8 @@ export const hebrewLanguage: LanguageConfig = {
   nativeName: 'עברית',
   lang: 'he-IL',
   dir: 'rtl',
+  voicePreferences: ['he-IL', 'he'],
+  speechRate: 0.9,
   letters: [
     { letter: 'א', name: 'אָלֶף', phonetic: 'Alef' },
     { letter: 'בּ', name: 'בֵּית', phonetic: 'Bet' },
