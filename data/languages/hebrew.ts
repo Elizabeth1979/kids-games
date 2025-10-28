@@ -1,0 +1,52 @@
+import { LanguageConfig } from '@/types';
+
+export const hebrewLanguage: LanguageConfig = {
+  id: 'hebrew',
+  name: 'Hebrew',
+  nativeName: 'עברית',
+  lang: 'he-IL',
+  dir: 'rtl',
+  letters: [
+    { letter: 'א', name: 'אָלֶף', phonetic: 'Alef' },
+    { letter: 'בּ', name: 'בֵּית', phonetic: 'Bet' },
+    { letter: 'ב', name: 'וֵית', phonetic: 'Vet' },
+    { letter: 'ג', name: 'גִּימֶל', phonetic: 'Gimel' },
+    { letter: 'ד', name: 'דָּלֶת', phonetic: 'Dalet' },
+    { letter: 'ה', name: 'הֵא', phonetic: 'Heh' },
+    { letter: 'ו', name: 'וָו', phonetic: 'Vav' },
+    { letter: 'ז', name: 'זַיִן', phonetic: 'Zayin' },
+    { letter: 'ח', name: 'חֵית', phonetic: 'Chet' },
+    { letter: 'ט', name: 'טֵית', phonetic: 'Tet' },
+    { letter: 'י', name: 'יוֹד', phonetic: 'Yod' },
+    { letter: 'כּ', name: 'כַּף', phonetic: 'Kaf' },
+    { letter: 'כ', name: 'כָף', phonetic: 'Chaf' },
+    { letter: 'ל', name: 'לָמֶד', phonetic: 'Lamed' },
+    { letter: 'מ', name: 'מֵם', phonetic: 'Mem' },
+    { letter: 'נ', name: 'נוּן', phonetic: 'Nun' },
+    { letter: 'ס', name: 'סָמֶךְ', phonetic: 'Samech' },
+    { letter: 'ע', name: 'עַיִן', phonetic: 'Ayin' },
+    { letter: 'פּ', name: 'פֵּא', phonetic: 'Peh' },
+    { letter: 'פ', name: 'פֵא', phonetic: 'Feh' },
+    { letter: 'צ', name: 'צַדִּי', phonetic: 'Tzadi' },
+    { letter: 'ק', name: 'קוֹף', phonetic: 'Kuf' },
+    { letter: 'ר', name: 'רֵישׁ', phonetic: 'Resh' },
+    { letter: 'שׁ', name: 'שִׁין', phonetic: 'Shin' },
+    { letter: 'שׂ', name: 'שִׂין', phonetic: 'Sin' },
+    { letter: 'ת', name: 'תָּו', phonetic: 'Tav' },
+    { letter: 'ך', name: 'כַּף סוֹפִית', phonetic: 'Chaf Sofit' },
+    { letter: 'ם', name: 'מֵם סוֹפִית', phonetic: 'Mem Sofit' },
+    { letter: 'ן', name: 'נוּן סוֹפִית', phonetic: 'Nun Sofit' },
+    { letter: 'ף', name: 'פֵּא סוֹפִית', phonetic: 'Feh Sofit' },
+    { letter: 'ץ', name: 'צַדִּי סוֹפִית', phonetic: 'Tzadi Sofit' }
+  ],
+  colors: [
+    '#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8',
+    '#F7DC6F', '#BB8FCE', '#85C1E2', '#F8B739', '#52B788',
+    '#FFB6C1', '#87CEEB', '#DDA15E', '#B4A7D6', '#F4A261',
+    '#E76F51', '#2A9D8F', '#E9C46A', '#F07167', '#00B4D8',
+    '#90E0EF', '#CAF0F8', '#FF8FA3', '#C9ADA7', '#A8DADC',
+    '#F1FAEE', '#E63946', '#FFD93D', '#6BCF7F', '#A78BFA',
+    '#FB923C'
+  ],
+  letterDisplayFn: (letter) => letter.letter
+};
