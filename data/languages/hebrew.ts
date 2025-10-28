@@ -47,6 +47,5 @@ export const hebrewLanguage: LanguageConfig = {
     '#90E0EF', '#CAF0F8', '#FF8FA3', '#C9ADA7', '#A8DADC',
     '#F1FAEE', '#E63946', '#FFD93D', '#6BCF7F', '#A78BFA',
     '#FB923C'
-  ],
-  letterDisplayFn: (letter) => letter.letter
+  ]
 };

@@ -69,6 +69,26 @@
       "description": "Brain and memory development"
     }
   },
+  "ticTacToe": {
+    "title": "Tic-Tac-Toe",
+    "subtitle": "Play against the computer!",
+    "yourTurn": "Your turn! Choose a square",
+    "computerTurn": "Computer's turn...",
+    "youWin": "Congratulations! You won!",
+    "computerWins": "Computer won. Try again!",
+    "tie": "It's a tie! Good game!",
+    "newGame": "New Game",
+    "resetScore": "Reset Score",
+    "difficulty": "Difficulty:",
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard",
+    "scores": {
+      "you": "You (❌)",
+      "tie": "Tie",
+      "computer": "Computer (⭕)"
+    }
+  },
   "help": {
     "title": "Help & Support",
     "faq": {

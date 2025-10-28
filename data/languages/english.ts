@@ -42,5 +42,5 @@ export const englishLanguage: LanguageConfig = {
     '#90E0EF', '#CAF0F8', '#FF8FA3', '#C9ADA7', '#A8DADC',
     '#F1FAEE'
   ],
-  letterDisplayFn: (letter) => `${letter.letter}${letter.lowercase}`
+  showBothCases: true
 };

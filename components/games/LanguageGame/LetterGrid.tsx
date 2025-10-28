@@ -32,7 +32,7 @@ export default function LetterGrid({
           letter={letter}
           color={languageConfig.colors[index % languageConfig.colors.length]}
           onClick={() => onLetterClick(letter)}
-          displayFn={languageConfig.letterDisplayFn}
+          showBothCases={languageConfig.showBothCases}
           showCorrect={correctLetter?.letter === letter.letter}
           showWrong={wrongLetter?.letter === letter.letter}
         />

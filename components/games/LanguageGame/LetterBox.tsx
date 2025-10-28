@@ -7,7 +7,7 @@ interface LetterBoxProps {
   letter: Letter;
   color: string;
   onClick: () => void;
-  displayFn?: (letter: Letter) => string;
+  showBothCases?: boolean;
   showCorrect?: boolean;
   showWrong?: boolean;
 }
@@ -16,7 +16,7 @@ export default function LetterBox({
   letter,
   color,
   onClick,
-  displayFn,
+  showBothCases = false,
   showCorrect = false,
   showWrong = false
 }: LetterBoxProps) {
@@ -28,7 +28,9 @@ export default function LetterBox({
     setTimeout(() => setIsPressed(false), 300);
   };
 
-  const display = displayFn ? displayFn(letter) : letter.letter;
+  const display = showBothCases && letter.lowercase
+    ? `${letter.letter}${letter.lowercase}`
+    : letter.letter;
 
   return (
     <button

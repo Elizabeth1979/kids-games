@@ -69,6 +69,26 @@
       "description": "פיתוח מוח וזיכרון"
     }
   },
+  "ticTacToe": {
+    "title": "איקס עיגול",
+    "subtitle": "שחק נגד המחשב!",
+    "yourTurn": "התור שלך! בחר משבצת",
+    "computerTurn": "תור המחשב...",
+    "youWin": "כל הכבוד! ניצחת!",
+    "computerWins": "המחשב ניצח. נסה שוב!",
+    "tie": "תיקו! משחק טוב!",
+    "newGame": "משחק חדש",
+    "resetScore": "אפס ניקוד",
+    "difficulty": "רמת קושי:",
+    "easy": "קל",
+    "medium": "בינוני",
+    "hard": "קשה",
+    "scores": {
+      "you": "אתה (❌)",
+      "tie": "תיקו",
+      "computer": "מחשב (⭕)"
+    }
+  },
   "help": {
     "title": "עזרה ותמיכה",
     "faq": {

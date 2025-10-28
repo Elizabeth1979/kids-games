@@ -21,7 +21,7 @@ export interface LanguageConfig {
   fallbackLanguage?: string;   // Fallback language if no voice available
   usePhoneticForSpeech?: boolean; // Use phonetic instead of name for speech
   speechRate?: number;      // Speech speed (0.1-2.0, default 0.8)
-  letterDisplayFn?: (letter: Letter) => string; // Custom display function
+  showBothCases?: boolean;  // Show both uppercase and lowercase (for English)
 }
 
 export type GameMode = 'learn' | 'find';

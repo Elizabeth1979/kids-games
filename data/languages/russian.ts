@@ -51,5 +51,5 @@ export const russianLanguage: LanguageConfig = {
     '#FB923C', '#F472B6', '#FBBF24'
   ],
   usePhoneticForSpeech: true,
-  letterDisplayFn: (letter) => `${letter.letter}${letter.lowercase}`
+  showBothCases: true
 };

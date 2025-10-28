@@ -47,6 +47,5 @@ export const arabicLanguage: LanguageConfig = {
   fallbackLanguage: 'en-US',
   usePhoneticForSpeech: false,
   voicePreferences: ['ar-SA', 'ar-001', 'ar-EG', 'ar'],
-  speechRate: 0.7,
-  letterDisplayFn: (letter) => letter.letter
+  speechRate: 0.7
 };
