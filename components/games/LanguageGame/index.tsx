@@ -43,7 +43,8 @@ export default function LanguageGame({ languageConfig }: LanguageGameProps) {
         : gameState.currentTarget.name;
       speak(textToSpeak);
     }
-  }, [gameState.currentTarget, gameState.mode, languageConfig, speak]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gameState.currentTarget, gameState.mode]);
 
   const handleLetterClick = (letter: Letter) => {
     if (gameState.mode === 'learn') {
