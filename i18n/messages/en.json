@@ -1,0 +1,99 @@
+{
+  "nav": {
+    "home": "Home",
+    "help": "Help",
+    "feedback": "Contact"
+  },
+  "language": {
+    "switch": "Change Language",
+    "he": "עברית",
+    "en": "English",
+    "ru": "Русский",
+    "ar": "العربية"
+  },
+  "home": {
+    "title": "Kids Games",
+    "subtitle": "Choose a game and start learning and having fun!"
+  },
+  "games": {
+    "modes": {
+      "learn": "📚 Learn",
+      "find": "🔍 Find the Letter",
+      "shuffle": "🔀 Shuffle Letters"
+    },
+    "instructions": {
+      "permanent": "💡 Click on a letter to hear its name",
+      "findLetter": "Find the letter"
+    },
+    "feedback": {
+      "correct": "Great job! Correct!",
+      "wrong": "Try again",
+      "excellent": "Excellent!",
+      "tryAgain": "Try again"
+    },
+    "score": {
+      "correct": "Correct",
+      "wrong": "Wrong"
+    },
+    "drawing": {
+      "title": "✏️ Drawing Board ✏️",
+      "color": "Color",
+      "size": "Size",
+      "clear": "🗑️ Clear",
+      "save": "💾 Save"
+    },
+    "shuffle": {
+      "shuffled": "Letters are shuffled",
+      "unshuffled": "Back to normal order"
+    }
+  },
+  "categories": {
+    "languages": {
+      "title": "Languages",
+      "icon": "🗣️",
+      "description": "Learn letters and different languages"
+    },
+    "board": {
+      "title": "Board Games",
+      "icon": "🎲",
+      "description": "Classic games and strategy"
+    },
+    "math": {
+      "title": "Math",
+      "icon": "🔢",
+      "description": "Fun math practice"
+    },
+    "brain": {
+      "title": "Brain Games",
+      "icon": "🧠",
+      "description": "Brain and memory development"
+    }
+  },
+  "help": {
+    "title": "Help & Support",
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "speech": {
+        "question": "Why can't I hear sound?",
+        "answer": "Make sure your device's volume is on and you're connected to the internet for the first time. On Android devices, you may need to download additional voices in the device settings."
+      },
+      "android": {
+        "question": "Instructions for Android devices",
+        "answer": "Go to Settings > Language & Input > Text-to-Speech Output > Install Voice Data"
+      },
+      "install": {
+        "question": "How do I install the app?",
+        "answer": "In Chrome or Safari browser, click the 'Add to Home Screen' or 'Install' button that appears in the URL bar or menu."
+      }
+    },
+    "contact": {
+      "title": "Contact Us",
+      "description": "Have a question or suggestion? We'd love to hear from you!",
+      "email": "Send us an email"
+    }
+  },
+  "footer": {
+    "contact": "Contact",
+    "email": "el.patrick79@gmail.com"
+  }
+}
