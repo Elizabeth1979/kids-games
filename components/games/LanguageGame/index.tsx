@@ -64,7 +64,11 @@ export default function LanguageGame({ languageConfig }: LanguageGameProps) {
   const handleModeChange = (mode: 'learn' | 'find') => {
     gameState.changeMode(mode);
     if (mode === 'find' && gameState.currentTarget) {
-      speak(t('instructions.findLetter') + ' ' + gameState.currentTarget.name);
+      // Speak the letter name/phonetic based on language config
+      const textToSpeak = languageConfig.usePhoneticForSpeech
+        ? gameState.currentTarget.phonetic
+        : gameState.currentTarget.name;
+      speak(textToSpeak);
     }
   };
 
