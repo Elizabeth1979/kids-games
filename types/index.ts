@@ -82,7 +82,7 @@ export interface GameStateHook {
 }
 
 export interface DrawingCanvasHook {
-  canvasRef: React.RefObject<HTMLCanvasElement>;
+  canvasRef: React.RefObject<HTMLCanvasElement | null>;
   color: string;
   setColor: (color: string) => void;
   brushSize: number;
