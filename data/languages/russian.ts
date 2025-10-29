@@ -6,6 +6,7 @@ export const russianLanguage: LanguageConfig = {
   nativeName: 'Русский',
   lang: 'ru',
   dir: 'ltr',
+  voicePreferences: ['ru-RU', 'ru'],
   instructions: {
     findLetter: 'Найди букву',
     shuffled: 'Буквы перемешаны',

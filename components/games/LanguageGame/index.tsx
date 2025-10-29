@@ -49,7 +49,6 @@ export default function LanguageGame({ languageConfig }: LanguageGameProps) {
   const handleLetterClick = (letter: Letter) => {
     if (gameState.mode === 'learn') {
       // Learn mode: just speak the letter
-      const baseLang = languageConfig.lang.split('-')[0];
       const textToSpeak = languageConfig.usePhoneticForSpeech
         ? letter.phonetic
         : letter.name;

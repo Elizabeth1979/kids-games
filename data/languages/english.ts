@@ -6,6 +6,7 @@ export const englishLanguage: LanguageConfig = {
   nativeName: 'English',
   lang: 'en',
   dir: 'ltr',
+  voicePreferences: ['en-US', 'en-GB', 'en'],
   instructions: {
     findLetter: 'Find the letter',
     shuffled: 'Letters shuffled',
