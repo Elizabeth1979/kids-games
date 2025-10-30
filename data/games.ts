@@ -46,6 +46,15 @@ export const gamesConfig: GameConfig[] = [
     category: 'board',
     active: true
   },
+  {
+    id: 'canvas-drawing',
+    title: 'ציור חופשי',
+    icon: '🎨',
+    description: 'צייר ושרבט כל מה שתרצה!',
+    subtitle: 'כלי ציור מהנים',
+    category: 'board',
+    active: true
+  },
   // Placeholders for future games
   {
     id: 'addition',

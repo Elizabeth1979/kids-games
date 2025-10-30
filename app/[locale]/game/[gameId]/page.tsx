@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import LanguageGame from '@/components/games/LanguageGame';
 import TicTacToe from '@/components/games/TicTacToe';
+import CanvasDrawing from '@/components/games/CanvasDrawing';
 import Navigation from '@/components/shared/Navigation';
 import { getLanguageById } from '@/data/languages';
 
@@ -21,6 +22,18 @@ export default async function GamePage({ params }: GamePageProps) {
         <Navigation />
         <div className="pt-20">
           <TicTacToe />
+        </div>
+      </>
+    );
+  }
+
+  // Handle canvas drawing game
+  if (gameId === 'canvas-drawing') {
+    return (
+      <>
+        <Navigation />
+        <div className="pt-20">
+          <CanvasDrawing />
         </div>
       </>
     );
@@ -50,6 +63,7 @@ export async function generateStaticParams() {
     { gameId: 'english' },
     { gameId: 'russian' },
     { gameId: 'arabic' },
-    { gameId: 'tic-tac-toe' }
+    { gameId: 'tic-tac-toe' },
+    { gameId: 'canvas-drawing' }
   ];
 }
