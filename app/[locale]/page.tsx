@@ -30,7 +30,7 @@ export default function HomePage() {
           return (
             <section key={category.id} className="mb-16">
               {/* Category Header */}
-              <div className="bg-secondary/50 backdrop-blur-sm rounded-3xl p-6 mb-6 border border-border">
+              <div className="mb-6">
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground">
                   {t(category.title)}
                 </h2>
