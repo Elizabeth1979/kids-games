@@ -4,25 +4,25 @@ export const categoriesConfig: CategoryConfig[] = [
   {
     id: 'languages',
     title: 'שפות',
-    icon: '🗣️',
+    icon: '',
     description: 'למדו אותיות ושפות שונות'
   },
   {
     id: 'board',
     title: 'משחקי לוח',
-    icon: '🎲',
+    icon: '',
     description: 'משחקים קלאסיים ואסטרטגיה'
   },
   {
     id: 'math',
     title: 'מתמטיקה',
-    icon: '🔢',
+    icon: '',
     description: 'תרגול חשבון מהנה'
   },
   {
     id: 'brain',
     title: 'משחקי חשיבה',
-    icon: '🧠',
+    icon: '',
     description: 'פיתוח מוח וזיכרון'
   }
 ];

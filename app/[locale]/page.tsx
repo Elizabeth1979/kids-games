@@ -17,7 +17,7 @@ export default function HomePage() {
           {/* Header */}
           <header className="text-center mb-12">
           <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-4 drop-shadow-lg">
-            🎮 {t('title')} 🎮
+            {t('title')}
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground">
             {t('subtitle')}

@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kids Games
 
-## Getting Started
+An educational games platform for children, featuring interactive learning games for letters, numbers, and more.
 
-First, run the development server:
+## Features
+
+- **Multilingual Support**: Hebrew, English, Russian, and Arabic
+- **Multiple Games**:
+  - Letter learning games (Hebrew, English, Russian, Arabic)
+  - Tic-Tac-Toe with AI opponent
+  - Free drawing canvas
+  - Coming soon: Math games, memory games, and more
+- **Learning Modes**: Learn, Find, and Shuffle modes for educational games
+- **Dark/Light Theme**: Eye-friendly mode switching
+- **Mobile Friendly**: Works on tablets and smartphones
+- **Text-to-Speech**: Hear letter pronunciations in multiple languages
+- **Progressive Web App**: Can be installed on devices for offline use
+
+## Tech Stack
+
+- **Framework**: Next.js 16 with React 19
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **Internationalization**: next-intl
+- **PWA Support**: next-pwa for progressive web app capabilities
+- **Testing**: Vitest + Playwright
+- **UI Components**: Radix UI + shadcn/ui
+
+## For Developers
+
+### Quick Start
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Open http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Documentation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+For detailed development instructions, see:
+- **[PROJECT_GUIDELINES.md](PROJECT_GUIDELINES.md)** - Development workflow, how to run the server, and coding guidelines
+- **[DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md)** - Detailed guide for understanding the development environment
+- **[HOW_IT_WORKS.md](HOW_IT_WORKS.md)** - Simple explanation of how the development server works
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server on port 3000 |
+| `npm run build` | Build for production |
+| `npm start` | Run production build |
+| `npm run lint` | Check code for errors |
+| `npm test` | Run tests |
+| `npm run fresh` | Clear cache and restart dev server |
+
+## Deployment
+
+This project is designed to be deployed on [Vercel](https://vercel.com). See [PROJECT_GUIDELINES.md](PROJECT_GUIDELINES.md) for deployment instructions.
+
+## License
+
+This project is for educational purposes.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+To learn more about the technologies used:
+- [Next.js Documentation](https://nextjs.org/docs)
+- [React Documentation](https://react.dev)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)

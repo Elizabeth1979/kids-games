@@ -111,7 +111,7 @@ export default function LanguageGame({ languageConfig }: LanguageGameProps) {
 
         {/* Title */}
         <h1 className="text-foreground text-4xl md:text-6xl font-bold text-center mb-6 drop-shadow-lg">
-          🎨 {languageConfig.nativeName} 🎨
+          {languageConfig.nativeName}
         </h1>
 
         {/* Mode Selector */}

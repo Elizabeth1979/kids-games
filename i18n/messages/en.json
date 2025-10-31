@@ -17,12 +17,12 @@
   },
   "games": {
     "modes": {
-      "learn": "📚 Learn",
-      "find": "🔍 Find the Letter",
-      "shuffle": "🔀 Shuffle Letters"
+      "learn": "Learn",
+      "find": "Find the Letter",
+      "shuffle": "Shuffle Letters"
     },
     "instructions": {
-      "permanent": "💡 Click on a letter to hear its name",
+      "permanent": "Click on a letter to hear its name",
       "findLetter": "Find the letter",
       "back": "Back"
     },
@@ -37,11 +37,11 @@
       "wrong": "Wrong"
     },
     "drawing": {
-      "title": "✏️ Drawing Board ✏️",
+      "title": "Drawing Board",
       "color": "Color",
       "size": "Size",
-      "clear": "🗑️ Clear",
-      "save": "💾 Save"
+      "clear": "Clear",
+      "save": "Save"
     },
     "shuffle": {
       "shuffled": "Letters are shuffled",
@@ -51,22 +51,22 @@
   "categories": {
     "languages": {
       "title": "Languages",
-      "icon": "🗣️",
+      "icon": "",
       "description": "Learn letters and different languages"
     },
     "board": {
       "title": "Board Games",
-      "icon": "🎲",
+      "icon": "",
       "description": "Classic games and strategy"
     },
     "math": {
       "title": "Math",
-      "icon": "🔢",
+      "icon": "",
       "description": "Fun math practice"
     },
     "brain": {
       "title": "Brain Games",
-      "icon": "🧠",
+      "icon": "",
       "description": "Brain and memory development"
     }
   },
@@ -85,9 +85,9 @@
     "medium": "Medium",
     "hard": "Hard",
     "scores": {
-      "you": "You (❌)",
+      "you": "You (X)",
       "tie": "Tie",
-      "computer": "Computer (⭕)"
+      "computer": "Computer (O)"
     }
   },
   "help": {

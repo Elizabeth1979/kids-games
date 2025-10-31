@@ -7,12 +7,12 @@ interface CelebrationProps {
 }
 
 export default function Celebration({ show }: CelebrationProps) {
-  const [emoji, setEmoji] = useState('🎉');
+  const [text, setText] = useState('!');
 
   useEffect(() => {
     if (show) {
-      const emojis = ['🎉', '⭐', '🌟', '✨', '🎊'];
-      setEmoji(emojis[Math.floor(Math.random() * emojis.length)]);
+      const celebrationTexts = ['!', '*', '+', '✓', '√'];
+      setText(celebrationTexts[Math.floor(Math.random() * celebrationTexts.length)]);
     }
   }, [show]);
 
@@ -20,8 +20,8 @@ export default function Celebration({ show }: CelebrationProps) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-50">
-      <div className="text-9xl animate-bounce">
-        {emoji}
+      <div className="text-9xl animate-bounce text-accent font-bold">
+        {text}
       </div>
     </div>
   );

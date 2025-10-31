@@ -9,7 +9,9 @@
     "lint": "eslint",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "clean": "rm -rf .next",
+    "fresh": "npm run clean && npm run dev"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",

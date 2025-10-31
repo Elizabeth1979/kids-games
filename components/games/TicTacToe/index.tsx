@@ -14,13 +14,13 @@ export default function TicTacToe() {
   // Get status message based on game state
   const getStatusMessage = () => {
     if (game.gameStatus === 'playerWon') {
-      return `🎉 ${t('youWin')} 🎉`;
+      return t('youWin');
     } else if (game.gameStatus === 'computerWon') {
-      return `😔 ${t('computerWins')}`;
+      return t('computerWins');
     } else if (game.gameStatus === 'tie') {
-      return `🤝 ${t('tie')}`;
+      return t('tie');
     } else if (game.currentPlayer === 'O') {
-      return `🤖 ${t('computerTurn')}`;
+      return t('computerTurn');
     } else {
       return t('yourTurn');
     }
@@ -39,7 +39,7 @@ export default function TicTacToe() {
         {/* Header */}
         <header className="text-center mb-8">
           <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-2 drop-shadow-lg">
-            ⭕ {t('title')} ❌
+            {t('title')}
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground">
             {t('subtitle')}

@@ -3,6 +3,40 @@
 ## Project Overview
 This is an educational games collection for children, designed to teach Hebrew letters, English letters, and provide fun learning experiences.
 
+## Running the Development Server
+
+### Quick Start (Every Time You Work on This Project)
+
+**Option 1: Use the Start Script (Easiest)**
+```bash
+./start-dev.sh
+```
+
+**Option 2: Manual Command**
+```bash
+npm run dev
+```
+
+**Option 3: Fresh Start (if something's broken)**
+```bash
+npm run fresh
+```
+
+Then open **http://localhost:3000** in your browser.
+
+### Understanding the Development Server
+
+The development server:
+- Must be run every time you want to work on the project
+- Always runs on port 3000: `http://localhost:3000`
+- Auto-reloads when you save files
+- Stops when you close the terminal
+- Only works on your computer (localhost = your machine only)
+
+**Important**: Keep the terminal window open while working! Closing it stops the server.
+
+For a detailed explanation of how the server works, see [HOW_IT_WORKS.md](HOW_IT_WORKS.md).
+
 ## Language & Localization Rules
 
 ### Hebrew-First Approach

@@ -40,7 +40,7 @@ export const gamesConfig: GameConfig[] = [
   {
     id: 'tic-tac-toe',
     title: 'איקס עיגול',
-    icon: '⭕❌',
+    icon: 'X-O',
     description: 'שחק נגד המחשב במשחק הקלאסי!',
     subtitle: 'שלוש רמות קושי',
     category: 'board',
@@ -49,7 +49,7 @@ export const gamesConfig: GameConfig[] = [
   {
     id: 'canvas-drawing',
     title: 'ציור חופשי',
-    icon: '🎨',
+    icon: '',
     description: 'צייר ושרבט כל מה שתרצה!',
     subtitle: 'כלי ציור מהנים',
     category: 'board',
@@ -59,7 +59,7 @@ export const gamesConfig: GameConfig[] = [
   {
     id: 'addition',
     title: 'חיבור',
-    icon: '➕',
+    icon: '+',
     description: 'תרגול חיבור מהנה',
     subtitle: 'בקרוב',
     category: 'math',
@@ -68,7 +68,7 @@ export const gamesConfig: GameConfig[] = [
   {
     id: 'subtraction',
     title: 'חיסור',
-    icon: '➖',
+    icon: '-',
     description: 'תרגול חיסור מהנה',
     subtitle: 'בקרוב',
     category: 'math',
@@ -77,7 +77,7 @@ export const gamesConfig: GameConfig[] = [
   {
     id: 'multiplication',
     title: 'לוח כפל',
-    icon: '✖️',
+    icon: 'x',
     description: 'למד את לוח הכפל',
     subtitle: 'בקרוב',
     category: 'math',
@@ -86,7 +86,7 @@ export const gamesConfig: GameConfig[] = [
   {
     id: 'memory',
     title: 'זיכרון',
-    icon: '🃏',
+    icon: '',
     description: 'משחק זיכרון והתאמות',
     subtitle: 'בקרוב',
     category: 'brain',
