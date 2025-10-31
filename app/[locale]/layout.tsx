@@ -2,6 +2,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
+import { fredoka, nunito } from '../layout';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -29,7 +30,7 @@ export default async function LocaleLayout({
   const dir = ['he', 'ar'].includes(locale) ? 'rtl' : 'ltr';
 
   return (
-    <html lang={locale} dir={dir}>
+    <html lang={locale} dir={dir} className={`${fredoka.variable} ${nunito.variable}`}>
       <head>
         <meta name="application-name" content="Kids Educational Games" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
