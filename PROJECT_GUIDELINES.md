@@ -115,6 +115,27 @@ Each educational game should include:
 - Link external stylesheets and scripts
 - Use UTF-8 encoding
 
+## Deployment Guidelines
+
+### Pre-Production Checklist
+**ALWAYS run the build before pushing to main/production:**
+
+1. Run `npm run build` to verify production build succeeds
+2. Fix any TypeScript errors or build failures
+3. Only push to main if build is successful
+4. This prevents broken deployments to Vercel
+
+### Deployment Workflow
+```bash
+# 1. Verify build passes
+npm run build
+
+# 2. If build succeeds, merge and push
+git checkout main
+git merge feature-branch
+git push origin main
+```
+
 ## Git Commit Guidelines
 
 ### Commit Message Format
