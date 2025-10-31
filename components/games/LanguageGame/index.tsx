@@ -135,15 +135,15 @@ export default function LanguageGame({ languageConfig }: LanguageGameProps) {
         />
 
         {/* Permanent Instruction */}
-        <div className="bg-white/90 rounded-2xl p-4 text-center text-lg font-bold text-purple-600 mb-4 shadow-md border-2 border-purple-600">
+        <div className="bg-card rounded-2xl p-4 text-center text-lg font-bold text-foreground mb-4 shadow-md border-2">
           {t('instructions.permanent')}
         </div>
 
         {/* Find Mode Instruction */}
         {gameState.mode === 'find' && gameState.currentTarget && (
-          <div className="bg-gradient-to-r from-purple-600 to-purple-800 text-white rounded-2xl p-5 mb-5 text-center text-2xl font-bold shadow-lg border-3 border-white/30">
+          <div className="bg-primary text-primary-foreground rounded-2xl p-5 mb-5 text-center text-2xl font-bold shadow-lg border-2">
             <span className="inline-block">{t('instructions.findLetter')}</span>{' '}
-            <span className="text-yellow-300 text-3xl inline-block mx-2" lang={languageConfig.lang} dir={languageConfig.dir}>{gameState.currentTarget.letter}</span>
+            <span className="text-accent-foreground text-3xl inline-block mx-2" lang={languageConfig.lang} dir={languageConfig.dir}>{gameState.currentTarget.letter}</span>
           </div>
         )}
 

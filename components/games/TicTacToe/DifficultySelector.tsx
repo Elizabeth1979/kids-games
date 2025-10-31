@@ -12,9 +12,9 @@ export default function DifficultySelector({ difficulty, onDifficultyChange }: D
   const difficulties: Difficulty[] = ['easy', 'medium', 'hard'];
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-lg">
+    <div className="bg-card rounded-2xl p-6 shadow-lg border">
       <div className="text-center mb-4">
-        <label className="text-lg md:text-xl font-bold text-gray-800">
+        <label className="text-lg md:text-xl font-bold text-foreground">
           {t('difficulty')}
         </label>
       </div>
@@ -27,8 +27,8 @@ export default function DifficultySelector({ difficulty, onDifficultyChange }: D
               px-6 py-3 rounded-xl font-bold text-base md:text-lg
               border-2 transition-all
               ${difficulty === level
-                ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white border-purple-500'
-                : 'bg-white text-gray-600 border-gray-300 hover:border-purple-500 hover:text-purple-500'
+                ? 'bg-primary text-primary-foreground border-primary'
+                : 'bg-card text-muted-foreground border-border hover:border-primary hover:text-foreground'
               }
             `}
           >

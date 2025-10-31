@@ -40,19 +40,19 @@ export default function LetterBox({
         font-bold cursor-pointer transition-all duration-300
         shadow-lg hover:shadow-xl border-4
         ${isPressed ? 'scale-110' : 'scale-100'}
-        ${showCorrect ? 'border-green-500 bg-green-50 animate-bounce' : ''}
-        ${showWrong ? 'border-red-500 animate-shake' : ''}
+        ${showCorrect ? 'border-primary bg-accent animate-bounce' : ''}
+        ${showWrong ? 'border-destructive bg-destructive/10 animate-shake' : ''}
         ${!showCorrect && !showWrong ? 'border-transparent hover:scale-105' : ''}
       `}
       style={{
-        backgroundColor: showCorrect ? '#E8F5E9' : showWrong ? '#FFEBEE' : color
+        backgroundColor: !showCorrect && !showWrong ? color : undefined
       }}
     >
       <div className="text-4xl md:text-5xl">
         {display}
       </div>
       {letter.phonetic && (
-        <div className="text-sm md:text-base text-gray-600 mt-1">
+        <div className="text-sm md:text-base text-muted-foreground mt-1">
           {letter.phonetic}
         </div>
       )}

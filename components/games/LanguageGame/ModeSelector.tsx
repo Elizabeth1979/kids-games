@@ -26,8 +26,8 @@ export default function ModeSelector({
           px-6 py-3 rounded-2xl text-lg font-bold transition-all
           shadow-md hover:shadow-lg hover:-translate-y-0.5
           ${currentMode === 'learn'
-            ? 'bg-green-500 text-white'
-            : 'bg-white text-gray-700 hover:bg-gray-50'
+            ? 'bg-primary text-primary-foreground'
+            : 'bg-card text-foreground hover:bg-accent border'
           }
         `}
       >
@@ -40,8 +40,8 @@ export default function ModeSelector({
           px-6 py-3 rounded-2xl text-lg font-bold transition-all
           shadow-md hover:shadow-lg hover:-translate-y-0.5
           ${currentMode === 'find'
-            ? 'bg-green-500 text-white'
-            : 'bg-white text-gray-700 hover:bg-gray-50'
+            ? 'bg-primary text-primary-foreground'
+            : 'bg-card text-foreground hover:bg-accent border'
           }
         `}
       >
@@ -54,8 +54,8 @@ export default function ModeSelector({
           px-6 py-3 rounded-2xl text-lg font-bold transition-all
           shadow-md hover:shadow-lg hover:-translate-y-0.5
           ${isShuffled
-            ? 'bg-orange-500 text-white'
-            : 'bg-white text-gray-700 hover:bg-gray-50'
+            ? 'bg-secondary text-secondary-foreground'
+            : 'bg-card text-foreground hover:bg-accent border'
           }
         `}
       >

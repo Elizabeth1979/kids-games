@@ -22,7 +22,7 @@ export default function LetterGrid({
     <div
       className="
         grid grid-cols-4 md:grid-cols-5 gap-2 md:gap-3
-        bg-white/10 backdrop-blur-sm rounded-3xl p-4 md:p-6 mb-6
+        bg-card/50 backdrop-blur-sm rounded-3xl p-4 md:p-6 mb-6 border
       "
       lang={languageConfig.lang}
       dir={languageConfig.dir}
