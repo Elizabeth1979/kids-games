@@ -15,7 +15,9 @@ export default function ScoreBox({ show, correct, wrong }: ScoreBoxProps) {
 
   return (
     <div className="bg-white/90 rounded-xl p-4 text-center text-xl font-bold mb-5 shadow-md">
-      {t('score.correct')}: <span className="text-green-600">{correct}</span> | {t('score.wrong')}: <span className="text-red-600">{wrong}</span>
+      <span className="inline-block">{t('score.correct')}: <span className="text-green-600">{correct}</span></span>
+      <span className="mx-3">|</span>
+      <span className="inline-block">{t('score.wrong')}: <span className="text-red-600">{wrong}</span></span>
     </div>
   );
 }

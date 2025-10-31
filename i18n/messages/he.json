@@ -16,6 +16,18 @@
     "subtitle": "בחרו משחק ותתחילו ללמוד ולהנות!"
   },
   "games": {
+    "titles": {
+      "hebrew": "משחק עברית",
+      "english": "משחק אנגלית",
+      "russian": "משחק רוסית",
+      "arabic": "משחק ערבית",
+      "tic-tac-toe": "איקס עיגול",
+      "canvas-drawing": "ציור חופשי",
+      "addition": "חיבור",
+      "subtraction": "חיסור",
+      "multiplication": "לוח כפל",
+      "memory": "זיכרון"
+    },
     "modes": {
       "learn": "למידה",
       "find": "מצא את האות",

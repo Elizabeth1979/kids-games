@@ -101,19 +101,31 @@ export function useSpeechSynthesis(languageConfig: LanguageConfig): SpeechSynthe
     };
   }, [loadVoices]);
 
-  const speak = useCallback((text: string) => {
+  const speak = useCallback((text: string, localeOverride?: string) => {
     if (typeof window === 'undefined' || !window.speechSynthesis || !text) return;
 
     // Cancel any ongoing speech
     window.speechSynthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = languageConfig.lang;
+    const targetLang = localeOverride || languageConfig.lang;
+    utterance.lang = targetLang;
     utterance.rate = languageConfig.speechRate || 0.8;
     utterance.pitch = 1;
     utterance.volume = 1;
 
-    if (selectedVoice) {
+    // If locale override is provided, try to find a voice for that locale
+    if (localeOverride && voices.length > 0) {
+      const baseLang = localeOverride.split('-')[0];
+      const overrideVoice = voices.find(v =>
+        v.lang.startsWith(baseLang) || v.lang === localeOverride
+      );
+      if (overrideVoice) {
+        utterance.voice = overrideVoice;
+      } else if (selectedVoice) {
+        utterance.voice = selectedVoice;
+      }
+    } else if (selectedVoice) {
       utterance.voice = selectedVoice;
     }
 
@@ -122,7 +134,7 @@ export function useSpeechSynthesis(languageConfig: LanguageConfig): SpeechSynthe
     } catch (error) {
       console.error('[Speech] Error:', error);
     }
-  }, [selectedVoice, languageConfig]);
+  }, [selectedVoice, languageConfig, voices]);
 
   return { speak, isReady, selectedVoice, voices };
 }

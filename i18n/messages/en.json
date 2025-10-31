@@ -16,6 +16,18 @@
     "subtitle": "Choose a game and start learning and having fun!"
   },
   "games": {
+    "titles": {
+      "hebrew": "Hebrew Game",
+      "english": "English Game",
+      "russian": "Russian Game",
+      "arabic": "Arabic Game",
+      "tic-tac-toe": "Tic-Tac-Toe",
+      "canvas-drawing": "Free Drawing",
+      "addition": "Addition",
+      "subtraction": "Subtraction",
+      "multiplication": "Multiplication Table",
+      "memory": "Memory"
+    },
     "modes": {
       "learn": "Learn",
       "find": "Find the Letter",
@@ -38,6 +50,7 @@
     },
     "drawing": {
       "title": "Drawing Board",
+      "subtitle": "Draw whatever you want!",
       "color": "Color",
       "size": "Size",
       "clear": "Clear",

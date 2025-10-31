@@ -6,7 +6,7 @@ import ComingSoonCard from '@/components/shared/ComingSoonCard';
 import Navigation from '@/components/shared/Navigation';
 
 export default function HomePage() {
-  const t = useTranslations('home');
+  const t = useTranslations();
 
   return (
     <div className="min-h-screen bg-background">
@@ -17,11 +17,8 @@ export default function HomePage() {
           {/* Header */}
           <header className="text-center mb-12">
           <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-4 drop-shadow-lg">
-            {t('title')}
+            {t('home.title')}
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground">
-            {t('subtitle')}
-          </p>
         </header>
 
         {/* Categories */}
@@ -34,12 +31,9 @@ export default function HomePage() {
             <section key={category.id} className="mb-16">
               {/* Category Header */}
               <div className="bg-secondary/50 backdrop-blur-sm rounded-3xl p-6 mb-6 border border-border">
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-                  {category.title}
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+                  {t(category.title)}
                 </h2>
-                <p className="text-muted-foreground text-lg">
-                  {category.description}
-                </p>
               </div>
 
               {/* Games Grid */}

@@ -16,6 +16,18 @@
     "subtitle": "اختر لعبة وابدأ في التعلم والمتعة!"
   },
   "games": {
+    "titles": {
+      "hebrew": "لعبة العبرية",
+      "english": "لعبة الإنجليزية",
+      "russian": "لعبة الروسية",
+      "arabic": "لعبة العربية",
+      "tic-tac-toe": "إكس أو",
+      "canvas-drawing": "رسم حر",
+      "addition": "الجمع",
+      "subtraction": "الطرح",
+      "multiplication": "جدول الضرب",
+      "memory": "الذاكرة"
+    },
     "modes": {
       "learn": "التعلم",
       "find": "ابحث عن الحرف",
@@ -38,6 +50,7 @@
     },
     "drawing": {
       "title": "لوحة الرسم",
+      "subtitle": "ارسم كل ما تريد!",
       "color": "اللون",
       "size": "الحجم",
       "clear": "مسح",

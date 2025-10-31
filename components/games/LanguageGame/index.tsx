@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useTranslations } from 'next-intl';
-import { LanguageConfig, Letter } from '@/types';
+import { useTranslations, useLocale } from 'next-intl';
+import { LanguageConfig, Letter, UILocale } from '@/types';
 import { useSpeechSynthesis } from '@/hooks/useSpeechSynthesis';
 import { useGameState } from '@/hooks/useGameState';
 import ModeSelector from './ModeSelector';
@@ -18,6 +18,7 @@ interface LanguageGameProps {
 
 export default function LanguageGame({ languageConfig }: LanguageGameProps) {
   const t = useTranslations('games');
+  const uiLocale = useLocale() as UILocale;
   const { speak } = useSpeechSynthesis(languageConfig);
   const gameState = useGameState(languageConfig.letters);
 
@@ -35,13 +36,21 @@ export default function LanguageGame({ languageConfig }: LanguageGameProps) {
     }
 
     if (gameState.mode === 'find' && gameState.currentTarget) {
-      // Speak the full instruction in the game's language
-      const letterName = languageConfig.usePhoneticForSpeech
-        ? gameState.currentTarget.phonetic
-        : gameState.currentTarget.name;
-      const instruction = languageConfig.instructions?.findLetter || t('instructions.findLetter');
-      const fullText = `${instruction} ${letterName}`;
-      speak(fullText);
+      // Use UI locale for instruction, then game language for letter name
+      const instruction = t('instructions.findLetter');
+      speak(instruction, uiLocale);
+
+      // Capture current target to avoid null reference in timeout
+      const currentTarget = gameState.currentTarget;
+      // Speak the letter name in the game's language after a brief pause
+      setTimeout(() => {
+        if (currentTarget) {
+          const letterName = languageConfig.usePhoneticForSpeech
+            ? currentTarget.phonetic
+            : currentTarget.name;
+          speak(letterName);
+        }
+      }, 1000);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState.currentTarget, gameState.mode]);
@@ -58,7 +67,8 @@ export default function LanguageGame({ languageConfig }: LanguageGameProps) {
       if (letter.letter === gameState.currentTarget?.letter) {
         // Correct answer!
         gameState.handleCorrect();
-        speak(t('feedback.correct'));
+        // Use UI locale for feedback, not game language
+        speak(t('feedback.correct'), uiLocale);
 
         setCorrectLetter(letter);
         setShowCelebration(true);
@@ -71,7 +81,8 @@ export default function LanguageGame({ languageConfig }: LanguageGameProps) {
       } else {
         // Wrong answer
         gameState.handleWrong();
-        speak(t('feedback.wrong'));
+        // Use UI locale for feedback, not game language
+        speak(t('feedback.wrong'), uiLocale);
 
         setWrongLetter(letter);
         setTimeout(() => {
@@ -88,30 +99,28 @@ export default function LanguageGame({ languageConfig }: LanguageGameProps) {
 
   const handleToggleShuffle = () => {
     gameState.toggleShuffle();
-    // Use game language instructions if available, fallback to UI language
-    const shuffledText = languageConfig.instructions?.shuffled || t('shuffle.shuffled');
-    const unshuffledText = languageConfig.instructions?.unshuffled || t('shuffle.unshuffled');
-    speak(gameState.isShuffled ? unshuffledText : shuffledText);
+    // Use UI locale for shuffle notifications
+    const shuffledText = t('shuffle.shuffled');
+    const unshuffledText = t('shuffle.unshuffled');
+    // Speak the NEW state after toggling
+    speak(gameState.isShuffled ? shuffledText : unshuffledText, uiLocale);
   };
 
   return (
-    <div
-      className="min-h-screen bg-background p-4 md:p-8"
-      lang={languageConfig.lang}
-      dir={languageConfig.dir}
-    >
+    <div className="min-h-screen bg-background p-4 md:p-8">
       <div className="max-w-5xl mx-auto">
         {/* Back button */}
         <Link
           href="/"
-          className="inline-block mb-6 text-foreground hover:text-muted-foreground transition-colors text-lg"
+          className="inline-flex items-center gap-2 mb-6 text-foreground hover:text-muted-foreground transition-colors text-lg"
         >
-          ← {t('instructions.back', { default: 'חזרה' })}
+          <span>←</span>
+          <span>{t('instructions.back', { default: 'חזרה' })}</span>
         </Link>
 
         {/* Title */}
         <h1 className="text-foreground text-4xl md:text-6xl font-bold text-center mb-6 drop-shadow-lg">
-          {languageConfig.nativeName}
+          {t(`titles.${languageConfig.id}`)}
         </h1>
 
         {/* Mode Selector */}
@@ -130,7 +139,8 @@ export default function LanguageGame({ languageConfig }: LanguageGameProps) {
         {/* Find Mode Instruction */}
         {gameState.mode === 'find' && gameState.currentTarget && (
           <div className="bg-gradient-to-r from-purple-600 to-purple-800 text-white rounded-2xl p-5 mb-5 text-center text-2xl font-bold shadow-lg border-3 border-white/30">
-            {t('instructions.findLetter')} <span className="text-yellow-300 text-3xl mx-2">{gameState.currentTarget.letter}</span>
+            <span className="inline-block">{t('instructions.findLetter')}</span>{' '}
+            <span className="text-yellow-300 text-3xl inline-block mx-2" lang={languageConfig.lang} dir={languageConfig.dir}>{gameState.currentTarget.letter}</span>
           </div>
         )}
 

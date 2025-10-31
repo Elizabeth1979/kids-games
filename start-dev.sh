@@ -21,6 +21,23 @@ if [ ! -d "node_modules" ]; then
     echo ""
 fi
 
+echo "🔍 Checking for existing dev servers..."
+echo ""
+
+# Kill any existing Next.js dev server processes
+if lsof -ti:3000 > /dev/null 2>&1; then
+    echo "⚠️  Found existing server on port 3000, stopping it..."
+    kill -9 $(lsof -ti:3000) 2>/dev/null || true
+    sleep 1
+fi
+
+# Clean up any lock files
+if [ -f ".next/dev/lock" ]; then
+    echo "🧹 Cleaning up lock files..."
+    rm -f .next/dev/lock
+fi
+
+echo ""
 echo "🚀 Starting development server..."
 echo ""
 echo "Your app will be available at:"

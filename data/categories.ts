@@ -3,26 +3,22 @@ import { CategoryConfig } from '@/types';
 export const categoriesConfig: CategoryConfig[] = [
   {
     id: 'languages',
-    title: 'שפות',
-    icon: '',
-    description: 'למדו אותיות ושפות שונות'
+    title: 'categories.languages.title',
+    icon: ''
   },
   {
     id: 'board',
-    title: 'משחקי לוח',
-    icon: '',
-    description: 'משחקים קלאסיים ואסטרטגיה'
+    title: 'categories.board.title',
+    icon: ''
   },
   {
     id: 'math',
-    title: 'מתמטיקה',
-    icon: '',
-    description: 'תרגול חשבון מהנה'
+    title: 'categories.math.title',
+    icon: ''
   },
   {
     id: 'brain',
-    title: 'משחקי חשיבה',
-    icon: '',
-    description: 'פיתוח מוח וזיכרון'
+    title: 'categories.brain.title',
+    icon: ''
   }
 ];

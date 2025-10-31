@@ -42,10 +42,8 @@ export interface GameState {
 
 export interface GameConfig {
   id: string;               // 'hebrew', 'english', 'tic-tac-toe', etc.
-  title: string;            // Display title (in Hebrew for now)
+  title: string;            // Translation key for title (e.g., 'games.titles.hebrew')
   icon: string;             // Emoji or text icon
-  description: string;      // Short description
-  subtitle?: string;        // Additional info ('Coming Soon', etc.)
   category: string;         // 'languages', 'board', 'math', 'brain'
   active: boolean;          // Is game playable?
   path?: string;            // Optional custom path
@@ -53,15 +51,14 @@ export interface GameConfig {
 
 export interface CategoryConfig {
   id: string;               // 'languages', 'board', 'math', 'brain'
-  title: string;            // Display title
+  title: string;            // Translation key for title (e.g., 'categories.languages.title')
   icon: string;             // Emoji icon
-  description: string;      // Short description
 }
 
 export type UILocale = 'he' | 'en' | 'ru' | 'ar';
 
 export interface SpeechSynthesisHook {
-  speak: (text: string) => void;
+  speak: (text: string, localeOverride?: string) => void;
   isReady: boolean;
   selectedVoice: SpeechSynthesisVoice | null;
   voices: SpeechSynthesisVoice[];
