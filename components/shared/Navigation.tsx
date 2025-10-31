@@ -6,10 +6,10 @@ import { useParams } from 'next/navigation';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 const languages = [
-  { code: 'he', name: 'עברית', flag: '🇮🇱' },
-  { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'ru', name: 'Русский', flag: '🇷🇺' },
-  { code: 'ar', name: 'العربية', flag: '🇸🇦' }
+  { code: 'he', name: 'עברית' },
+  { code: 'en', name: 'English' },
+  { code: 'ru', name: 'Русский' },
+  { code: 'ar', name: 'العربية' }
 ];
 
 export default function Navigation() {
@@ -37,7 +37,7 @@ export default function Navigation() {
             href="/"
             className="text-primary-foreground text-xl md:text-2xl font-bold hover:scale-105 transition-transform"
           >
-            🎮 {t('home')}
+            {t('home')}
           </Link>
           <div className="flex gap-2 md:gap-4 items-center">
             {/* Theme Toggle */}
@@ -50,8 +50,7 @@ export default function Navigation() {
                          px-4 py-2 rounded-xl hover:bg-primary-foreground/20 transition-all
                          flex items-center gap-2"
               >
-                {languages.find(lang => lang.code === locale)?.flag}
-                <span className="hidden md:inline">
+                <span>
                   {languages.find(lang => lang.code === locale)?.name}
                 </span>
                 <span className="text-sm">▼</span>
@@ -65,12 +64,10 @@ export default function Navigation() {
                   <button
                     key={lang.code}
                     onClick={() => handleLanguageChange(lang.code)}
-                    className={`w-full text-left px-4 py-3 hover:bg-accent transition-colors
-                              flex items-center gap-3 ${
+                    className={`w-full text-left px-4 py-3 hover:bg-accent transition-colors ${
                                 locale === lang.code ? 'bg-secondary font-bold' : ''
                               }`}
                   >
-                    <span className="text-2xl">{lang.flag}</span>
                     <span className="text-card-foreground">{lang.name}</span>
                   </button>
                 ))}
@@ -82,7 +79,7 @@ export default function Navigation() {
               className="text-primary-foreground text-lg md:text-xl font-semibold
                        px-4 py-2 rounded-xl hover:bg-primary-foreground/20 transition-all"
             >
-              ❓ {t('help')}
+              {t('help')}
             </Link>
           </div>
         </div>

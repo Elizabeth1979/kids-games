@@ -11,7 +11,7 @@ export default function Celebration({ show }: CelebrationProps) {
 
   useEffect(() => {
     if (show) {
-      const celebrationTexts = ['!', '*', '+', '✓', '√'];
+      const celebrationTexts = ['!', '*', '+', 'V'];
       setText(celebrationTexts[Math.floor(Math.random() * celebrationTexts.length)]);
     }
   }, [show]);

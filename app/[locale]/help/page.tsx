@@ -12,18 +12,15 @@ export default function HelpPage() {
   const faqs = [
     {
       question: t('faq.speech.question'),
-      answer: t('faq.speech.answer'),
-      icon: '🔊'
+      answer: t('faq.speech.answer')
     },
     {
       question: t('faq.android.question'),
-      answer: t('faq.android.answer'),
-      icon: '📱'
+      answer: t('faq.android.answer')
     },
     {
       question: t('faq.install.question'),
-      answer: t('faq.install.answer'),
-      icon: '📲'
+      answer: t('faq.install.answer')
     }
   ];
 
@@ -44,7 +41,7 @@ export default function HelpPage() {
         <section className="mb-12">
           <div className="bg-secondary/50 backdrop-blur-sm rounded-3xl p-6 mb-6 border border-border">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-              ❓ {t('faq.title')}
+              {t('faq.title')}
             </h2>
           </div>
 
@@ -54,16 +51,13 @@ export default function HelpPage() {
                 key={index}
                 className="bg-card rounded-3xl p-6 shadow-lg hover:shadow-xl transition-shadow border border-border"
               >
-                <div className="flex items-start gap-4">
-                  <div className="text-4xl flex-shrink-0">{faq.icon}</div>
-                  <div className="flex-1">
-                    <h3 className="text-xl md:text-2xl font-bold text-card-foreground mb-3">
-                      {faq.question}
-                    </h3>
-                    <p className="text-muted-foreground text-lg leading-relaxed">
-                      {faq.answer}
-                    </p>
-                  </div>
+                <div>
+                  <h3 className="text-xl md:text-2xl font-bold text-card-foreground mb-3">
+                    {faq.question}
+                  </h3>
+                  <p className="text-muted-foreground text-lg leading-relaxed">
+                    {faq.answer}
+                  </p>
                 </div>
               </div>
             ))}
@@ -74,7 +68,7 @@ export default function HelpPage() {
         <section className="mb-12">
           <div className="bg-secondary/50 backdrop-blur-sm rounded-3xl p-6 mb-6 border border-border">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-              📧 {t('contact.title')}
+              {t('contact.title')}
             </h2>
           </div>
 
@@ -88,7 +82,7 @@ export default function HelpPage() {
                        px-8 py-4 rounded-2xl text-xl font-bold shadow-lg
                        hover:shadow-xl hover:scale-105 transition-all hover:bg-accent/90"
             >
-              {t('contact.email')} ✉️
+              {t('contact.email')}
             </a>
             <p className="text-muted-foreground mt-4">
               {tFooter('email')}
@@ -104,7 +98,7 @@ export default function HelpPage() {
                        px-8 py-4 rounded-2xl text-xl font-bold shadow-lg
                        hover:bg-secondary/80 hover:shadow-xl hover:scale-105 transition-all border border-border"
             >
-              🏠 {tNav('home')}
+              {tNav('home')}
             </Link>
           </div>
         </div>

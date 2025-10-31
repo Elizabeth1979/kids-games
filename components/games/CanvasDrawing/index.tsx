@@ -23,7 +23,7 @@ export default function CanvasDrawing() {
       <div className="max-w-6xl mx-auto">
         <div className="bg-white/95 rounded-3xl p-8 shadow-2xl">
           <h1 className="text-4xl md:text-5xl font-bold text-purple-600 text-center mb-2">
-            🎨 {t('drawing.title')} 🎨
+            {t('drawing.title')}
           </h1>
           <p className="text-center text-gray-600 mb-8 text-lg">
             {t('drawing.subtitle')}
@@ -71,7 +71,7 @@ export default function CanvasDrawing() {
                          hover:bg-red-600 transition-all shadow-md hover:shadow-lg
                          hover:scale-105 active:scale-95"
             >
-              🗑️ {t('drawing.clear')}
+              {t('drawing.clear')}
             </button>
 
             <button
@@ -80,7 +80,7 @@ export default function CanvasDrawing() {
                          hover:bg-green-600 transition-all shadow-md hover:shadow-lg
                          hover:scale-105 active:scale-95"
             >
-              💾 {t('drawing.save')}
+              {t('drawing.save')}
             </button>
           </div>
         </div>

@@ -20,13 +20,9 @@ export function ThemeToggle() {
       aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
     >
       {theme === 'light' ? (
-        <span className="text-2xl" role="img" aria-label="Moon icon">
-          🌙
-        </span>
+        <span className="text-lg font-bold">DARK</span>
       ) : (
-        <span className="text-2xl" role="img" aria-label="Sun icon">
-          ☀️
-        </span>
+        <span className="text-lg font-bold">LIGHT</span>
       )}
     </Button>
   );
