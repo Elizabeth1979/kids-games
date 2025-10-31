@@ -30,7 +30,7 @@ export default async function LocaleLayout({
   const dir = ['he', 'ar'].includes(locale) ? 'rtl' : 'ltr';
 
   return (
-    <html lang={locale} dir={dir} className={`${fredoka.variable} ${nunito.variable}`}>
+    <html lang={locale} dir={dir} className={`${fredoka.variable} ${nunito.variable}`} suppressHydrationWarning>
       <head>
         <meta name="application-name" content="Kids Educational Games" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -44,6 +44,20 @@ export default async function LocaleLayout({
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/icon-192.png" />
+
+        {/* Apply theme before page renders to prevent flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const theme = localStorage.getItem('kids-games-theme') || 'light';
+                  document.documentElement.classList.add(theme);
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
       </head>
       <body className="antialiased" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>

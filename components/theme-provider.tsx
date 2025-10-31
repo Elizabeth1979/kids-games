@@ -28,10 +28,19 @@ export function ThemeProvider({
   storageKey = 'kids-games-theme',
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = React.useState<Theme>(defaultTheme);
+  const [theme, setTheme] = React.useState<Theme>(() => {
+    // Initialize theme from localStorage if available
+    if (typeof window !== 'undefined') {
+      const storedTheme = localStorage.getItem(storageKey) as Theme | null;
+      if (storedTheme === 'light' || storedTheme === 'dark') {
+        return storedTheme;
+      }
+    }
+    return defaultTheme;
+  });
 
   React.useEffect(() => {
-    // Load theme from localStorage
+    // Load theme from localStorage (for SSR safety)
     const storedTheme = localStorage.getItem(storageKey) as Theme | null;
     if (storedTheme === 'light' || storedTheme === 'dark') {
       setTheme(storedTheme);
