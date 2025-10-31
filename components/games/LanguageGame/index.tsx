@@ -106,6 +106,9 @@ export default function LanguageGame({ languageConfig }: LanguageGameProps) {
     speak(gameState.isShuffled ? shuffledText : unshuffledText, uiLocale);
   };
 
+  // Determine if UI is RTL
+  const isRTL = ['he', 'ar'].includes(uiLocale);
+
   return (
     <div className="min-h-screen bg-background p-4 md:p-8">
       <div className="max-w-5xl mx-auto">
@@ -114,7 +117,7 @@ export default function LanguageGame({ languageConfig }: LanguageGameProps) {
           href="/"
           className="inline-flex items-center gap-2 mb-6 text-foreground hover:text-muted-foreground transition-colors text-lg"
         >
-          <span>←</span>
+          <span>{isRTL ? '→' : '←'}</span>
           <span>{t('instructions.back', { default: 'חזרה' })}</span>
         </Link>
 
