@@ -96,7 +96,7 @@ export default function LanguageGame({ languageConfig }: LanguageGameProps) {
 
   return (
     <div
-      className="min-h-screen bg-gradient-to-br from-purple-500 to-purple-700 p-4 md:p-8"
+      className="min-h-screen bg-background p-4 md:p-8"
       lang={languageConfig.lang}
       dir={languageConfig.dir}
     >
@@ -104,13 +104,13 @@ export default function LanguageGame({ languageConfig }: LanguageGameProps) {
         {/* Back button */}
         <Link
           href="/"
-          className="inline-block mb-6 text-white hover:text-white/80 transition-colors text-lg"
+          className="inline-block mb-6 text-foreground hover:text-muted-foreground transition-colors text-lg"
         >
           ← {t('instructions.back', { default: 'חזרה' })}
         </Link>
 
         {/* Title */}
-        <h1 className="text-white text-4xl md:text-6xl font-bold text-center mb-6 drop-shadow-lg">
+        <h1 className="text-foreground text-4xl md:text-6xl font-bold text-center mb-6 drop-shadow-lg">
           🎨 {languageConfig.nativeName} 🎨
         </h1>
 

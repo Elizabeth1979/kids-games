@@ -27,21 +27,21 @@ export default function TicTacToe() {
   };
 
   const getStatusClass = () => {
-    if (game.gameStatus === 'playerWon') return 'bg-red-500';
-    if (game.gameStatus === 'computerWon') return 'bg-blue-600';
-    if (game.gameStatus === 'tie') return 'bg-yellow-500';
-    return 'bg-gradient-to-r from-purple-500 to-blue-500';
+    if (game.gameStatus === 'playerWon') return 'bg-destructive';
+    if (game.gameStatus === 'computerWon') return 'bg-primary';
+    if (game.gameStatus === 'tie') return 'bg-accent';
+    return 'bg-secondary';
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-500 to-pink-500 py-12 px-4">
+    <div className="min-h-screen bg-background py-12 px-4">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <header className="text-center mb-8">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-2 drop-shadow-lg">
+          <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-2 drop-shadow-lg">
             ⭕ {t('title')} ❌
           </h1>
-          <p className="text-xl md:text-2xl text-white/90">
+          <p className="text-xl md:text-2xl text-muted-foreground">
             {t('subtitle')}
           </p>
         </header>

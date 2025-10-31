@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fredoka, Nunito } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
 // Configure fonts with optimal settings
@@ -27,5 +28,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return children;
+  return (
+    <ThemeProvider defaultTheme="light" storageKey="kids-games-theme">
+      {children}
+    </ThemeProvider>
+  );
 }
