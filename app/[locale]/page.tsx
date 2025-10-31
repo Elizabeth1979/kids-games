@@ -35,7 +35,7 @@ export default function HomePage() {
               {/* Category Header */}
               <div className="bg-secondary/50 backdrop-blur-sm rounded-3xl p-6 mb-6 border border-border">
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-                  {category.icon} {category.title}
+                  {category.title}
                 </h2>
                 <p className="text-muted-foreground text-lg">
                   {category.description}
