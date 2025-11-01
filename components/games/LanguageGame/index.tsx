@@ -103,7 +103,7 @@ export default function LanguageGame({ languageConfig }: LanguageGameProps) {
     const shuffledText = t('shuffle.shuffled');
     const unshuffledText = t('shuffle.unshuffled');
     // Speak the NEW state after toggling
-    speak(gameState.isShuffled ? shuffledText : unshuffledText, uiLocale);
+    speak(gameState.isShuffled ? unshuffledText : shuffledText, uiLocale);
   };
 
   // Determine if UI is RTL
