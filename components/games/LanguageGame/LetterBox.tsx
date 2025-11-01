@@ -42,7 +42,7 @@ export default function LetterBox({
         ${isPressed ? 'scale-110' : 'scale-100'}
         ${showCorrect ? 'border-primary bg-accent animate-bounce' : ''}
         ${showWrong ? 'border-destructive bg-destructive/10 animate-shake' : ''}
-        ${!showCorrect && !showWrong ? 'border-transparent hover:scale-105' : ''}
+        ${!showCorrect && !showWrong ? 'border-foreground/20 hover:scale-105' : ''}
       `}
       style={{
         backgroundColor: !showCorrect && !showWrong ? color : undefined

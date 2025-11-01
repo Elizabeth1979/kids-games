@@ -43,6 +43,13 @@ export const gamesConfig: GameConfig[] = [
     category: 'board',
     active: true
   },
+  {
+    id: 'image-puzzle',
+    title: 'games.titles.image-puzzle',
+    icon: '🧩',
+    category: 'brain',
+    active: true
+  },
   // Placeholders for future games
   {
     id: 'addition',

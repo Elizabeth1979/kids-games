@@ -143,7 +143,7 @@ export default function LanguageGame({ languageConfig }: LanguageGameProps) {
         {gameState.mode === 'find' && gameState.currentTarget && (
           <div className="bg-primary text-primary-foreground rounded-2xl p-5 mb-5 text-center text-2xl font-bold shadow-lg border-2">
             <span className="inline-block">{t('instructions.findLetter')}</span>{' '}
-            <span className="text-accent-foreground text-3xl inline-block mx-2" lang={languageConfig.lang} dir={languageConfig.dir}>{gameState.currentTarget.letter}</span>
+            <span className="text-accent text-3xl inline-block mx-2" lang={languageConfig.lang} dir={languageConfig.dir}>{gameState.currentTarget.letter}</span>
           </div>
         )}
 

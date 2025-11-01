@@ -23,6 +23,7 @@
       "arabic": "لعبة العربية",
       "tic-tac-toe": "إكس أو",
       "canvas-drawing": "رسم حر",
+      "image-puzzle": "أحجية الصور",
       "addition": "الجمع",
       "subtraction": "الطرح",
       "multiplication": "جدول الضرب",
@@ -59,6 +60,18 @@
     "shuffle": {
       "shuffled": "الحروف مخلوطة",
       "unshuffled": "العودة إلى الترتيب العادي"
+    },
+    "puzzle": {
+      "title": "أحجية الصور",
+      "subtitle": "قم بتحميل صورة وحل الأحجية!",
+      "upload": "تحميل صورة",
+      "newImage": "صورة جديدة",
+      "reset": "خلط مرة أخرى",
+      "difficulty": "حجم الأحجية",
+      "instructions": "انقر على قطعتين لتبديلهما. رتب جميع القطع لإكمال الأحجية!",
+      "complete": "اكتملت الأحجية!",
+      "original": "الصورة الأصلية",
+      "solve": "حل الأحجية"
     }
   },
   "categories": {

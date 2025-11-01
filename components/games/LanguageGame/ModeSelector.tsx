@@ -24,10 +24,10 @@ export default function ModeSelector({
         onClick={() => onModeChange('learn')}
         className={`
           px-6 py-3 rounded-2xl text-lg font-bold transition-all
-          shadow-md hover:shadow-lg hover:-translate-y-0.5
+          shadow-md hover:shadow-lg hover:-translate-y-0.5 border-2
           ${currentMode === 'learn'
-            ? 'bg-primary text-primary-foreground'
-            : 'bg-card text-foreground hover:bg-accent border'
+            ? 'bg-primary text-primary-foreground border-primary-foreground/50'
+            : 'bg-card text-foreground hover:bg-accent border-border'
           }
         `}
       >
@@ -38,10 +38,10 @@ export default function ModeSelector({
         onClick={() => onModeChange('find')}
         className={`
           px-6 py-3 rounded-2xl text-lg font-bold transition-all
-          shadow-md hover:shadow-lg hover:-translate-y-0.5
+          shadow-md hover:shadow-lg hover:-translate-y-0.5 border-2
           ${currentMode === 'find'
-            ? 'bg-primary text-primary-foreground'
-            : 'bg-card text-foreground hover:bg-accent border'
+            ? 'bg-primary text-primary-foreground border-primary-foreground/50'
+            : 'bg-card text-foreground hover:bg-accent border-border'
           }
         `}
       >
@@ -52,10 +52,10 @@ export default function ModeSelector({
         onClick={onToggleShuffle}
         className={`
           px-6 py-3 rounded-2xl text-lg font-bold transition-all
-          shadow-md hover:shadow-lg hover:-translate-y-0.5
+          shadow-md hover:shadow-lg hover:-translate-y-0.5 border-2
           ${isShuffled
-            ? 'bg-secondary text-secondary-foreground'
-            : 'bg-card text-foreground hover:bg-accent border'
+            ? 'bg-secondary text-secondary-foreground border-secondary-foreground/50'
+            : 'bg-card text-foreground hover:bg-accent border-border'
           }
         `}
       >

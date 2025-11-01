@@ -13,7 +13,7 @@ export default function Controls({ onNewGame, onResetScore }: ControlsProps) {
       <button
         onClick={onNewGame}
         className="px-8 py-4 bg-primary text-primary-foreground
-                   rounded-2xl font-bold text-lg shadow-lg
+                   rounded-2xl font-bold text-lg shadow-lg border-2 border-primary-foreground/50
                    hover:shadow-xl hover:scale-105 transition-all hover:bg-primary/90"
       >
         {t('newGame')}
@@ -21,7 +21,7 @@ export default function Controls({ onNewGame, onResetScore }: ControlsProps) {
       <button
         onClick={onResetScore}
         className="px-8 py-4 bg-destructive text-destructive-foreground
-                   rounded-2xl font-bold text-lg shadow-lg
+                   rounded-2xl font-bold text-lg shadow-lg border-2 border-destructive-foreground/50
                    hover:shadow-xl hover:scale-105 transition-all hover:bg-destructive/90"
       >
         {t('resetScore')}

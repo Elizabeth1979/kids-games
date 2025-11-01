@@ -23,6 +23,7 @@
       "arabic": "Arabic Game",
       "tic-tac-toe": "Tic-Tac-Toe",
       "canvas-drawing": "Free Drawing",
+      "image-puzzle": "Image Puzzle",
       "addition": "Addition",
       "subtraction": "Subtraction",
       "multiplication": "Multiplication Table",
@@ -59,6 +60,18 @@
     "shuffle": {
       "shuffled": "Letters are shuffled",
       "unshuffled": "Back to normal order"
+    },
+    "puzzle": {
+      "title": "Image Puzzle",
+      "subtitle": "Upload an image and solve the puzzle!",
+      "upload": "Upload Image",
+      "newImage": "New Image",
+      "reset": "Shuffle Again",
+      "difficulty": "Puzzle Size",
+      "instructions": "Click on two pieces to swap them. Arrange all pieces to complete the puzzle!",
+      "complete": "Puzzle Complete!",
+      "original": "Original Image",
+      "solve": "Solve the Puzzle"
     }
   },
   "categories": {

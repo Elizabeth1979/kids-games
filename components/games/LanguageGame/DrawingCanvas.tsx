@@ -63,7 +63,7 @@ export default function DrawingCanvas() {
         <button
           onClick={clearCanvas}
           className="bg-destructive text-destructive-foreground px-6 py-2 rounded-xl font-bold
-                     hover:bg-destructive/90 transition-all shadow-md hover:shadow-lg"
+                     hover:bg-destructive/90 transition-all shadow-md hover:shadow-lg border-2 border-destructive-foreground/50"
         >
           {t('drawing.clear')}
         </button>
@@ -71,7 +71,7 @@ export default function DrawingCanvas() {
         <button
           onClick={downloadDrawing}
           className="bg-primary text-primary-foreground px-6 py-2 rounded-xl font-bold
-                     hover:bg-primary/90 transition-all shadow-md hover:shadow-lg"
+                     hover:bg-primary/90 transition-all shadow-md hover:shadow-lg border-2 border-primary-foreground/50"
         >
           {t('drawing.save')}
         </button>

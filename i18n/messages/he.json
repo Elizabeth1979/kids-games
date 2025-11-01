@@ -23,6 +23,7 @@
       "arabic": "משחק ערבית",
       "tic-tac-toe": "איקס עיגול",
       "canvas-drawing": "ציור חופשי",
+      "image-puzzle": "פאזל תמונה",
       "addition": "חיבור",
       "subtraction": "חיסור",
       "multiplication": "לוח כפל",
@@ -59,6 +60,18 @@
     "shuffle": {
       "shuffled": "האותיות מעורבבות",
       "unshuffled": "חזרה לסדר רגיל"
+    },
+    "puzzle": {
+      "title": "פאזל תמונה",
+      "subtitle": "העלו תמונה ופתרו את הפאזל!",
+      "upload": "העלה תמונה",
+      "newImage": "תמונה חדשה",
+      "reset": "ערבב שוב",
+      "difficulty": "גודל פאזל",
+      "instructions": "לחץ על שני חלקים כדי להחליף ביניהם. סדר את כל החלקים כדי להשלים את הפאזל!",
+      "complete": "פאזל הושלם!",
+      "original": "תמונה מקורית",
+      "solve": "פתור את הפאזל"
     }
   },
   "categories": {
