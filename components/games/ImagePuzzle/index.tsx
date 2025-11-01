@@ -24,11 +24,17 @@ export default function ImagePuzzle() {
 
   const [uploadedImage, setUploadedImage] = useState<HTMLImageElement | null>(null);
   const [pieces, setPieces] = useState<PuzzlePiece[]>([]);
-  const [draggedPiece, setDraggedPiece] = useState<number | null>(null);
   const [gridSize, setGridSize] = useState<number>(3);
   const [showCelebration, setShowCelebration] = useState(false);
   const [canvasSize, setCanvasSize] = useState<number>(CANVAS_BASE_SIZE);
   const [needsInitialPuzzle, setNeedsInitialPuzzle] = useState(false);
+
+  // Drag-and-drop state
+  const [isDragging, setIsDragging] = useState(false);
+  const [draggedPieceIndex, setDraggedPieceIndex] = useState<number | null>(null);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [dragPosition, setDragPosition] = useState({ x: 0, y: 0 });
+  const [hoverPosition, setHoverPosition] = useState<number | null>(null);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -145,7 +151,7 @@ export default function ImagePuzzle() {
     }
   }, [needsInitialPuzzle, uploadedImage]);
 
-  // Draw puzzle whenever pieces, draggedPiece, canvasSize, or gridSize changes
+  // Draw puzzle whenever pieces, draggedPieceIndex, canvasSize, gridSize, or hoverPosition changes
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || pieces.length === 0) return;
@@ -176,8 +182,26 @@ export default function ImagePuzzle() {
       (a, b) => a.currentPosition - b.currentPosition
     );
 
-    sortedPieces.forEach((piece) => {
+    sortedPieces.forEach((piece, idx) => {
       if (!piece.imageData) return;
+
+      // Skip drawing the piece being dragged in its original position
+      if (draggedPieceIndex !== null && idx === draggedPieceIndex) {
+        // Draw a placeholder/shadow instead
+        const col = piece.currentPosition % gridSize;
+        const row = Math.floor(piece.currentPosition / gridSize);
+        const x = Math.round(col * pieceWidth);
+        const y = Math.round(row * pieceHeight);
+
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+        ctx.fillRect(x, y, piece.imageData.width, piece.imageData.height);
+        ctx.strokeStyle = '#facc15';
+        ctx.lineWidth = 3;
+        ctx.setLineDash([10, 5]);
+        ctx.strokeRect(x, y, piece.imageData.width, piece.imageData.height);
+        ctx.setLineDash([]);
+        return;
+      }
 
       const col = piece.currentPosition % gridSize;
       const row = Math.floor(piece.currentPosition / gridSize);
@@ -188,66 +212,129 @@ export default function ImagePuzzle() {
 
       ctx.putImageData(piece.imageData, x, y);
 
-      // Draw border around pieces - highlight selected piece
-      const isSelected = draggedPiece === piece.currentPosition;
-      ctx.strokeStyle = isSelected ? '#facc15' : '#666';
-      ctx.lineWidth = isSelected ? 4 : 2;
+      // Highlight hover position
+      const isHovered = hoverPosition === piece.currentPosition && draggedPieceIndex !== null;
+      ctx.strokeStyle = isHovered ? '#facc15' : '#666';
+      ctx.lineWidth = isHovered ? 4 : 2;
       ctx.strokeRect(x, y, piece.imageData.width, piece.imageData.height);
     });
-  }, [pieces, canvasSize, gridSize, draggedPiece]);
+  }, [pieces, canvasSize, gridSize, draggedPieceIndex, hoverPosition]);
 
-  const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
+  // Helper to get canvas coordinates from pointer event
+  const getCanvasCoordinates = (clientX: number, clientY: number) => {
     const canvas = canvasRef.current;
-    if (!canvas || pieces.length === 0) return;
+    if (!canvas) return null;
 
     const rect = canvas.getBoundingClientRect();
-    // Account for canvas scaling by converting click coordinates to canvas coordinates
     const scaleX = canvas.width / rect.width;
     const scaleY = canvas.height / rect.height;
 
-    const x = (e.clientX - rect.left) * scaleX;
-    const y = (e.clientY - rect.top) * scaleY;
+    return {
+      x: (clientX - rect.left) * scaleX,
+      y: (clientY - rect.top) * scaleY,
+      displayX: clientX - rect.left,
+      displayY: clientY - rect.top,
+    };
+  };
+
+  // Helper to get piece position from coordinates
+  const getPieceAtPosition = (x: number, y: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return null;
 
     const pieceWidth = canvas.width / gridSize;
     const pieceHeight = canvas.height / gridSize;
 
     const col = Math.floor(x / pieceWidth);
     const row = Math.floor(y / pieceHeight);
-    const clickedPosition = row * gridSize + col;
 
-    if (draggedPiece === null) {
-      // First click - select piece
-      setDraggedPiece(clickedPosition);
-    } else {
-      // Second click - swap pieces
-      const newPieces = [...pieces];
-      const piece1Index = newPieces.findIndex(
-        (p) => p.currentPosition === draggedPiece
-      );
-      const piece2Index = newPieces.findIndex(
-        (p) => p.currentPosition === clickedPosition
-      );
+    if (col < 0 || col >= gridSize || row < 0 || row >= gridSize) return null;
 
-      if (piece1Index !== -1 && piece2Index !== -1) {
-        const temp = newPieces[piece1Index].currentPosition;
-        newPieces[piece1Index].currentPosition = newPieces[piece2Index].currentPosition;
-        newPieces[piece2Index].currentPosition = temp;
+    return row * gridSize + col;
+  };
 
-        // Check if puzzle is complete
-        const complete = newPieces.every(
-          (piece) => piece.correctPosition === piece.currentPosition
-        );
+  // Pointer event handlers (works for mouse, touch, and pen)
+  const handlePointerDown = (e: React.PointerEvent<HTMLCanvasElement>) => {
+    if (pieces.length === 0) return;
 
-        if (complete) {
-          setShowCelebration(true);
-          setTimeout(() => setShowCelebration(false), 3000);
+    const coords = getCanvasCoordinates(e.clientX, e.clientY);
+    if (!coords) return;
+
+    const position = getPieceAtPosition(coords.x, coords.y);
+    if (position === null) return;
+
+    const pieceIndex = pieces.findIndex((p) => p.currentPosition === position);
+    if (pieceIndex === -1) return;
+
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    // Capture pointer to receive events even outside canvas
+    e.currentTarget.setPointerCapture(e.pointerId);
+
+    const pieceWidth = canvas.width / gridSize;
+    const pieceHeight = canvas.height / gridSize;
+    const col = position % gridSize;
+    const row = Math.floor(position / gridSize);
+    const pieceX = col * pieceWidth;
+    const pieceY = row * pieceHeight;
+
+    setIsDragging(true);
+    setDraggedPieceIndex(pieceIndex);
+    setDragOffset({
+      x: coords.x - pieceX,
+      y: coords.y - pieceY,
+    });
+    setDragPosition({ x: coords.displayX, y: coords.displayY });
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLCanvasElement>) => {
+    if (!isDragging || draggedPieceIndex === null) return;
+
+    const coords = getCanvasCoordinates(e.clientX, e.clientY);
+    if (!coords) return;
+
+    setDragPosition({ x: coords.displayX, y: coords.displayY });
+
+    const position = getPieceAtPosition(coords.x, coords.y);
+    setHoverPosition(position);
+  };
+
+  const handlePointerUp = (e: React.PointerEvent<HTMLCanvasElement>) => {
+    if (!isDragging || draggedPieceIndex === null) return;
+
+    const coords = getCanvasCoordinates(e.clientX, e.clientY);
+    if (coords) {
+      const targetPosition = getPieceAtPosition(coords.x, coords.y);
+
+      if (targetPosition !== null && targetPosition !== pieces[draggedPieceIndex].currentPosition) {
+        // Swap pieces
+        const newPieces = [...pieces];
+        const targetPieceIndex = newPieces.findIndex((p) => p.currentPosition === targetPosition);
+
+        if (targetPieceIndex !== -1) {
+          const temp = newPieces[draggedPieceIndex].currentPosition;
+          newPieces[draggedPieceIndex].currentPosition = newPieces[targetPieceIndex].currentPosition;
+          newPieces[targetPieceIndex].currentPosition = temp;
+
+          // Check if puzzle is complete
+          const complete = newPieces.every(
+            (piece) => piece.correctPosition === piece.currentPosition
+          );
+
+          if (complete) {
+            setShowCelebration(true);
+            setTimeout(() => setShowCelebration(false), 3000);
+          }
+
+          setPieces(newPieces);
         }
-
-        setPieces(newPieces);
       }
-
-      setDraggedPiece(null);
     }
+
+    setIsDragging(false);
+    setDraggedPieceIndex(null);
+    setHoverPosition(null);
   };
 
   const handleReset = () => {
@@ -354,14 +441,53 @@ export default function ImagePuzzle() {
                   <div className="relative w-full">
                     <canvas
                       ref={canvasRef}
-                      onClick={handleCanvasClick}
-                      className="border-4 border-primary rounded-xl cursor-pointer block w-full"
+                      onPointerDown={handlePointerDown}
+                      onPointerMove={handlePointerMove}
+                      onPointerUp={handlePointerUp}
+                      onPointerCancel={handlePointerUp}
+                      className="border-4 border-primary rounded-xl cursor-grab active:cursor-grabbing block w-full touch-none"
                       style={{
                         maxWidth: '100%',
                         height: 'auto',
                         imageRendering: 'crisp-edges'
                       }}
                     />
+
+                    {/* Floating dragged piece */}
+                    {isDragging && draggedPieceIndex !== null && pieces[draggedPieceIndex] && (
+                      <div
+                        className="absolute pointer-events-none"
+                        style={{
+                          left: dragPosition.x - dragOffset.x,
+                          top: dragPosition.y - dragOffset.y,
+                          width: canvasSize / gridSize,
+                          height: canvasSize / gridSize,
+                          transform: 'scale(1.1)',
+                          filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.5))',
+                          zIndex: 1000,
+                        }}
+                      >
+                        <canvas
+                          width={canvasSize / gridSize}
+                          height={canvasSize / gridSize}
+                          ref={(canvas) => {
+                            if (canvas && pieces[draggedPieceIndex]?.imageData) {
+                              const ctx = canvas.getContext('2d');
+                              if (ctx) {
+                                ctx.putImageData(pieces[draggedPieceIndex].imageData!, 0, 0);
+                                // Draw highlight border
+                                ctx.strokeStyle = '#facc15';
+                                ctx.lineWidth = 4;
+                                ctx.strokeRect(0, 0, canvas.width, canvas.height);
+                              }
+                            }
+                          }}
+                          className="rounded-lg"
+                          style={{ imageRendering: 'crisp-edges' }}
+                        />
+                      </div>
+                    )}
+
                     {showCelebration && (
                       <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-xl">
                         <div className="bg-white rounded-2xl p-8 text-center animate-bounce">
