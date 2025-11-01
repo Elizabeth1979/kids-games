@@ -41,9 +41,10 @@ export default async function LocaleLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="theme-color" content="#667eea" />
 
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/icon-192.png" />
+        {/* Icons commented out until added to /public folder */}
+        {/* <link rel="manifest" href="/manifest.json" /> */}
+        {/* <link rel="icon" href="/favicon.ico" /> */}
+        {/* <link rel="apple-touch-icon" href="/icon-192.png" /> */}
 
         {/* Apply theme before page renders to prevent flash */}
         <script
