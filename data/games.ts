@@ -73,10 +73,10 @@ export const gamesConfig: GameConfig[] = [
     active: false
   },
   {
-    id: 'memory',
-    title: 'games.titles.memory',
-    icon: '',
+    id: 'memory-game',
+    title: 'games.titles.memory-game',
+    icon: '🧠',
     category: 'brain',
-    active: false
+    active: true
   }
 ];

@@ -27,7 +27,7 @@
       "addition": "Addition",
       "subtraction": "Subtraction",
       "multiplication": "Multiplication Table",
-      "memory": "Memory"
+      "memory-game": "Memory Game"
     },
     "modes": {
       "learn": "Learn",
@@ -72,6 +72,31 @@
       "complete": "Puzzle Complete!",
       "original": "Original Image",
       "solve": "Solve the Puzzle"
+    },
+    "memory": {
+      "title": "Memory Game",
+      "selectTheme": "Choose your favorite theme",
+      "selectDifficulty": "Choose difficulty level",
+      "themes": {
+        "minecraft": "Minecraft Rocks",
+        "brainrot": "Brainrot",
+        "roblox": "Roblox"
+      },
+      "difficulty": {
+        "easy": "Easy",
+        "medium": "Medium",
+        "hard": "Hard"
+      },
+      "pairs": "pairs",
+      "cards": "cards",
+      "moves": "Moves",
+      "matches": "Matches",
+      "playAgain": "Play Again",
+      "changeDifficulty": "Change Difficulty",
+      "changeTheme": "Change Theme",
+      "backToThemes": "Back to Themes",
+      "congratulations": "Congratulations!",
+      "completedIn": "You completed the game in {moves} moves!"
     }
   },
   "categories": {

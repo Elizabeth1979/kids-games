@@ -27,7 +27,7 @@
       "addition": "Сложение",
       "subtraction": "Вычитание",
       "multiplication": "Таблица умножения",
-      "memory": "Память"
+      "memory-game": "Игра на память"
     },
     "modes": {
       "learn": "Обучение",
@@ -72,6 +72,31 @@
       "complete": "Пазл собран!",
       "original": "Оригинальное изображение",
       "solve": "Решите головоломку"
+    },
+    "memory": {
+      "title": "Игра на память",
+      "selectTheme": "Выберите любимую тему",
+      "selectDifficulty": "Выберите уровень сложности",
+      "themes": {
+        "minecraft": "Камни Minecraft",
+        "brainrot": "Brainrot",
+        "roblox": "Roblox"
+      },
+      "difficulty": {
+        "easy": "Легко",
+        "medium": "Средне",
+        "hard": "Сложно"
+      },
+      "pairs": "пар",
+      "cards": "карт",
+      "moves": "Ходы",
+      "matches": "Совпадения",
+      "playAgain": "Играть снова",
+      "changeDifficulty": "Изменить сложность",
+      "changeTheme": "Изменить тему",
+      "backToThemes": "Назад к темам",
+      "congratulations": "Поздравляем!",
+      "completedIn": "Вы завершили игру за {moves} ходов!"
     }
   },
   "categories": {

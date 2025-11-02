@@ -27,7 +27,7 @@
       "addition": "الجمع",
       "subtraction": "الطرح",
       "multiplication": "جدول الضرب",
-      "memory": "الذاكرة"
+      "memory-game": "لعبة الذاكرة"
     },
     "modes": {
       "learn": "التعلم",
@@ -72,6 +72,31 @@
       "complete": "اكتملت الأحجية!",
       "original": "الصورة الأصلية",
       "solve": "حل الأحجية"
+    },
+    "memory": {
+      "title": "لعبة الذاكرة",
+      "selectTheme": "اختر موضوعك المفضل",
+      "selectDifficulty": "اختر مستوى الصعوبة",
+      "themes": {
+        "minecraft": "صخور ماينكرافت",
+        "brainrot": "برينروت",
+        "roblox": "روبلوكس"
+      },
+      "difficulty": {
+        "easy": "سهل",
+        "medium": "متوسط",
+        "hard": "صعب"
+      },
+      "pairs": "أزواج",
+      "cards": "بطاقات",
+      "moves": "التحركات",
+      "matches": "التطابقات",
+      "playAgain": "العب مرة أخرى",
+      "changeDifficulty": "تغيير الصعوبة",
+      "changeTheme": "تغيير الموضوع",
+      "backToThemes": "العودة إلى المواضيع",
+      "congratulations": "مبروك!",
+      "completedIn": "أكملت اللعبة في {moves} تحركات!"
     }
   },
   "categories": {

@@ -7,6 +7,11 @@ export const categoriesConfig: CategoryConfig[] = [
     icon: ''
   },
   {
+    id: 'brain',
+    title: 'categories.brain.title',
+    icon: ''
+  },
+  {
     id: 'board',
     title: 'categories.board.title',
     icon: ''
@@ -14,11 +19,6 @@ export const categoriesConfig: CategoryConfig[] = [
   {
     id: 'math',
     title: 'categories.math.title',
-    icon: ''
-  },
-  {
-    id: 'brain',
-    title: 'categories.brain.title',
     icon: ''
   }
 ];

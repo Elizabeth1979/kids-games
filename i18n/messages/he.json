@@ -27,7 +27,7 @@
       "addition": "חיבור",
       "subtraction": "חיסור",
       "multiplication": "לוח כפל",
-      "memory": "זיכרון"
+      "memory-game": "משחק זיכרון"
     },
     "modes": {
       "learn": "למידה",
@@ -72,6 +72,31 @@
       "complete": "פאזל הושלם!",
       "original": "תמונה מקורית",
       "solve": "פתור את הפאזל"
+    },
+    "memory": {
+      "title": "משחק זיכרון",
+      "selectTheme": "בחר את הנושא האהוב עליך",
+      "selectDifficulty": "בחר רמת קושי",
+      "themes": {
+        "minecraft": "סלעי מיינקראפט",
+        "brainrot": "ברייןרוט",
+        "roblox": "רובלוקס"
+      },
+      "difficulty": {
+        "easy": "קל",
+        "medium": "בינוני",
+        "hard": "קשה"
+      },
+      "pairs": "זוגות",
+      "cards": "קלפים",
+      "moves": "מהלכים",
+      "matches": "התאמות",
+      "playAgain": "שחק שוב",
+      "changeDifficulty": "שנה רמת קושי",
+      "changeTheme": "שנה נושא",
+      "backToThemes": "חזרה לנושאים",
+      "congratulations": "כל הכבוד!",
+      "completedIn": "השלמת את המשחק ב-{moves} מהלכים!"
     }
   },
   "categories": {

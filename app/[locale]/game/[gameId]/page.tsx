@@ -3,6 +3,7 @@ import LanguageGame from '@/components/games/LanguageGame';
 import TicTacToe from '@/components/games/TicTacToe';
 import CanvasDrawing from '@/components/games/CanvasDrawing';
 import ImagePuzzle from '@/components/games/ImagePuzzle';
+import MemoryGame from '@/components/games/MemoryGame';
 import Navigation from '@/components/shared/Navigation';
 import { getLanguageById } from '@/data/languages';
 
@@ -52,6 +53,18 @@ export default async function GamePage({ params }: GamePageProps) {
     );
   }
 
+  // Handle memory game
+  if (gameId === 'memory-game') {
+    return (
+      <>
+        <Navigation />
+        <div className="pt-20">
+          <MemoryGame />
+        </div>
+      </>
+    );
+  }
+
   // Get language configuration
   const languageConfig = getLanguageById(gameId);
 
@@ -78,6 +91,7 @@ export async function generateStaticParams() {
     { gameId: 'arabic' },
     { gameId: 'tic-tac-toe' },
     { gameId: 'canvas-drawing' },
-    { gameId: 'image-puzzle' }
+    { gameId: 'image-puzzle' },
+    { gameId: 'memory-game' }
   ];
 }
