@@ -29,6 +29,12 @@
       "multiplication": "Multiplication Table",
       "memory-game": "Memory Game"
     },
+    "icons": {
+      "tic-tac-toe": "⭕",
+      "canvas-drawing": "🎨",
+      "image-puzzle": "🧩",
+      "memory-game": "🧠"
+    },
     "modes": {
       "learn": "Learn",
       "find": "Find the Letter",

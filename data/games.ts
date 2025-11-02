@@ -4,7 +4,7 @@ export const gamesConfig: GameConfig[] = [
   {
     id: 'hebrew',
     title: 'games.titles.hebrew',
-    icon: 'א-ת',
+    icon: 'אבג',
     category: 'languages',
     active: true
   },
@@ -25,21 +25,21 @@ export const gamesConfig: GameConfig[] = [
   {
     id: 'arabic',
     title: 'games.titles.arabic',
-    icon: 'أ-ي',
+    icon: 'أبت',
     category: 'languages',
     active: true
   },
   {
     id: 'tic-tac-toe',
     title: 'games.titles.tic-tac-toe',
-    icon: 'X-O',
+    icon: 'OX',
     category: 'board',
     active: true
   },
   {
     id: 'canvas-drawing',
     title: 'games.titles.canvas-drawing',
-    icon: '',
+    icon: '🎨',
     category: 'board',
     active: true
   },
@@ -54,21 +54,21 @@ export const gamesConfig: GameConfig[] = [
   {
     id: 'addition',
     title: 'games.titles.addition',
-    icon: '+',
+    icon: '➕',
     category: 'math',
     active: false
   },
   {
     id: 'subtraction',
     title: 'games.titles.subtraction',
-    icon: '-',
+    icon: '➖',
     category: 'math',
     active: false
   },
   {
     id: 'multiplication',
     title: 'games.titles.multiplication',
-    icon: 'x',
+    icon: '✖️',
     category: 'math',
     active: false
   },

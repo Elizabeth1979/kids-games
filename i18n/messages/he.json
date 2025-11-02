@@ -29,6 +29,12 @@
       "multiplication": "לוח כפל",
       "memory-game": "משחק זיכרון"
     },
+    "icons": {
+      "tic-tac-toe": "⭕",
+      "canvas-drawing": "🎨",
+      "image-puzzle": "🧩",
+      "memory-game": "🧠"
+    },
     "modes": {
       "learn": "למידה",
       "find": "מצא את האות",
