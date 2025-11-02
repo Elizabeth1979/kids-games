@@ -45,6 +45,13 @@ export default function MemoryGame() {
     }
   }, [isGameComplete]);
 
+  // Reset game when difficulty changes
+  useEffect(() => {
+    if (gameState === 'playing' && theme) {
+      resetGame();
+    }
+  }, [selectedDifficulty, gameState]);
+
   const handleThemeSelect = (themeId: string) => {
     setSelectedThemeId(themeId);
     setGameState('difficulty-select');
