@@ -1,5 +1,7 @@
 'use client';
 
+import Footer from '@/components/shared/Footer';
+
 export default function OfflinePage() {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-4">
@@ -24,6 +26,7 @@ export default function OfflinePage() {
           נסה שוב / Try Again
         </button>
       </div>
+      <Footer />
     </div>
   );
 }
