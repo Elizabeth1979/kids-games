@@ -1,7 +1,7 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
+import { Difficulty } from '@/types/difficulty';
 
 export type Player = 'X' | 'O' | '';
-export type Difficulty = 'easy' | 'medium' | 'hard';
 export type GameStatus = 'playing' | 'playerWon' | 'computerWon' | 'tie';
 
 interface Scores {

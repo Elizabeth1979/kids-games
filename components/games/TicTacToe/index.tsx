@@ -5,7 +5,7 @@ import { useTicTacToe } from '@/hooks/useTicTacToe';
 import GameBoard from './GameBoard';
 import ScoreBoard from './ScoreBoard';
 import Controls from './Controls';
-import DifficultySelector from './DifficultySelector';
+import DifficultyButtons from '@/components/shared/DifficultyButtons';
 
 export default function TicTacToe() {
   const t = useTranslations('ticTacToe');
@@ -72,7 +72,7 @@ export default function TicTacToe() {
         />
 
         {/* Difficulty Selector */}
-        <DifficultySelector
+        <DifficultyButtons
           difficulty={game.difficulty}
           onDifficultyChange={game.setDifficulty}
         />

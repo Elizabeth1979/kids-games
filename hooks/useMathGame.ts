@@ -1,19 +1,20 @@
 import { useState, useCallback, useEffect } from 'react';
-import type { MathOperation, MathDifficulty, MathQuestion, MathGameStats } from '@/types';
+import type { MathOperation, MathQuestion, MathGameStats } from '@/types';
+import { Difficulty } from '@/types/difficulty';
 import { operationConfigs } from '@/data/mathOperations';
 
 export interface UseMathGameReturn {
   // Game state
   currentQuestion: MathQuestion | null;
   gameStats: MathGameStats;
-  difficulty: MathDifficulty;
+  difficulty: Difficulty;
   operation: MathOperation;
   isGameActive: boolean;
 
   // Game actions
   generateNewQuestion: () => void;
   submitAnswer: (answer: number) => boolean;
-  setDifficulty: (difficulty: MathDifficulty) => void;
+  setDifficulty: (difficulty: Difficulty) => void;
   setOperation: (operation: MathOperation) => void;
   resetGame: () => void;
   resetStats: () => void;
@@ -29,11 +30,11 @@ export interface UseMathGameReturn {
  */
 export function useMathGame(
   initialOperation: MathOperation = 'addition',
-  initialDifficulty: MathDifficulty = 'medium'
+  initialDifficulty: Difficulty = 'medium'
 ): UseMathGameReturn {
 
   const [operation, setOperationState] = useState<MathOperation>(initialOperation);
-  const [difficulty, setDifficultyState] = useState<MathDifficulty>(initialDifficulty);
+  const [difficulty, setDifficultyState] = useState<Difficulty>(initialDifficulty);
   const [currentQuestion, setCurrentQuestion] = useState<MathQuestion | null>(null);
   const [isGameActive, setIsGameActive] = useState(false);
 
@@ -104,7 +105,7 @@ export function useMathGame(
   /**
    * Change the difficulty level
    */
-  const setDifficulty = useCallback((newDifficulty: MathDifficulty) => {
+  const setDifficulty = useCallback((newDifficulty: Difficulty) => {
     setDifficultyState(newDifficulty);
   }, []);
 

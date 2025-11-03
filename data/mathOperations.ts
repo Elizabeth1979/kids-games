@@ -1,4 +1,5 @@
-import type { MathOperation, MathDifficulty, MathQuestion, OperationConfig } from '@/types';
+import type { MathOperation, MathQuestion, OperationConfig } from '@/types';
+import { Difficulty } from '@/types/difficulty';
 
 /**
  * Generate a random integer between min and max (inclusive)
@@ -21,7 +22,7 @@ export const operationConfigs: Record<MathOperation, OperationConfig> = {
       medium: { min: 1, max: 50 },
       hard: { min: 1, max: 100 }
     },
-    generateQuestion: (difficulty: MathDifficulty): MathQuestion => {
+    generateQuestion: (difficulty: Difficulty): MathQuestion => {
       const range = operationConfigs.addition.numberRange[difficulty];
       const num1 = randomInRange(range.min, range.max);
       const num2 = randomInRange(range.min, range.max);
@@ -47,7 +48,7 @@ export const operationConfigs: Record<MathOperation, OperationConfig> = {
       medium: { min: 1, max: 50 },
       hard: { min: 1, max: 100 }
     },
-    generateQuestion: (difficulty: MathDifficulty): MathQuestion => {
+    generateQuestion: (difficulty: Difficulty): MathQuestion => {
       const range = operationConfigs.subtraction.numberRange[difficulty];
       let num1 = randomInRange(range.min, range.max);
       let num2 = randomInRange(range.min, range.max);
@@ -79,7 +80,7 @@ export const operationConfigs: Record<MathOperation, OperationConfig> = {
       medium: { min: 1, max: 10 },  // 1-10 times tables
       hard: { min: 1, max: 12 }     // 1-12 times tables
     },
-    generateQuestion: (difficulty: MathDifficulty): MathQuestion => {
+    generateQuestion: (difficulty: Difficulty): MathQuestion => {
       const range = operationConfigs.multiplication.numberRange[difficulty];
       const num1 = randomInRange(range.min, range.max);
       const num2 = randomInRange(range.min, range.max);
@@ -105,7 +106,7 @@ export const operationConfigs: Record<MathOperation, OperationConfig> = {
       medium: { min: 1, max: 10 },
       hard: { min: 1, max: 12 }
     },
-    generateQuestion: (difficulty: MathDifficulty): MathQuestion => {
+    generateQuestion: (difficulty: Difficulty): MathQuestion => {
       const range = operationConfigs.division.numberRange[difficulty];
 
       // Generate divisor and quotient, then calculate dividend

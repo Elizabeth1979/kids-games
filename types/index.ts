@@ -2,6 +2,8 @@
  * Core TypeScript types for Kids Games application
  */
 
+import { Difficulty } from './difficulty';
+
 export interface Letter {
   letter: string;           // The letter character
   name: string;             // Full name in native language
@@ -93,7 +95,6 @@ export interface DrawingCanvasHook {
 
 // Math game types
 export type MathOperation = 'addition' | 'subtraction' | 'multiplication' | 'division';
-export type MathDifficulty = 'easy' | 'medium' | 'hard';
 export type MathGameMode = 'practice' | 'timed' | 'challenge';
 
 export interface MathQuestion {
@@ -122,7 +123,7 @@ export interface OperationConfig {
   id: MathOperation;
   symbol: string;
   emoji: string;
-  generateQuestion: (difficulty: MathDifficulty) => MathQuestion;
+  generateQuestion: (difficulty: Difficulty) => MathQuestion;
   validate: (question: MathQuestion, answer: number) => boolean;
   numberRange: {
     easy: NumberRange;

@@ -1,7 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import type { MemoryItem } from '@/data/memoryThemes';
-
-export type Difficulty = 'easy' | 'medium' | 'hard';
+import { Difficulty } from '@/types/difficulty';
 
 export interface MemoryCard {
   id: string;

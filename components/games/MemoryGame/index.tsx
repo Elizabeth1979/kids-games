@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { useMemoryGame, type Difficulty } from '@/hooks/useMemoryGame';
+import { useMemoryGame } from '@/hooks/useMemoryGame';
+import { Difficulty } from '@/types/difficulty';
 import { getThemeById } from '@/data/memoryThemes';
 import ThemeSelector from './ThemeSelector';
-import DifficultySelector from './DifficultySelector';
+import DifficultySelector from '@/components/shared/DifficultySelector';
 import Card from './Card';
 import GameStats from './GameStats';
 
@@ -82,9 +83,16 @@ export default function MemoryGame() {
   }
 
   if (gameState === 'difficulty-select' && theme) {
+    const metadata = {
+      easy: `3 ${t('pairs')} (6 ${t('cards')})`,
+      medium: `6 ${t('pairs')} (12 ${t('cards')})`,
+      hard: `8 ${t('pairs')} (16 ${t('cards')})`,
+    };
+
     return (
       <DifficultySelector
-        themeName={t(`themes.${theme.id}`)}
+        title={t(`themes.${theme.id}`)}
+        metadata={metadata}
         onSelectDifficulty={handleDifficultySelect}
         onBack={handleBackToThemes}
       />

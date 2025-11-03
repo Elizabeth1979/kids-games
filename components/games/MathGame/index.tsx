@@ -3,12 +3,14 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import type { MathOperation, MathDifficulty } from '@/types';
+import type { MathOperation } from '@/types';
+import { Difficulty } from '@/types/difficulty';
 import { useMathGame } from '@/hooks/useMathGame';
-import DifficultySelector from './DifficultySelector';
+import DifficultySelector from '@/components/shared/DifficultySelector';
 import QuestionDisplay from './QuestionDisplay';
 import AnswerInput from './AnswerInput';
 import GameStats from './GameStats';
+import { getOperationConfig } from '@/data/mathOperations';
 
 type GameState = 'difficulty-select' | 'playing';
 
@@ -20,11 +22,12 @@ export default function MathGame({ operation }: MathGameProps) {
   const t = useTranslations('math');
   const router = useRouter();
   const [gameState, setGameState] = useState<GameState>('difficulty-select');
-  const [selectedDifficulty, setSelectedDifficulty] = useState<MathDifficulty>('medium');
+  const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty>('medium');
 
   const game = useMathGame(operation, selectedDifficulty);
+  const config = getOperationConfig(operation);
 
-  const handleDifficultySelect = (difficulty: MathDifficulty) => {
+  const handleDifficultySelect = (difficulty: Difficulty) => {
     setSelectedDifficulty(difficulty);
     game.setDifficulty(difficulty);
     setGameState('playing');
@@ -40,9 +43,16 @@ export default function MathGame({ operation }: MathGameProps) {
 
   // Difficulty selection screen
   if (gameState === 'difficulty-select') {
+    const metadata = {
+      easy: t('difficulty.range', { min: config.numberRange.easy.min, max: config.numberRange.easy.max }),
+      medium: t('difficulty.range', { min: config.numberRange.medium.min, max: config.numberRange.medium.max }),
+      hard: t('difficulty.range', { min: config.numberRange.hard.min, max: config.numberRange.hard.max }),
+    };
+
     return (
       <DifficultySelector
-        operation={operation}
+        title={`${t(`operations.${operation}`)} ${config.emoji}`}
+        metadata={metadata}
         onSelectDifficulty={handleDifficultySelect}
         onBack={handleBackToHome}
       />
