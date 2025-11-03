@@ -27,10 +27,10 @@ export default function TicTacToe() {
   };
 
   const getStatusClass = () => {
-    if (game.gameStatus === 'playerWon') return 'bg-destructive';
-    if (game.gameStatus === 'computerWon') return 'bg-primary';
-    if (game.gameStatus === 'tie') return 'bg-accent';
-    return 'bg-secondary';
+    if (game.gameStatus === 'playerWon') return 'bg-destructive text-destructive-foreground';
+    if (game.gameStatus === 'computerWon') return 'bg-primary text-primary-foreground';
+    if (game.gameStatus === 'tie') return 'bg-accent text-accent-foreground';
+    return 'bg-secondary text-secondary-foreground';
   };
 
   return (
@@ -52,7 +52,7 @@ export default function TicTacToe() {
         {/* Status Message */}
         <div
           className={`text-center text-xl md:text-2xl font-bold py-4 px-6 rounded-2xl
-                     text-white mb-8 shadow-lg transition-all ${getStatusClass()}`}
+                     mb-8 shadow-lg transition-all ${getStatusClass()}`}
         >
           {getStatusMessage()}
         </div>

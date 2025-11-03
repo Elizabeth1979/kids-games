@@ -29,7 +29,7 @@ export default function GameBoard({ board, winningCells, onCellClick, disabled }
               ${!isTaken && !disabled ? 'hover:border-primary hover:bg-accent cursor-pointer' : ''}
               ${isTaken ? 'cursor-not-allowed' : ''}
               ${isWinningCell ? 'bg-accent border-secondary' : ''}
-              ${isPlayerX ? 'text-destructive' : 'text-primary'}
+              ${isPlayerX ? 'text-destructive' : 'text-foreground'}
             `}
           >
             {cell}
