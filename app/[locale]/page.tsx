@@ -51,7 +51,7 @@ export default function HomePage() {
         })}
 
           {/* Footer */}
-          <footer className="text-center mt-16">
+          <footer className="text-center mt-16" dir="ltr" lang="en">
             <p className="text-sm text-foreground/80">
               Built with Love and AI by{' '}
               <a
