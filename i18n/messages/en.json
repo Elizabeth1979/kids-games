@@ -210,5 +210,20 @@
       "hard": "Hard",
       "range": "Numbers {min}-{max}"
     }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "We'd love to hear your ideas for new games and features!",
+    "heading": "Send Us Your Ideas",
+    "subheading": "Have a suggestion for a new game or feature? Let us know! We read every message.",
+    "emailLabel": "Your Email",
+    "emailPlaceholder": "your.email@example.com",
+    "messageLabel": "Your Idea or Suggestion",
+    "messagePlaceholder": "Tell us about your idea for a new game or feature...",
+    "submit": "Send Message",
+    "sending": "Sending...",
+    "successMessage": "Thank you! We received your message and will review it soon.",
+    "errorMessage": "Oops! Something went wrong. Please try again.",
+    "privacyNote": "We respect your privacy. Your email will only be used to respond to your message."
   }
 }
