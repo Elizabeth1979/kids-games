@@ -34,6 +34,16 @@
     --input: 250 30% 85%;
     --ring: 250 60% 45%;
 
+    /* Semantic colors for game difficulty and feedback */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 98%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 98%;
+
+    --info: 217 91% 60%;
+    --info-foreground: 0 0% 98%;
+
     --radius: 0.5rem;
   }
 
@@ -67,6 +77,16 @@
     --border: 250 35% 25%;
     --input: 250 35% 25%;
     --ring: 48 95% 65%;
+
+    /* Semantic colors for game difficulty and feedback (dark mode) */
+    --success: 142 70% 45%;
+    --success-foreground: 0 0% 98%;
+
+    --warning: 38 90% 55%;
+    --warning-foreground: 0 0% 10%;
+
+    --info: 217 85% 65%;
+    --info-foreground: 0 0% 10%;
   }
 }
 

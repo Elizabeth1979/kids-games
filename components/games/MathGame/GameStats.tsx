@@ -15,19 +15,19 @@ export default function GameStats({ stats }: GameStatsProps) {
       label: t('correct'),
       value: stats.correct,
       emoji: '✅',
-      color: 'bg-green-100 border-green-400 text-green-800'
+      color: 'bg-secondary border-border text-secondary-foreground'
     },
     {
       label: t('total'),
       value: stats.totalQuestions,
       emoji: '📊',
-      color: 'bg-blue-100 border-blue-400 text-blue-800'
+      color: 'bg-card border-border text-card-foreground'
     },
     {
       label: t('wrong'),
       value: stats.wrong,
       emoji: '❌',
-      color: 'bg-red-100 border-red-400 text-red-800'
+      color: 'bg-muted border-border text-muted-foreground'
     }
   ];
 

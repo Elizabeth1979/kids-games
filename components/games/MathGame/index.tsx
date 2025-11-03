@@ -51,23 +51,23 @@ export default function MathGame({ operation }: MathGameProps) {
 
   // Playing screen
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-100 to-blue-100 p-4 md:p-8">
+    <div className="min-h-screen bg-background p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-3xl md:text-4xl font-bold text-purple-900">
+          <h1 className="text-3xl md:text-4xl font-bold text-foreground">
             {t(`operations.${operation}`)}
           </h1>
           <div className="flex gap-2">
             <button
               onClick={handleBackToDifficulty}
-              className="px-4 py-2 bg-white rounded-xl shadow-md hover:shadow-lg transition-all text-sm md:text-base font-semibold text-gray-700 hover:text-purple-600"
+              className="px-4 py-2 bg-card rounded-xl shadow-md hover:shadow-lg transition-all text-sm md:text-base font-semibold text-card-foreground hover:text-accent"
             >
               {t('changeDifficulty')}
             </button>
             <button
               onClick={handleBackToHome}
-              className="px-4 py-2 bg-white rounded-xl shadow-md hover:shadow-lg transition-all text-sm md:text-base font-semibold text-gray-700 hover:text-purple-600"
+              className="px-4 py-2 bg-card rounded-xl shadow-md hover:shadow-lg transition-all text-sm md:text-base font-semibold text-card-foreground hover:text-accent"
             >
               {t('changeOperation')}
             </button>
@@ -94,7 +94,7 @@ export default function MathGame({ operation }: MathGameProps) {
         <div className="flex justify-center gap-4 mt-8">
           <button
             onClick={game.resetStats}
-            className="px-6 py-3 bg-white rounded-xl shadow-md hover:shadow-lg transition-all text-lg font-semibold text-red-600 hover:text-red-700 border-2 border-red-300 hover:border-red-400"
+            className="px-6 py-3 bg-card rounded-xl shadow-md hover:shadow-lg transition-all text-lg font-semibold text-destructive hover:text-destructive/90 border-2 border-destructive/30 hover:border-destructive/50"
           >
             {t('resetStats')}
           </button>

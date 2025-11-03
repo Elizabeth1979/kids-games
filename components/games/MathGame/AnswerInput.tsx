@@ -40,8 +40,8 @@ export default function AnswerInput({ onSubmit, disabled }: AnswerInputProps) {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
-      <div className="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-4 border-blue-300">
-        <label htmlFor="answer" className="block text-2xl font-bold text-gray-800 mb-4 text-center">
+      <div className="bg-card rounded-3xl p-6 md:p-8 shadow-xl border-4 border-border">
+        <label htmlFor="answer" className="block text-2xl font-bold text-card-foreground mb-4 text-center">
           {t('yourAnswer')}
         </label>
 
@@ -56,19 +56,19 @@ export default function AnswerInput({ onSubmit, disabled }: AnswerInputProps) {
             autoFocus
             autoComplete="off"
             placeholder="?"
-            className="flex-1 min-w-0 text-5xl md:text-6xl font-bold text-center p-4 rounded-2xl border-4 border-purple-300 focus:border-purple-500 focus:outline-none disabled:bg-gray-100 disabled:text-gray-400 font-mono"
+            className="flex-1 min-w-0 text-5xl md:text-6xl font-bold text-center p-4 rounded-2xl border-4 border-input focus:border-ring focus:outline-none disabled:bg-muted disabled:text-muted-foreground font-mono bg-background text-foreground"
           />
 
           <button
             type="submit"
             disabled={disabled || inputValue.trim() === ''}
-            className="md:flex-shrink-0 px-8 py-4 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-2xl text-2xl font-bold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:shadow-lg"
+            className="md:flex-shrink-0 px-8 py-4 bg-primary text-primary-foreground rounded-2xl text-2xl font-bold shadow-lg hover:shadow-xl hover:bg-primary/90 transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:shadow-lg"
           >
             {t('submit')}
           </button>
         </div>
 
-        <p className="text-center text-gray-600 mt-4 text-sm">
+        <p className="text-center text-muted-foreground mt-4 text-sm">
           {t('pressEnter')}
         </p>
       </div>

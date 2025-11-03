@@ -26,6 +26,12 @@ const ALLOWED_COLOR_CLASSES = [
   'bg-accent-foreground',
   'bg-destructive',
   'bg-destructive-foreground',
+  'bg-success',
+  'bg-success-foreground',
+  'bg-warning',
+  'bg-warning-foreground',
+  'bg-info',
+  'bg-info-foreground',
 
   // Text colors
   'text-background',
@@ -44,6 +50,12 @@ const ALLOWED_COLOR_CLASSES = [
   'text-accent-foreground',
   'text-destructive',
   'text-destructive-foreground',
+  'text-success',
+  'text-success-foreground',
+  'text-warning',
+  'text-warning-foreground',
+  'text-info',
+  'text-info-foreground',
 
   // Border colors
   'border',
@@ -63,6 +75,12 @@ const ALLOWED_COLOR_CLASSES = [
   'border-accent-foreground',
   'border-destructive',
   'border-destructive-foreground',
+  'border-success',
+  'border-success-foreground',
+  'border-warning',
+  'border-warning-foreground',
+  'border-info',
+  'border-info-foreground',
 
   // Ring colors
   'ring-background',
@@ -76,9 +94,13 @@ const ALLOWED_COLOR_CLASSES = [
   'hover:bg-primary/90',
   'hover:bg-secondary/90',
   'hover:bg-destructive/90',
+  'hover:bg-success/90',
+  'hover:bg-warning/90',
+  'hover:bg-info/90',
   'hover:bg-accent',
   'hover:text-foreground',
   'hover:text-primary',
+  'hover:text-accent',
   'hover:border-primary',
 
   // Canvas/drawing specific - white is needed for actual drawing surface
