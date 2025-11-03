@@ -27,6 +27,7 @@
       "addition": "الجمع",
       "subtraction": "الطرح",
       "multiplication": "جدول الضرب",
+      "division": "القسمة",
       "memory-game": "لعبة الذاكرة"
     },
     "modes": {
@@ -167,5 +168,41 @@
   "footer": {
     "contact": "اتصل",
     "email": "el.patrick79@gmail.com"
+  },
+  "math": {
+    "operations": {
+      "addition": "الجمع",
+      "subtraction": "الطرح",
+      "multiplication": "الضرب",
+      "division": "القسمة"
+    },
+    "selectOperation": "اختر عملية حسابية",
+    "selectDifficulty": "اختر مستوى الصعوبة",
+    "yourAnswer": "إجابتك",
+    "submit": "إرسال",
+    "loading": "جار التحميل...",
+    "back": "رجوع",
+    "pressEnter": "اضغط Enter للإرسال",
+    "changeOperation": "تغيير العملية",
+    "changeDifficulty": "تغيير الصعوبة",
+    "resetStats": "إعادة تعيين الإحصائيات",
+    "stats": {
+      "correct": "صحيح",
+      "wrong": "خطأ",
+      "streak": "سلسلة",
+      "bestStreak": "أفضل",
+      "accuracy": "الدقة",
+      "total": "المجموع"
+    },
+    "feedback": {
+      "correct": "صحيح!",
+      "wrong": "الإجابة هي {answer}"
+    },
+    "difficulty": {
+      "easy": "سهل",
+      "medium": "متوسط",
+      "hard": "صعب",
+      "range": "أرقام {min}-{max}"
+    }
   }
 }

@@ -4,6 +4,7 @@ import TicTacToe from '@/components/games/TicTacToe';
 import CanvasDrawing from '@/components/games/CanvasDrawing';
 import ImagePuzzle from '@/components/games/ImagePuzzle';
 import MemoryGame from '@/components/games/MemoryGame';
+import MathGame from '@/components/games/MathGame';
 import Navigation from '@/components/shared/Navigation';
 import { getLanguageById } from '@/data/languages';
 
@@ -65,6 +66,18 @@ export default async function GamePage({ params }: GamePageProps) {
     );
   }
 
+  // Handle math games
+  if (['addition', 'subtraction', 'multiplication', 'division'].includes(gameId)) {
+    return (
+      <>
+        <Navigation />
+        <div className="pt-20">
+          <MathGame operation={gameId as 'addition' | 'subtraction' | 'multiplication' | 'division'} />
+        </div>
+      </>
+    );
+  }
+
   // Get language configuration
   const languageConfig = getLanguageById(gameId);
 
@@ -92,6 +105,10 @@ export async function generateStaticParams() {
     { gameId: 'tic-tac-toe' },
     { gameId: 'canvas-drawing' },
     { gameId: 'image-puzzle' },
-    { gameId: 'memory-game' }
+    { gameId: 'memory-game' },
+    { gameId: 'addition' },
+    { gameId: 'subtraction' },
+    { gameId: 'multiplication' },
+    { gameId: 'division' }
   ];
 }

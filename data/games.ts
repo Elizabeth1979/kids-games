@@ -50,27 +50,38 @@ export const gamesConfig: GameConfig[] = [
     category: 'brain',
     active: true
   },
-  // Placeholders for future games
+  // Math games
   {
     id: 'addition',
     title: 'games.titles.addition',
     icon: '➕',
     category: 'math',
-    active: false
+    active: true,
+    path: '/games/math/addition'
   },
   {
     id: 'subtraction',
     title: 'games.titles.subtraction',
     icon: '➖',
     category: 'math',
-    active: false
+    active: true,
+    path: '/games/math/subtraction'
   },
   {
     id: 'multiplication',
     title: 'games.titles.multiplication',
     icon: '✖️',
     category: 'math',
-    active: false
+    active: true,
+    path: '/games/math/multiplication'
+  },
+  {
+    id: 'division',
+    title: 'games.titles.division',
+    icon: '➗',
+    category: 'math',
+    active: true,
+    path: '/games/math/division'
   },
   {
     id: 'memory-game',

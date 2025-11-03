@@ -27,6 +27,7 @@
       "addition": "Addition",
       "subtraction": "Subtraction",
       "multiplication": "Multiplication Table",
+      "division": "Division",
       "memory-game": "Memory Game"
     },
     "icons": {
@@ -173,5 +174,41 @@
   "footer": {
     "contact": "Contact",
     "email": "el.patrick79@gmail.com"
+  },
+  "math": {
+    "operations": {
+      "addition": "Addition",
+      "subtraction": "Subtraction",
+      "multiplication": "Multiplication",
+      "division": "Division"
+    },
+    "selectOperation": "Choose a Math Operation",
+    "selectDifficulty": "Choose Difficulty Level",
+    "yourAnswer": "Your Answer",
+    "submit": "Submit",
+    "loading": "Loading...",
+    "back": "Back",
+    "pressEnter": "Press Enter to submit",
+    "changeOperation": "Change Operation",
+    "changeDifficulty": "Change Difficulty",
+    "resetStats": "Reset Stats",
+    "stats": {
+      "correct": "Correct",
+      "wrong": "Wrong",
+      "streak": "Streak",
+      "bestStreak": "Best",
+      "accuracy": "Accuracy",
+      "total": "Total"
+    },
+    "feedback": {
+      "correct": "Correct!",
+      "wrong": "The answer is {answer}"
+    },
+    "difficulty": {
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard",
+      "range": "Numbers {min}-{max}"
+    }
   }
 }

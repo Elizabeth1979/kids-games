@@ -27,6 +27,7 @@
       "addition": "Сложение",
       "subtraction": "Вычитание",
       "multiplication": "Таблица умножения",
+      "division": "Деление",
       "memory-game": "Игра на память"
     },
     "modes": {
@@ -167,5 +168,41 @@
   "footer": {
     "contact": "Контакт",
     "email": "el.patrick79@gmail.com"
+  },
+  "math": {
+    "operations": {
+      "addition": "Сложение",
+      "subtraction": "Вычитание",
+      "multiplication": "Умножение",
+      "division": "Деление"
+    },
+    "selectOperation": "Выберите математическую операцию",
+    "selectDifficulty": "Выберите уровень сложности",
+    "yourAnswer": "Ваш ответ",
+    "submit": "Отправить",
+    "loading": "Загрузка...",
+    "back": "Назад",
+    "pressEnter": "Нажмите Enter для отправки",
+    "changeOperation": "Изменить операцию",
+    "changeDifficulty": "Изменить сложность",
+    "resetStats": "Сбросить статистику",
+    "stats": {
+      "correct": "Правильно",
+      "wrong": "Неправильно",
+      "streak": "Серия",
+      "bestStreak": "Лучшее",
+      "accuracy": "Точность",
+      "total": "Всего"
+    },
+    "feedback": {
+      "correct": "Правильно!",
+      "wrong": "Ответ: {answer}"
+    },
+    "difficulty": {
+      "easy": "Легко",
+      "medium": "Средне",
+      "hard": "Сложно",
+      "range": "Числа {min}-{max}"
+    }
   }
 }

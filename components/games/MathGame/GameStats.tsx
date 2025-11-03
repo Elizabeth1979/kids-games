@@ -1,34 +1,33 @@
-import { useTranslations } from 'next-intl';
+'use client';
 
-interface ScoreBoardProps {
-  scores: {
-    player: number;
-    computer: number;
-    tie: number;
-  };
+import { useTranslations } from 'next-intl';
+import type { MathGameStats } from '@/types';
+
+interface GameStatsProps {
+  stats: MathGameStats;
 }
 
-export default function ScoreBoard({ scores }: ScoreBoardProps) {
-  const t = useTranslations('ticTacToe.scores');
+export default function GameStats({ stats }: GameStatsProps) {
+  const t = useTranslations('math.stats');
 
   const statItems = [
     {
-      label: t('you'),
-      value: scores.player,
-      emoji: '👤',
+      label: t('correct'),
+      value: stats.correct,
+      emoji: '✅',
       color: 'bg-green-100 border-green-400 text-green-800'
     },
     {
-      label: t('tie'),
-      value: scores.tie,
-      emoji: '🤝',
-      color: 'bg-yellow-100 border-yellow-400 text-yellow-800'
+      label: t('total'),
+      value: stats.totalQuestions,
+      emoji: '📊',
+      color: 'bg-blue-100 border-blue-400 text-blue-800'
     },
     {
-      label: t('computer'),
-      value: scores.computer,
-      emoji: '🤖',
-      color: 'bg-blue-100 border-blue-400 text-blue-800'
+      label: t('wrong'),
+      value: stats.wrong,
+      emoji: '❌',
+      color: 'bg-red-100 border-red-400 text-red-800'
     }
   ];
 

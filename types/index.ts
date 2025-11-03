@@ -90,3 +90,43 @@ export interface DrawingCanvasHook {
   clearCanvas: () => void;
   downloadDrawing: () => void;
 }
+
+// Math game types
+export type MathOperation = 'addition' | 'subtraction' | 'multiplication' | 'division';
+export type MathDifficulty = 'easy' | 'medium' | 'hard';
+export type MathGameMode = 'practice' | 'timed' | 'challenge';
+
+export interface MathQuestion {
+  operand1: number;
+  operand2: number;
+  operation: MathOperation;
+  correctAnswer: number;
+  displayText: string;
+}
+
+export interface MathGameStats {
+  correct: number;
+  wrong: number;
+  streak: number;
+  bestStreak: number;
+  totalQuestions: number;
+  accuracy: number;
+}
+
+export interface NumberRange {
+  min: number;
+  max: number;
+}
+
+export interface OperationConfig {
+  id: MathOperation;
+  symbol: string;
+  emoji: string;
+  generateQuestion: (difficulty: MathDifficulty) => MathQuestion;
+  validate: (question: MathQuestion, answer: number) => boolean;
+  numberRange: {
+    easy: NumberRange;
+    medium: NumberRange;
+    hard: NumberRange;
+  };
+}

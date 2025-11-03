@@ -27,6 +27,7 @@
       "addition": "חיבור",
       "subtraction": "חיסור",
       "multiplication": "לוח כפל",
+      "division": "חילוק",
       "memory-game": "משחק זיכרון"
     },
     "icons": {
@@ -173,5 +174,41 @@
   "footer": {
     "contact": "צור קשר",
     "email": "el.patrick79@gmail.com"
+  },
+  "math": {
+    "operations": {
+      "addition": "חיבור",
+      "subtraction": "חיסור",
+      "multiplication": "כפל",
+      "division": "חילוק"
+    },
+    "selectOperation": "בחר פעולת חשבון",
+    "selectDifficulty": "בחר רמת קושי",
+    "yourAnswer": "התשובה שלך",
+    "submit": "שלח",
+    "loading": "טוען...",
+    "back": "חזרה",
+    "pressEnter": "לחץ Enter לשליחה",
+    "changeOperation": "שנה פעולה",
+    "changeDifficulty": "שנה רמת קושי",
+    "resetStats": "אפס סטטיסטיקות",
+    "stats": {
+      "correct": "נכון",
+      "wrong": "שגוי",
+      "streak": "רצף",
+      "bestStreak": "שיא",
+      "accuracy": "דיוק",
+      "total": "סה״כ"
+    },
+    "feedback": {
+      "correct": "נכון!",
+      "wrong": "התשובה היא {answer}"
+    },
+    "difficulty": {
+      "easy": "קל",
+      "medium": "בינוני",
+      "hard": "קשה",
+      "range": "מספרים {min}-{max}"
+    }
   }
 }
