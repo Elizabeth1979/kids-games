@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import type { MemoryCard } from '@/hooks/useMemoryGame';
 import Card from './Card';
@@ -11,17 +12,19 @@ const card: MemoryCard = {
 };
 
 describe('MemoryGame Card', () => {
-  it('uses native button semantics and is keyboard operable', () => {
+  it('uses native button semantics and activates with Enter and Space', async () => {
+    const user = userEvent.setup();
     const onClick = vi.fn();
     render(<Card card={card} onClick={onClick} ariaLabel="Hidden memory card" />);
 
     const button = screen.getByRole('button', { name: 'Hidden memory card' });
-    button.focus();
-    fireEvent.keyDown(button, { key: 'Enter' });
-    fireEvent.click(button);
-
+    await user.tab();
     expect(button).toHaveFocus();
-    expect(onClick).toHaveBeenCalledTimes(1);
+
+    await user.keyboard('{Enter}');
+    await user.keyboard(' ');
+
+    expect(onClick).toHaveBeenCalledTimes(2);
   });
 
   it('exposes revealed card content and disables completed cards', () => {

@@ -5,7 +5,11 @@ import { describe, expect, it, vi } from 'vitest';
 
 type WorkerListener = (event: Record<string, unknown>) => void;
 
-function loadWorker(options?: { cacheNames?: string[]; response?: { ok: boolean } }) {
+function loadWorker(options?: {
+  cacheNames?: string[];
+  response?: { ok: boolean };
+  matchError?: Error;
+}) {
   const listeners = new Map<string, WorkerListener>();
   const deleteCache = vi.fn(() => Promise.resolve(true));
   const put = vi.fn(() => Promise.resolve());
@@ -21,7 +25,9 @@ function loadWorker(options?: { cacheNames?: string[]; response?: { ok: boolean 
       keys: vi.fn(() => Promise.resolve(options?.cacheNames ?? [])),
       delete: deleteCache,
       open: vi.fn(() => Promise.resolve({ addAll: vi.fn(), put })),
-      match: vi.fn(() => Promise.resolve(undefined)),
+      match: vi.fn(() => options?.matchError
+        ? Promise.reject(options.matchError)
+        : Promise.resolve(undefined)),
     },
     self: {
       location: { origin: 'https://kids.example' },
@@ -36,9 +42,9 @@ function loadWorker(options?: { cacheNames?: string[]; response?: { ok: boolean 
 }
 
 describe('service worker cache ownership', () => {
-  it('only deletes stale caches owned by this app', async () => {
+  it('migrates from v1 by deleting stale app caches and preserving unrelated caches', async () => {
     const worker = loadWorker({
-      cacheNames: ['kids-games-v0', 'kids-games-v1', 'another-app-cache'],
+      cacheNames: ['kids-games-v0', 'kids-games-v1', 'kids-games-v2', 'another-app-cache'],
     });
     let activation: Promise<unknown> | undefined;
 
@@ -47,8 +53,11 @@ describe('service worker cache ownership', () => {
     });
     await activation;
 
-    expect(worker.deleteCache).toHaveBeenCalledTimes(1);
+    expect(worker.deleteCache).toHaveBeenCalledTimes(2);
     expect(worker.deleteCache).toHaveBeenCalledWith('kids-games-v0');
+    expect(worker.deleteCache).toHaveBeenCalledWith('kids-games-v1');
+    expect(worker.deleteCache).not.toHaveBeenCalledWith('kids-games-v2');
+    expect(worker.deleteCache).not.toHaveBeenCalledWith('another-app-cache');
   });
 
   it('does not cache unsuccessful navigation responses', async () => {
@@ -63,6 +72,31 @@ describe('service worker cache ownership', () => {
     await responsePromise;
 
     expect(worker.put).not.toHaveBeenCalled();
+  });
+
+  it('settles both the response and fetch lifetime when cache lookup rejects', async () => {
+    const matchError = new Error('cache lookup failed');
+    const worker = loadWorker({ matchError });
+    let responsePromise: Promise<unknown> | undefined;
+    let lifetimePromise: Promise<unknown> | undefined;
+
+    worker.listeners.get('fetch')!({
+      request: { method: 'GET', mode: 'cors', url: 'https://kids.example/icon.svg' },
+      respondWith: (promise: Promise<unknown>) => { responsePromise = promise; },
+      waitUntil: (promise: Promise<unknown>) => { lifetimePromise = promise; },
+    });
+
+    const settled = await Promise.race([
+      Promise.allSettled([responsePromise!, lifetimePromise!]),
+      new Promise<never>((_, reject) => {
+        setTimeout(() => reject(new Error('fetch promises did not settle')), 50);
+      }),
+    ]);
+
+    expect(settled).toEqual([
+      { status: 'rejected', reason: matchError },
+      { status: 'fulfilled', value: undefined },
+    ]);
   });
 
   it('extends fetch lifetime while caching a successful navigation', async () => {

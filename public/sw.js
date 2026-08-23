@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'kids-games-';
-const CACHE_NAME = `${CACHE_PREFIX}v1`;
+const CACHE_NAME = `${CACHE_PREFIX}v2`;
 const PRECACHE_URLS = ['/manifest.json', '/offline.html'];
 
 self.addEventListener('install', (event) => {
@@ -45,25 +45,18 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  let finishCacheWrite;
-  const cacheWrite = new Promise((resolve) => { finishCacheWrite = resolve; });
-  event.waitUntil(cacheWrite);
-  event.respondWith(caches.match(event.request).then((cached) => {
-    if (cached) {
-      finishCacheWrite();
-      return cached;
-    }
+  const responsePromise = caches.match(event.request).then((cached) => {
+    if (cached) return cached;
 
     return fetch(event.request).then(async (response) => {
       if (response.ok && new URL(event.request.url).origin === self.location.origin) {
         await caches.open(CACHE_NAME)
           .then((cache) => cache.put(event.request, response.clone()));
       }
-      finishCacheWrite();
       return response;
-    }).catch((error) => {
-      finishCacheWrite();
-      throw error;
     });
-  }));
+  });
+
+  event.respondWith(responsePromise);
+  event.waitUntil(responsePromise.then(() => undefined, () => undefined));
 });
