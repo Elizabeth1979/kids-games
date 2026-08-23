@@ -8,7 +8,7 @@ export type Difficulty = 'easy' | 'medium' | 'hard';
  */
 export interface DifficultyConfig {
   id: Difficulty;
-  emoji: string;
+  symbol: string;
   colorClasses: string;
   description?: string;
 }
@@ -20,20 +20,20 @@ export interface DifficultyConfig {
 export const DIFFICULTY_CONFIGS: Record<Difficulty, DifficultyConfig> = {
   easy: {
     id: 'easy',
-    emoji: '😊',
+    symbol: '1',
     colorClasses:
       'bg-success hover:bg-success/90 border-success text-success-foreground',
   },
   medium: {
     id: 'medium',
-    emoji: '🤔',
+    symbol: '2',
     colorClasses:
       'bg-warning hover:bg-warning/90 border-warning text-warning-foreground',
   },
   hard: {
     id: 'hard',
-    emoji: '🔥',
+    symbol: '3',
     colorClasses:
-      'bg-destructive hover:bg-destructive/90 border-destructive text-destructive-foreground',
+      'bg-info hover:bg-info/90 border-info text-info-foreground',
   },
 };

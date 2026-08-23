@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import { PartyPopper } from 'lucide-react';
 import { useMemoryGame } from '@/hooks/useMemoryGame';
 import { Difficulty } from '@/types/difficulty';
 import { getThemeById } from '@/data/memoryThemes';
@@ -18,7 +19,7 @@ export default function MemoryGame() {
   const [selectedThemeId, setSelectedThemeId] = useState<string | null>(null);
   const [selectedDifficulty, setSelectedDifficulty] =
     useState<Difficulty>('medium');
-  const [showCelebration, setShowCelebration] = useState(false);
+  const [celebrationDismissed, setCelebrationDismissed] = useState(false);
 
   const theme = selectedThemeId ? getThemeById(selectedThemeId) : null;
   const gameLogic = useMemoryGame(
@@ -28,6 +29,7 @@ export default function MemoryGame() {
 
   const { cards, moves, matches, isGameComplete, flipCard, resetGame } =
     gameLogic;
+  const showCelebration = isGameComplete && !celebrationDismissed;
 
   const totalPairs =
     selectedDifficulty === 'easy' ? 3 : selectedDifficulty === 'medium' ? 6 : 8;
@@ -40,18 +42,10 @@ export default function MemoryGame() {
       : 'grid-cols-4';
 
   useEffect(() => {
-    if (isGameComplete) {
-      setShowCelebration(true);
-      setTimeout(() => setShowCelebration(false), 3000);
-    }
+    if (!isGameComplete) return;
+    const timer = setTimeout(() => setCelebrationDismissed(true), 3000);
+    return () => clearTimeout(timer);
   }, [isGameComplete]);
-
-  // Reset game when difficulty changes
-  useEffect(() => {
-    if (gameState === 'playing' && theme) {
-      resetGame();
-    }
-  }, [selectedDifficulty, gameState]);
 
   const handleThemeSelect = (themeId: string) => {
     setSelectedThemeId(themeId);
@@ -59,7 +53,9 @@ export default function MemoryGame() {
   };
 
   const handleDifficultySelect = (difficulty: Difficulty) => {
+    if (theme) resetGame(theme.items, difficulty);
     setSelectedDifficulty(difficulty);
+    setCelebrationDismissed(false);
     setGameState('playing');
   };
 
@@ -75,7 +71,7 @@ export default function MemoryGame() {
 
   const handlePlayAgain = () => {
     resetGame();
-    setShowCelebration(false);
+    setCelebrationDismissed(false);
   };
 
   if (gameState === 'theme-select') {
@@ -123,8 +119,16 @@ export default function MemoryGame() {
         <div
           className={`grid ${gridCols} gap-3 md:gap-4 max-w-3xl mx-auto mb-6`}
         >
-          {cards.map((card) => (
-            <Card key={card.id} card={card} onClick={() => flipCard(card.id)} />
+          {cards.map((card, index) => (
+            <Card
+              key={card.id}
+              card={card}
+              onClick={() => flipCard(card.id)}
+              ariaLabel={t(
+                card.isMatched ? 'matchedCard' : card.isFlipped ? 'revealedCard' : 'hiddenCard',
+                { position: index + 1, name: card.item.name }
+              )}
+            />
           ))}
         </div>
 
@@ -154,7 +158,7 @@ export default function MemoryGame() {
         {showCelebration && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
             <div className="bg-card border-2 border-border rounded-2xl p-8 max-w-md w-full text-center animate-in zoom-in-95 duration-300">
-              <div className="text-6xl mb-4">🎉</div>
+              <PartyPopper className="size-16 mx-auto mb-4 text-accent" aria-hidden="true" />
               <h2 className="text-3xl font-bold text-foreground mb-2">
                 {t('congratulations')}
               </h2>

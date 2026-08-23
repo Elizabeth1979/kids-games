@@ -39,14 +39,14 @@ export const gamesConfig: GameConfig[] = [
   {
     id: 'canvas-drawing',
     title: 'games.titles.canvas-drawing',
-    icon: '🎨',
+    icon: 'ART',
     category: 'board',
     active: true
   },
   {
     id: 'image-puzzle',
     title: 'games.titles.image-puzzle',
-    icon: '🧩',
+    icon: 'PUZ',
     category: 'brain',
     active: true
   },
@@ -54,7 +54,7 @@ export const gamesConfig: GameConfig[] = [
   {
     id: 'addition',
     title: 'games.titles.addition',
-    icon: '➕',
+    icon: '+',
     category: 'math',
     active: true,
     path: '/games/math/addition'
@@ -62,7 +62,7 @@ export const gamesConfig: GameConfig[] = [
   {
     id: 'subtraction',
     title: 'games.titles.subtraction',
-    icon: '➖',
+    icon: '-',
     category: 'math',
     active: true,
     path: '/games/math/subtraction'
@@ -70,7 +70,7 @@ export const gamesConfig: GameConfig[] = [
   {
     id: 'multiplication',
     title: 'games.titles.multiplication',
-    icon: '✖️',
+    icon: '×',
     category: 'math',
     active: true,
     path: '/games/math/multiplication'
@@ -78,7 +78,7 @@ export const gamesConfig: GameConfig[] = [
   {
     id: 'division',
     title: 'games.titles.division',
-    icon: '➗',
+    icon: '÷',
     category: 'math',
     active: true,
     path: '/games/math/division'
@@ -86,7 +86,7 @@ export const gamesConfig: GameConfig[] = [
   {
     id: 'memory-game',
     title: 'games.titles.memory-game',
-    icon: '🧠',
+    icon: 'MEM',
     category: 'brain',
     active: true
   }

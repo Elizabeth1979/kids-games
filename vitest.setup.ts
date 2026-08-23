@@ -2,10 +2,10 @@ import '@testing-library/jest-dom';
 import { vi } from 'vitest';
 
 // Store contexts per canvas to ensure consistency
-const canvasContextMap = new WeakMap();
+const canvasContextMap = new WeakMap<HTMLCanvasElement, CanvasRenderingContext2D>();
 
 // Mock canvas getContext for tests
-HTMLCanvasElement.prototype.getContext = function(contextId: string) {
+const getContextMock = function(this: HTMLCanvasElement, contextId: string) {
   if (contextId === '2d') {
     // Return the same context for the same canvas
     if (!canvasContextMap.has(this)) {
@@ -44,10 +44,13 @@ HTMLCanvasElement.prototype.getContext = function(contextId: string) {
         createLinearGradient: vi.fn(),
         createRadialGradient: vi.fn(),
         createPattern: vi.fn(),
-      };
+      } as unknown as CanvasRenderingContext2D;
       canvasContextMap.set(this, mockContext);
     }
-    return canvasContextMap.get(this) as any;
+    return canvasContextMap.get(this) ?? null;
   }
   return null;
 };
+
+HTMLCanvasElement.prototype.getContext =
+  getContextMock as typeof HTMLCanvasElement.prototype.getContext;

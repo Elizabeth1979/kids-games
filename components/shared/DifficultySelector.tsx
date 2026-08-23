@@ -68,8 +68,8 @@ export default function DifficultySelector({
                 aria-label={tDiff(level)}
               >
                 <div className="flex flex-col items-center gap-4">
-                  {/* Emoji */}
-                  <div className="text-8xl">{config.emoji}</div>
+                  {/* Decorative difficulty marker */}
+                  <div className="text-8xl" aria-hidden="true">{config.symbol}</div>
 
                   {/* Label */}
                   <h2 className="text-2xl md:text-3xl font-bold capitalize">

@@ -20,7 +20,7 @@ export default function GameStats({
         <div className="text-sm text-muted-foreground">{t('moves')}</div>
       </div>
       <div className="bg-card border-2 border-border rounded-lg px-6 py-3 min-w-[120px] text-center">
-        <div className="text-2xl font-bold text-green-600">
+        <div className="text-2xl font-bold text-success">
           {matches}/{totalPairs}
         </div>
         <div className="text-sm text-muted-foreground">{t('matches')}</div>

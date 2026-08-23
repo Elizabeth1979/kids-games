@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { MemoryItem } from '@/data/memoryThemes';
 import { Difficulty } from '@/types/difficulty';
 
@@ -16,7 +16,7 @@ interface UseMemoryGameReturn {
   matches: number;
   isGameComplete: boolean;
   flipCard: (cardId: string) => void;
-  resetGame: () => void;
+  resetGame: (itemsOverride?: MemoryItem[], difficultyOverride?: Difficulty) => void;
 }
 
 function shuffleArray<T>(array: T[]): T[] {
@@ -28,12 +28,14 @@ function shuffleArray<T>(array: T[]): T[] {
   return shuffled;
 }
 
-function createCardPairs(items: MemoryItem[], count: number): MemoryCard[] {
-  // Select the required number of items based on difficulty
-  const selectedItems = items.slice(0, count);
+function getPairCount(difficulty: Difficulty): number {
+  return difficulty === 'easy' ? 3 : difficulty === 'medium' ? 6 : 8;
+}
 
-  // Create pairs
+function createCardPairs(items: MemoryItem[], count: number): MemoryCard[] {
+  const selectedItems = items.slice(0, count);
   const pairs: MemoryCard[] = [];
+
   selectedItems.forEach((item, index) => {
     pairs.push({
       id: `${item.id}-1-${index}`,
@@ -56,8 +58,7 @@ export function useMemoryGame(
   items: MemoryItem[],
   difficulty: Difficulty
 ): UseMemoryGameReturn {
-  const pairCount = difficulty === 'easy' ? 3 : difficulty === 'medium' ? 6 : 8;
-
+  const pairCount = getPairCount(difficulty);
   const [cards, setCards] = useState<MemoryCard[]>(() =>
     createCardPairs(items, pairCount)
   );
@@ -65,80 +66,79 @@ export function useMemoryGame(
   const [moves, setMoves] = useState(0);
   const [matches, setMatches] = useState(0);
   const [isProcessing, setIsProcessing] = useState(false);
+  const resolutionTimer = useRef<number | null>(null);
 
   const isGameComplete = matches === pairCount;
 
-  const resetGame = useCallback(() => {
-    setCards(createCardPairs(items, pairCount));
+  const cancelPendingResolution = useCallback(() => {
+    if (resolutionTimer.current !== null) {
+      window.clearTimeout(resolutionTimer.current);
+      resolutionTimer.current = null;
+    }
+  }, []);
+
+  useEffect(() => cancelPendingResolution, [cancelPendingResolution]);
+
+  const resetGame = useCallback((
+    itemsOverride = items,
+    difficultyOverride = difficulty
+  ) => {
+    cancelPendingResolution();
+    setCards(createCardPairs(itemsOverride, getPairCount(difficultyOverride)));
     setFlippedCards([]);
     setMoves(0);
     setMatches(0);
     setIsProcessing(false);
-  }, [items, pairCount]);
+  }, [items, difficulty, cancelPendingResolution]);
 
-  const flipCard = useCallback(
-    (cardId: string) => {
-      if (isProcessing) return;
+  const flipCard = useCallback((cardId: string) => {
+    if (isProcessing) return;
 
-      setCards((prevCards) => {
-        const updatedCards = prevCards.map((card) => {
-          if (card.id === cardId && !card.isMatched && !card.isFlipped) {
-            return { ...card, isFlipped: true };
-          }
-          return card;
-        });
+    const selectedCard = cards.find((card) => card.id === cardId);
+    if (!selectedCard || selectedCard.isMatched || selectedCard.isFlipped) return;
 
-        const currentFlipped = updatedCards.filter(
-          (card) => card.isFlipped && !card.isMatched
+    const flippedCard = { ...selectedCard, isFlipped: true };
+    const nextFlippedCards = [...flippedCards, flippedCard];
+    setCards((currentCards) =>
+      currentCards.map((card) => card.id === cardId ? flippedCard : card)
+    );
+    setFlippedCards(nextFlippedCards);
+
+    if (nextFlippedCards.length !== 2) return;
+
+    setIsProcessing(true);
+    setMoves((previousMoves) => previousMoves + 1);
+    const [card1, card2] = nextFlippedCards;
+
+    if (card1.item.id === card2.item.id) {
+      resolutionTimer.current = window.setTimeout(() => {
+        resolutionTimer.current = null;
+        setCards((currentCards) =>
+          currentCards.map((card) =>
+            card.id === card1.id || card.id === card2.id
+              ? { ...card, isMatched: true }
+              : card
+          )
         );
-
-        setFlippedCards(currentFlipped);
-
-        return updatedCards;
-      });
-    },
-    [isProcessing]
-  );
-
-  useEffect(() => {
-    if (flippedCards.length === 2) {
-      setIsProcessing(true);
-      setMoves((prev) => prev + 1);
-
-      const [card1, card2] = flippedCards;
-
-      if (card1.item.id === card2.item.id) {
-        // Match found!
-        setTimeout(() => {
-          setCards((prevCards) =>
-            prevCards.map((card) => {
-              if (card.id === card1.id || card.id === card2.id) {
-                return { ...card, isMatched: true };
-              }
-              return card;
-            })
-          );
-          setMatches((prev) => prev + 1);
-          setFlippedCards([]);
-          setIsProcessing(false);
-        }, 600);
-      } else {
-        // No match - flip back
-        setTimeout(() => {
-          setCards((prevCards) =>
-            prevCards.map((card) => {
-              if (card.id === card1.id || card.id === card2.id) {
-                return { ...card, isFlipped: false };
-              }
-              return card;
-            })
-          );
-          setFlippedCards([]);
-          setIsProcessing(false);
-        }, 1000);
-      }
+        setMatches((previousMatches) => previousMatches + 1);
+        setFlippedCards([]);
+        setIsProcessing(false);
+      }, 600);
+    } else {
+      resolutionTimer.current = window.setTimeout(() => {
+        resolutionTimer.current = null;
+        setCards((currentCards) =>
+          currentCards.map((card) =>
+            card.id === card1.id || card.id === card2.id
+              ? { ...card, isFlipped: false }
+              : card
+          )
+        );
+        setFlippedCards([]);
+        setIsProcessing(false);
+      }, 1000);
     }
-  }, [flippedCards]);
+  }, [cards, flippedCards, isProcessing]);
 
   return {
     cards,

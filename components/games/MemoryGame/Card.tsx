@@ -3,9 +3,10 @@ import type { MemoryCard } from '@/hooks/useMemoryGame';
 interface CardProps {
   card: MemoryCard;
   onClick: () => void;
+  ariaLabel: string;
 }
 
-export default function Card({ card, onClick }: CardProps) {
+export default function Card({ card, onClick, ariaLabel }: CardProps) {
   const { item, isFlipped, isMatched } = card;
 
   const handleClick = () => {
@@ -15,9 +16,13 @@ export default function Card({ card, onClick }: CardProps) {
   };
 
   return (
-    <div
+    <button
+      type="button"
       onClick={handleClick}
-      className={`relative aspect-square cursor-pointer transition-transform duration-200 hover:scale-105 ${
+      disabled={isFlipped || isMatched}
+      aria-label={ariaLabel}
+      aria-pressed={isFlipped || isMatched}
+      className={`relative aspect-square p-0 border-0 bg-transparent text-inherit cursor-pointer transition-transform duration-200 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary ${
         isMatched ? 'cursor-default' : ''
       }`}
       style={{ perspective: '1000px' }}
@@ -33,15 +38,15 @@ export default function Card({ card, onClick }: CardProps) {
           className="absolute w-full h-full rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center text-4xl shadow-lg border-2 border-primary/20"
           style={{ backfaceVisibility: 'hidden' }}
         >
-          <span className="text-white text-5xl">?</span>
+          <span className="text-primary-foreground text-5xl">?</span>
         </div>
 
         {/* Card Front */}
         <div
           className={`absolute w-full h-full rounded-xl flex flex-col items-center justify-center gap-2 shadow-lg border-2 ${
             isMatched
-              ? 'bg-green-500/20 border-green-500'
-              : 'border-gray-300 dark:border-gray-700'
+              ? 'bg-success/20 border-success'
+              : 'border-border'
           }`}
           style={{
             backfaceVisibility: 'hidden',
@@ -51,17 +56,21 @@ export default function Card({ card, onClick }: CardProps) {
               : `${item.color}${isMatched ? '' : 'CC'}`,
           }}
         >
-          <div className="text-4xl sm:text-5xl md:text-6xl">{item.emoji}</div>
+          <div className="text-4xl sm:text-5xl md:text-6xl font-bold" aria-hidden="true">
+            {item.symbol}
+          </div>
           <div
-            className="text-xs sm:text-sm md:text-base font-semibold text-center px-2"
+            className={`text-xs sm:text-sm md:text-base font-semibold text-center px-2 ${
+              isMatched ? 'text-success' : ''
+            }`}
             style={{
-              color: isMatched ? '#10b981' : item.textColor || '#FFFFFF',
+              color: isMatched ? undefined : item.textColor,
             }}
           >
             {item.name}
           </div>
         </div>
       </div>
-    </div>
+    </button>
   );
 }

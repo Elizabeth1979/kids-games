@@ -51,7 +51,7 @@ export default function MathGame({ operation }: MathGameProps) {
 
     return (
       <DifficultySelector
-        title={`${t(`operations.${operation}`)} ${config.emoji}`}
+        title={`${t(`operations.${operation}`)} (${config.symbol})`}
         metadata={metadata}
         onSelectDifficulty={handleDifficultySelect}
         onBack={handleBackToHome}

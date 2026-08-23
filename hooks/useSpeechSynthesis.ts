@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { LanguageConfig, SpeechSynthesisHook } from '@/types';
 
 export function useSpeechSynthesis(languageConfig: LanguageConfig): SpeechSynthesisHook {
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [selectedVoice, setSelectedVoice] = useState<SpeechSynthesisVoice | null>(null);
   const [isReady, setIsReady] = useState(false);
-  const loadAttemptsRef = useRef(0);
+
 
   const loadVoices = useCallback(() => {
     if (typeof window === 'undefined' || !window.speechSynthesis) return;
@@ -77,24 +77,17 @@ export function useSpeechSynthesis(languageConfig: LanguageConfig): SpeechSynthe
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    loadVoices();
-
-    // Load voices with retry strategy for Android
-    const loadWithRetry = () => {
-      if (loadAttemptsRef.current < 3) {
-        loadAttemptsRef.current++;
-        const delays = [100, 500, 1000];
-        setTimeout(loadVoices, delays[loadAttemptsRef.current - 1]);
-      }
-    };
+    // Browsers populate voices asynchronously, so try immediately and retry.
+    const timers = [0, 100, 500, 1000].map((delay) =>
+      window.setTimeout(loadVoices, delay)
+    );
 
     if (window.speechSynthesis.onvoiceschanged !== undefined) {
       window.speechSynthesis.onvoiceschanged = loadVoices;
     }
 
-    loadWithRetry();
-
     return () => {
+      timers.forEach((timer) => window.clearTimeout(timer));
       if (window.speechSynthesis) {
         window.speechSynthesis.onvoiceschanged = null;
       }

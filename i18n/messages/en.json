@@ -30,12 +30,7 @@
       "division": "Division",
       "memory-game": "Memory Game"
     },
-    "icons": {
-      "tic-tac-toe": "⭕",
-      "canvas-drawing": "🎨",
-      "image-puzzle": "🧩",
-      "memory-game": "🧠"
-    },
+
     "modes": {
       "learn": "Learn",
       "find": "Find the Letter",
@@ -103,7 +98,10 @@
       "changeTheme": "Change Theme",
       "backToThemes": "Back to Themes",
       "congratulations": "Congratulations!",
-      "completedIn": "You completed the game in {moves} moves!"
+      "completedIn": "You completed the game in {moves} moves!",
+      "hiddenCard": "Card {position}, face down",
+      "revealedCard": "Card {position}: {name}",
+      "matchedCard": "Matched card {position}: {name}"
     }
   },
   "categories": {

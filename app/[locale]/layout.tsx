@@ -4,6 +4,11 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { fredoka, nunito } from '../layout';
 import Footer from '@/components/shared/Footer';
+import ServiceWorkerRegistration from '@/components/shared/ServiceWorkerRegistration';
+
+function isSupportedLocale(locale: string) {
+  return routing.locales.some((supportedLocale) => supportedLocale === locale);
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -19,7 +24,7 @@ export default async function LocaleLayout({
   const { locale } = await params;
 
   // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale as any)) {
+  if (!isSupportedLocale(locale)) {
     notFound();
   }
 
@@ -42,8 +47,8 @@ export default async function LocaleLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="theme-color" content="#667eea" />
 
+        <link rel="manifest" href="/manifest.json" />
         {/* Icons commented out until added to /public folder */}
-        {/* <link rel="manifest" href="/manifest.json" /> */}
         {/* <link rel="icon" href="/favicon.ico" /> */}
         {/* <link rel="apple-touch-icon" href="/icon-192.png" /> */}
 
@@ -63,6 +68,7 @@ export default async function LocaleLayout({
       </head>
       <body className="antialiased" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
+          <ServiceWorkerRegistration />
           {children}
           <Footer />
         </NextIntlClientProvider>

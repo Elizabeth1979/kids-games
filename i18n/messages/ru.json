@@ -97,7 +97,10 @@
       "changeTheme": "Изменить тему",
       "backToThemes": "Назад к темам",
       "congratulations": "Поздравляем!",
-      "completedIn": "Вы завершили игру за {moves} ходов!"
+      "completedIn": "Вы завершили игру за {moves} ходов!",
+      "hiddenCard": "Карточка {position}, рубашкой вверх",
+      "revealedCard": "Карточка {position}: {name}",
+      "matchedCard": "Совпавшая карточка {position}: {name}"
     }
   },
   "categories": {

@@ -30,12 +30,7 @@
       "division": "חילוק",
       "memory-game": "משחק זיכרון"
     },
-    "icons": {
-      "tic-tac-toe": "⭕",
-      "canvas-drawing": "🎨",
-      "image-puzzle": "🧩",
-      "memory-game": "🧠"
-    },
+
     "modes": {
       "learn": "למידה",
       "find": "מצא את האות",
@@ -103,7 +98,10 @@
       "changeTheme": "שנה נושא",
       "backToThemes": "חזרה לנושאים",
       "congratulations": "כל הכבוד!",
-      "completedIn": "השלמת את המשחק ב-{moves} מהלכים!"
+      "completedIn": "השלמת את המשחק ב-{moves} מהלכים!",
+      "hiddenCard": "קלף {position}, הפוך",
+      "revealedCard": "קלף {position}: {name}",
+      "matchedCard": "קלף תואם {position}: {name}"
     }
   },
   "categories": {

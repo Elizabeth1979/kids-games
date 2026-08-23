@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import type { ComponentProps } from 'react';
 import { NextIntlClientProvider } from 'next-intl';
 import LanguageGame from './index';
 import { hebrewLanguage, englishLanguage, russianLanguage, arabicLanguage } from '@/data/languages';
@@ -10,7 +11,7 @@ import ruMessages from '@/i18n/messages/ru.json';
 
 // Mock the routing
 vi.mock('@/i18n/routing', () => ({
-  Link: ({ children, ...props }: any) => <a {...props}>{children}</a>,
+  Link: ({ children, ...props }: ComponentProps<'a'>) => <a {...props}>{children}</a>,
 }));
 
 // Mock speech synthesis

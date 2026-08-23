@@ -27,7 +27,7 @@ export default function ImagePuzzle() {
   const [gridSize, setGridSize] = useState<number>(3);
   const [showCelebration, setShowCelebration] = useState(false);
   const [canvasSize, setCanvasSize] = useState<number>(CANVAS_BASE_SIZE);
-  const [needsInitialPuzzle, setNeedsInitialPuzzle] = useState(false);
+
 
   // Drag-and-drop state
   const [isDragging, setIsDragging] = useState(false);
@@ -46,7 +46,7 @@ export default function ImagePuzzle() {
       img.onload = () => {
         setUploadedImage(img);
         setShowCelebration(false);
-        setNeedsInitialPuzzle(true);
+        requestAnimationFrame(() => createPuzzle(img, 3));
       };
       img.src = event.target?.result as string;
     };
@@ -121,35 +121,6 @@ export default function ImagePuzzle() {
     setPieces(shuffled);
   };
 
-  // Draw original image to preview canvas
-  useEffect(() => {
-    const canvas = previewCanvasRef.current;
-    if (!canvas || !uploadedImage) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    // Set canvas dimensions
-    canvas.width = CANVAS_BASE_SIZE;
-    canvas.height = CANVAS_BASE_SIZE;
-
-    // Draw image to fill the square canvas (crop to square)
-    const scale = Math.max(CANVAS_BASE_SIZE / uploadedImage.width, CANVAS_BASE_SIZE / uploadedImage.height);
-    const scaledWidth = uploadedImage.width * scale;
-    const scaledHeight = uploadedImage.height * scale;
-    const offsetX = (CANVAS_BASE_SIZE - scaledWidth) / 2;
-    const offsetY = (CANVAS_BASE_SIZE - scaledHeight) / 2;
-
-    ctx.drawImage(uploadedImage, offsetX, offsetY, scaledWidth, scaledHeight);
-  }, [uploadedImage]);
-
-  // Create puzzle when needed (after canvases are rendered)
-  useEffect(() => {
-    if (needsInitialPuzzle && uploadedImage && previewCanvasRef.current) {
-      createPuzzle(uploadedImage, 3);
-      setNeedsInitialPuzzle(false);
-    }
-  }, [needsInitialPuzzle, uploadedImage]);
 
   // Draw puzzle whenever pieces, draggedPieceIndex, canvasSize, gridSize, or hoverPosition changes
   useEffect(() => {
@@ -456,14 +427,14 @@ export default function ImagePuzzle() {
                     {/* Floating dragged piece */}
                     {isDragging && draggedPieceIndex !== null && pieces[draggedPieceIndex] && (
                       <div
-                        className="absolute pointer-events-none"
+                        className="absolute pointer-events-none drop-shadow-xl"
                         style={{
                           left: dragPosition.x - dragOffset.x,
                           top: dragPosition.y - dragOffset.y,
                           width: canvasSize / gridSize,
                           height: canvasSize / gridSize,
                           transform: 'scale(1.1)',
-                          filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.5))',
+
                           zIndex: 1000,
                         }}
                       >
@@ -490,9 +461,9 @@ export default function ImagePuzzle() {
 
                     {showCelebration && (
                       <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-xl">
-                        <div className="bg-white rounded-2xl p-8 text-center animate-bounce">
-                          <Check size={64} className="text-green-500 mx-auto mb-4" />
-                          <p className="text-2xl font-bold text-green-600">
+                        <div className="bg-card rounded-2xl p-8 text-center animate-bounce">
+                          <Check size={64} className="text-success mx-auto mb-4" aria-hidden="true" />
+                          <p className="text-2xl font-bold text-success">
                             {t('puzzle.complete')}
                           </p>
                         </div>

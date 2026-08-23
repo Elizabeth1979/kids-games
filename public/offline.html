@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#667eea" />
+    <title>Kids Games - Offline</title>
+    <style>
+      body { margin: 0; min-height: 100vh; display: grid; place-items: center; font-family: system-ui, sans-serif; background: #f8fafc; color: #172033; }
+      main { width: min(32rem, calc(100% - 2rem)); padding: 2rem; text-align: center; border: 2px solid #667eea; border-radius: 1.5rem; background: #ffffff; }
+      h1 { margin-top: 0; }
+      button { min-height: 44px; padding: .75rem 1.25rem; border: 0; border-radius: .75rem; background: #4556b8; color: #ffffff; font: inherit; font-weight: 700; cursor: pointer; }
+      button:focus-visible { outline: 3px solid #172033; outline-offset: 3px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>You are offline</h1>
+      <p>Reconnect to the internet, then try loading the game again.</p>
+      <button type="button" onclick="location.reload()">Try again</button>
+    </main>
+  </body>
+</html>
