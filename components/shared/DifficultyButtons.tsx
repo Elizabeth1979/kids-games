@@ -47,7 +47,7 @@ export default function DifficultyButtons({
             aria-label={t(level)}
           >
             <span className="flex items-center gap-2">
-              <span>{config.emoji}</span>
+              <span aria-hidden="true">{config.symbol}</span>
               <span>{t(level)}</span>
             </span>
           </button>

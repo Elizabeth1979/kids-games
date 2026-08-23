@@ -16,7 +16,7 @@ export const operationConfigs: Record<MathOperation, OperationConfig> = {
   addition: {
     id: 'addition',
     symbol: '+',
-    emoji: '➕',
+
     numberRange: {
       easy: { min: 1, max: 10 },
       medium: { min: 1, max: 50 },
@@ -42,7 +42,7 @@ export const operationConfigs: Record<MathOperation, OperationConfig> = {
   subtraction: {
     id: 'subtraction',
     symbol: '-',
-    emoji: '➖',
+
     numberRange: {
       easy: { min: 1, max: 10 },
       medium: { min: 1, max: 50 },
@@ -74,7 +74,7 @@ export const operationConfigs: Record<MathOperation, OperationConfig> = {
   multiplication: {
     id: 'multiplication',
     symbol: '×',
-    emoji: '✖️',
+
     numberRange: {
       easy: { min: 1, max: 5 },    // 1-5 times tables
       medium: { min: 1, max: 10 },  // 1-10 times tables
@@ -100,7 +100,7 @@ export const operationConfigs: Record<MathOperation, OperationConfig> = {
   division: {
     id: 'division',
     symbol: '÷',
-    emoji: '➗',
+
     numberRange: {
       easy: { min: 1, max: 5 },
       medium: { min: 1, max: 10 },

@@ -456,14 +456,14 @@ export default function ImagePuzzle() {
                     {/* Floating dragged piece */}
                     {isDragging && draggedPieceIndex !== null && pieces[draggedPieceIndex] && (
                       <div
-                        className="absolute pointer-events-none"
+                        className="absolute pointer-events-none drop-shadow-xl"
                         style={{
                           left: dragPosition.x - dragOffset.x,
                           top: dragPosition.y - dragOffset.y,
                           width: canvasSize / gridSize,
                           height: canvasSize / gridSize,
                           transform: 'scale(1.1)',
-                          filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.5))',
+
                           zIndex: 1000,
                         }}
                       >
@@ -490,9 +490,9 @@ export default function ImagePuzzle() {
 
                     {showCelebration && (
                       <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-xl">
-                        <div className="bg-white rounded-2xl p-8 text-center animate-bounce">
-                          <Check size={64} className="text-green-500 mx-auto mb-4" />
-                          <p className="text-2xl font-bold text-green-600">
+                        <div className="bg-card rounded-2xl p-8 text-center animate-bounce">
+                          <Check size={64} className="text-success mx-auto mb-4" aria-hidden="true" />
+                          <p className="text-2xl font-bold text-success">
                             {t('puzzle.complete')}
                           </p>
                         </div>

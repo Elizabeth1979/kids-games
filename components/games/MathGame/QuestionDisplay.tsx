@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { CircleCheck, CircleX } from 'lucide-react';
 import type { MathQuestion } from '@/types';
 
 interface QuestionDisplayProps {
@@ -34,17 +35,17 @@ export default function QuestionDisplay({
         {showFeedback && (
           <div
             className={`text-3xl md:text-4xl font-bold mt-6 animate-bounce ${
-              isCorrect ? 'text-green-600' : 'text-red-600'
+              isCorrect ? 'text-success' : 'text-warning'
             }`}
           >
             {isCorrect ? (
               <div className="flex items-center justify-center gap-3">
-                <span>✅</span>
+                <CircleCheck aria-hidden="true" />
                 <span>{t('feedback.correct')}</span>
               </div>
             ) : (
               <div className="flex items-center justify-center gap-3">
-                <span>❌</span>
+                <CircleX aria-hidden="true" />
                 <span>
                   {t('feedback.wrong', { answer: question.correctAnswer })}
                 </span>

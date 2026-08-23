@@ -124,9 +124,6 @@ const HARDCODED_COLOR_PATTERNS = [
 
 // Exceptions: patterns that are allowed despite matching the hardcoded color patterns
 const EXCEPTIONS = [
-  // Keep green/red for score indicators (semantic meaning)
-  'text-green-600',
-  'text-red-600',
 
   // SVG and canvas contexts may need specific colors
   /ctx\./,

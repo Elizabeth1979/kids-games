@@ -98,7 +98,7 @@ function checkFileForEmojis(filePath: string): EmojiMatch[] {
 describe('Emoji Detection Tests', () => {
   describe('Source Code Files', () => {
     const projectRoot = process.cwd();
-    let allMatches: EmojiMatch[] = [];
+    const allMatches: EmojiMatch[] = [];
 
     // Collect all files to check
     const filesToCheck: string[] = [];
@@ -215,7 +215,8 @@ describe('Emoji Detection Tests', () => {
       ];
 
       testCases.forEach(emoji => {
-        expect(EMOJI_REGEX.test(emoji), `Should detect emoji: ${emoji}`).toBe(true);
+        const regex = new RegExp(EMOJI_REGEX.source, EMOJI_REGEX.flags);
+        expect(regex.test(emoji), `Should detect emoji: ${emoji}`).toBe(true);
       });
     });
 

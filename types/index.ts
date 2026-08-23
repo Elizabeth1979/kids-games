@@ -45,7 +45,7 @@ export interface GameState {
 export interface GameConfig {
   id: string;               // 'hebrew', 'english', 'tic-tac-toe', etc.
   title: string;            // Translation key for title (e.g., 'games.titles.hebrew')
-  icon: string;             // Emoji or text icon
+  icon: string;             // Short text or mathematical symbol
   category: string;         // 'languages', 'board', 'math', 'brain'
   active: boolean;          // Is game playable?
   path?: string;            // Optional custom path
@@ -54,7 +54,7 @@ export interface GameConfig {
 export interface CategoryConfig {
   id: string;               // 'languages', 'board', 'math', 'brain'
   title: string;            // Translation key for title (e.g., 'categories.languages.title')
-  icon: string;             // Emoji icon
+  icon: string;             // Short text icon
 }
 
 export type UILocale = 'he' | 'en' | 'ru' | 'ar';
@@ -122,7 +122,6 @@ export interface NumberRange {
 export interface OperationConfig {
   id: MathOperation;
   symbol: string;
-  emoji: string;
   generateQuestion: (difficulty: Difficulty) => MathQuestion;
   validate: (question: MathQuestion, answer: number) => boolean;
   numberRange: {

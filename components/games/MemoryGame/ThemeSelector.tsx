@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+import { Shapes } from 'lucide-react';
 import { memoryThemes } from '@/data/memoryThemes';
 
 interface ThemeSelectorProps {
@@ -26,9 +27,7 @@ export default function ThemeSelector({ onSelectTheme }: ThemeSelectorProps) {
               className="group relative overflow-hidden rounded-2xl border-2 border-border bg-card p-6 hover:border-primary transition-all duration-300 hover:scale-105 hover:shadow-xl"
             >
               <div className="flex flex-col items-center gap-4">
-                <div className="text-5xl">
-                  {theme.items[0].emoji || '🎮'}
-                </div>
+                <Shapes className="size-12" aria-hidden="true" />
                 <h3 className="text-xl font-semibold text-foreground">
                   {t(`themes.${theme.id}`)}
                 </h3>

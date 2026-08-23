@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import { PartyPopper } from 'lucide-react';
 import { useMemoryGame } from '@/hooks/useMemoryGame';
 import { Difficulty } from '@/types/difficulty';
 import { getThemeById } from '@/data/memoryThemes';
@@ -154,7 +155,7 @@ export default function MemoryGame() {
         {showCelebration && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
             <div className="bg-card border-2 border-border rounded-2xl p-8 max-w-md w-full text-center animate-in zoom-in-95 duration-300">
-              <div className="text-6xl mb-4">🎉</div>
+              <PartyPopper className="size-16 mx-auto mb-4 text-accent" aria-hidden="true" />
               <h2 className="text-3xl font-bold text-foreground mb-2">
                 {t('congratulations')}
               </h2>
