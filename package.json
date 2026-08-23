@@ -13,6 +13,7 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
+    "test:production": "npm run build && node tests/production-static-assets.mjs",
     "clean": "rm -rf .next",
     "fresh": "npm run clean && npm run dev"
   },

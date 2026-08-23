@@ -97,7 +97,10 @@
       "changeTheme": "تغيير الموضوع",
       "backToThemes": "العودة إلى المواضيع",
       "congratulations": "مبروك!",
-      "completedIn": "أكملت اللعبة في {moves} تحركات!"
+      "completedIn": "أكملت اللعبة في {moves} تحركات!",
+      "hiddenCard": "البطاقة {position}، مقلوبة",
+      "revealedCard": "البطاقة {position}: {name}",
+      "matchedCard": "بطاقة متطابقة {position}: {name}"
     }
   },
   "categories": {

@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import type { MathOperation, MathQuestion, MathGameStats } from '@/types';
 import { Difficulty } from '@/types/difficulty';
 import { operationConfigs } from '@/data/mathOperations';
@@ -51,18 +51,29 @@ export function useMathGame(
 
   const [lastAnswerCorrect, setLastAnswerCorrect] = useState<boolean | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
+  const nextQuestionTimer = useRef<number | null>(null);
+
+  const cancelPendingQuestion = useCallback(() => {
+    if (nextQuestionTimer.current !== null) {
+      window.clearTimeout(nextQuestionTimer.current);
+      nextQuestionTimer.current = null;
+    }
+  }, []);
+
+  useEffect(() => cancelPendingQuestion, [cancelPendingQuestion]);
 
   /**
    * Generate a new question based on current operation and difficulty
    */
   const generateNewQuestion = useCallback(() => {
+    cancelPendingQuestion();
     const config = operationConfigs[operation];
     const question = config.generateQuestion(difficulty);
     setCurrentQuestion(question);
     setIsGameActive(true);
     setLastAnswerCorrect(null);
     setShowFeedback(false);
-  }, [operation, difficulty]);
+  }, [operation, difficulty, cancelPendingQuestion]);
 
   /**
    * Submit an answer and check if it's correct
@@ -97,7 +108,8 @@ export function useMathGame(
     setShowFeedback(true);
 
     // Auto-generate next question after a short delay
-    setTimeout(() => {
+    nextQuestionTimer.current = window.setTimeout(() => {
+      nextQuestionTimer.current = null;
       generateNewQuestion();
     }, 1500);
 
@@ -108,23 +120,25 @@ export function useMathGame(
    * Change the difficulty level
    */
   const setDifficulty = useCallback((newDifficulty: Difficulty) => {
+    cancelPendingQuestion();
     setDifficultyState(newDifficulty);
     setCurrentQuestion(operationConfigs[operation].generateQuestion(newDifficulty));
     setIsGameActive(true);
     setLastAnswerCorrect(null);
     setShowFeedback(false);
-  }, [operation]);
+  }, [operation, cancelPendingQuestion]);
 
   /**
    * Change the math operation
    */
   const setOperation = useCallback((newOperation: MathOperation) => {
+    cancelPendingQuestion();
     setOperationState(newOperation);
     setCurrentQuestion(operationConfigs[newOperation].generateQuestion(difficulty));
     setIsGameActive(true);
     setLastAnswerCorrect(null);
     setShowFeedback(false);
-  }, [difficulty]);
+  }, [difficulty, cancelPendingQuestion]);
 
   /**
    * Reset the game (generate a new question)

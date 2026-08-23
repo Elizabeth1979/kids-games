@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { MemoryItem } from '@/data/memoryThemes';
 import { Difficulty } from '@/types/difficulty';
 
@@ -66,19 +66,30 @@ export function useMemoryGame(
   const [moves, setMoves] = useState(0);
   const [matches, setMatches] = useState(0);
   const [isProcessing, setIsProcessing] = useState(false);
+  const resolutionTimer = useRef<number | null>(null);
 
   const isGameComplete = matches === pairCount;
+
+  const cancelPendingResolution = useCallback(() => {
+    if (resolutionTimer.current !== null) {
+      window.clearTimeout(resolutionTimer.current);
+      resolutionTimer.current = null;
+    }
+  }, []);
+
+  useEffect(() => cancelPendingResolution, [cancelPendingResolution]);
 
   const resetGame = useCallback((
     itemsOverride = items,
     difficultyOverride = difficulty
   ) => {
+    cancelPendingResolution();
     setCards(createCardPairs(itemsOverride, getPairCount(difficultyOverride)));
     setFlippedCards([]);
     setMoves(0);
     setMatches(0);
     setIsProcessing(false);
-  }, [items, difficulty]);
+  }, [items, difficulty, cancelPendingResolution]);
 
   const flipCard = useCallback((cardId: string) => {
     if (isProcessing) return;
@@ -100,7 +111,8 @@ export function useMemoryGame(
     const [card1, card2] = nextFlippedCards;
 
     if (card1.item.id === card2.item.id) {
-      window.setTimeout(() => {
+      resolutionTimer.current = window.setTimeout(() => {
+        resolutionTimer.current = null;
         setCards((currentCards) =>
           currentCards.map((card) =>
             card.id === card1.id || card.id === card2.id
@@ -113,7 +125,8 @@ export function useMemoryGame(
         setIsProcessing(false);
       }, 600);
     } else {
-      window.setTimeout(() => {
+      resolutionTimer.current = window.setTimeout(() => {
+        resolutionTimer.current = null;
         setCards((currentCards) =>
           currentCards.map((card) =>
             card.id === card1.id || card.id === card2.id

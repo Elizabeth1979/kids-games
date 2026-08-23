@@ -3,9 +3,10 @@ import type { MemoryCard } from '@/hooks/useMemoryGame';
 interface CardProps {
   card: MemoryCard;
   onClick: () => void;
+  ariaLabel: string;
 }
 
-export default function Card({ card, onClick }: CardProps) {
+export default function Card({ card, onClick, ariaLabel }: CardProps) {
   const { item, isFlipped, isMatched } = card;
 
   const handleClick = () => {
@@ -15,9 +16,13 @@ export default function Card({ card, onClick }: CardProps) {
   };
 
   return (
-    <div
+    <button
+      type="button"
       onClick={handleClick}
-      className={`relative aspect-square cursor-pointer transition-transform duration-200 hover:scale-105 ${
+      disabled={isFlipped || isMatched}
+      aria-label={ariaLabel}
+      aria-pressed={isFlipped || isMatched}
+      className={`relative aspect-square p-0 border-0 bg-transparent text-inherit cursor-pointer transition-transform duration-200 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary ${
         isMatched ? 'cursor-default' : ''
       }`}
       style={{ perspective: '1000px' }}
@@ -66,6 +71,6 @@ export default function Card({ card, onClick }: CardProps) {
           </div>
         </div>
       </div>
-    </div>
+    </button>
   );
 }

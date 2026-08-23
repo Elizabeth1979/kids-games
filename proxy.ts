@@ -8,6 +8,6 @@ export const config = {
   // - API routes
   // - _next/static (static files)
   // - _next/image (image optimization)
-  // - favicon.ico, manifest.json, etc.
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|manifest.json|.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.svg).*)']
+  // - public/static files (any path segment containing a dot)
+  matcher: ['/((?!api|_next/static|_next/image|.*\\..*).*)']
 };

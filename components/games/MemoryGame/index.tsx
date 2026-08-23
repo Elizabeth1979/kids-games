@@ -119,8 +119,16 @@ export default function MemoryGame() {
         <div
           className={`grid ${gridCols} gap-3 md:gap-4 max-w-3xl mx-auto mb-6`}
         >
-          {cards.map((card) => (
-            <Card key={card.id} card={card} onClick={() => flipCard(card.id)} />
+          {cards.map((card, index) => (
+            <Card
+              key={card.id}
+              card={card}
+              onClick={() => flipCard(card.id)}
+              ariaLabel={t(
+                card.isMatched ? 'matchedCard' : card.isFlipped ? 'revealedCard' : 'hiddenCard',
+                { position: index + 1, name: card.item.name }
+              )}
+            />
           ))}
         </div>
 
