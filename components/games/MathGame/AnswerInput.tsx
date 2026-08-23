@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 interface AnswerInputProps {
@@ -12,12 +12,6 @@ export default function AnswerInput({ onSubmit, disabled }: AnswerInputProps) {
   const t = useTranslations('math');
   const [inputValue, setInputValue] = useState('');
 
-  // Clear input when disabled changes (new question)
-  useEffect(() => {
-    if (!disabled) {
-      setInputValue('');
-    }
-  }, [disabled]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

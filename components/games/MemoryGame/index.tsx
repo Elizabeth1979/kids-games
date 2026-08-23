@@ -19,7 +19,7 @@ export default function MemoryGame() {
   const [selectedThemeId, setSelectedThemeId] = useState<string | null>(null);
   const [selectedDifficulty, setSelectedDifficulty] =
     useState<Difficulty>('medium');
-  const [showCelebration, setShowCelebration] = useState(false);
+  const [celebrationDismissed, setCelebrationDismissed] = useState(false);
 
   const theme = selectedThemeId ? getThemeById(selectedThemeId) : null;
   const gameLogic = useMemoryGame(
@@ -29,6 +29,7 @@ export default function MemoryGame() {
 
   const { cards, moves, matches, isGameComplete, flipCard, resetGame } =
     gameLogic;
+  const showCelebration = isGameComplete && !celebrationDismissed;
 
   const totalPairs =
     selectedDifficulty === 'easy' ? 3 : selectedDifficulty === 'medium' ? 6 : 8;
@@ -41,18 +42,10 @@ export default function MemoryGame() {
       : 'grid-cols-4';
 
   useEffect(() => {
-    if (isGameComplete) {
-      setShowCelebration(true);
-      setTimeout(() => setShowCelebration(false), 3000);
-    }
+    if (!isGameComplete) return;
+    const timer = setTimeout(() => setCelebrationDismissed(true), 3000);
+    return () => clearTimeout(timer);
   }, [isGameComplete]);
-
-  // Reset game when difficulty changes
-  useEffect(() => {
-    if (gameState === 'playing' && theme) {
-      resetGame();
-    }
-  }, [selectedDifficulty, gameState]);
 
   const handleThemeSelect = (themeId: string) => {
     setSelectedThemeId(themeId);
@@ -60,7 +53,9 @@ export default function MemoryGame() {
   };
 
   const handleDifficultySelect = (difficulty: Difficulty) => {
+    if (theme) resetGame(theme.items, difficulty);
     setSelectedDifficulty(difficulty);
+    setCelebrationDismissed(false);
     setGameState('playing');
   };
 
@@ -76,7 +71,7 @@ export default function MemoryGame() {
 
   const handlePlayAgain = () => {
     resetGame();
-    setShowCelebration(false);
+    setCelebrationDismissed(false);
   };
 
   if (gameState === 'theme-select') {

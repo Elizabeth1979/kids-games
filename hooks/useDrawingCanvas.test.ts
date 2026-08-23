@@ -4,7 +4,7 @@ import { useDrawingCanvas } from './useDrawingCanvas';
 
 describe('useDrawingCanvas', () => {
   let canvasElement: HTMLCanvasElement;
-  let mockContext: any;
+  let mockContext: CanvasRenderingContext2D;
 
   beforeEach(() => {
     // Create a mock canvas element
@@ -26,7 +26,7 @@ describe('useDrawingCanvas', () => {
     }));
 
     // Get the mock context
-    mockContext = canvasElement.getContext('2d');
+    mockContext = canvasElement.getContext('2d')!;
   });
 
   it('should preserve drawing when canvas is resized', () => {
@@ -118,7 +118,7 @@ describe('useDrawingCanvas', () => {
     act(() => {
       const touchStartEvent = {
         touches: [{ clientX: 50, clientY: 50 }],
-      } as any;
+      } as unknown as React.TouchEvent<HTMLCanvasElement>;
       result.current.startDrawing(touchStartEvent);
     });
 
@@ -126,7 +126,7 @@ describe('useDrawingCanvas', () => {
       const touchMoveEvent = {
         touches: [{ clientX: 150, clientY: 150 }],
         preventDefault: vi.fn(),
-      } as any;
+      } as unknown as React.TouchEvent<HTMLCanvasElement>;
       result.current.draw(touchMoveEvent);
     });
 
@@ -178,7 +178,7 @@ describe('useDrawingCanvas', () => {
     act(() => {
       const touchStartEvent = {
         touches: [{ clientX: 50, clientY: 50 }],
-      } as any;
+      } as unknown as React.TouchEvent<HTMLCanvasElement>;
       result.current.startDrawing(touchStartEvent);
     });
 
@@ -189,7 +189,7 @@ describe('useDrawingCanvas', () => {
       const touchMoveEvent = {
         touches: [{ clientX: 150, clientY: 150 }],
         preventDefault: preventDefaultMock,
-      } as any;
+      } as unknown as React.TouchEvent<HTMLCanvasElement>;
       result.current.draw(touchMoveEvent);
     });
 
